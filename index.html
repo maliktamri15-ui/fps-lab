@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FPS Lab — فاحص تشغيل الألعاب وتقدير الفريمات، فحص توافق المعالج وكرت الشاشة والرام، ومقارنة التجميعات.">
   <title>FPS Lab | فاحص تشغيل الألعاب وتقدير الفريمات</title>
   <style>
     :root {
@@ -58,12 +59,13 @@
       background: var(--bg-body);
       color: var(--text-main);
       min-height: 100vh;
-      padding: 22px 16px 40px;
+      padding: 20px 14px 36px;
       transition: background 0.25s, color 0.25s;
+      overflow-x: hidden;
     }
 
     .container {
-      max-width: 1140px;
+      max-width: 1180px;
       margin: 0 auto;
     }
 
@@ -78,7 +80,7 @@
 
     .brand-badge {
       font-weight: 800;
-      font-size: 16px;
+      font-size: 17px;
       color: #38bdf8;
     }
 
@@ -94,20 +96,20 @@
     }
 
     .header h1 {
-      font-size: 28px;
+      font-size: clamp(21px, 4vw, 30px);
       margin-bottom: 8px;
     }
 
     .header p {
       color: var(--text-muted);
-      font-size: 15px;
+      font-size: clamp(13px, 2.2vw, 15px);
     }
 
     .card-box {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 20px;
+      padding: 18px;
       margin-bottom: 18px;
       backdrop-filter: blur(8px);
     }
@@ -139,8 +141,20 @@
 
     .specs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
       gap: 12px;
+    }
+
+    .compare-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .hw-mini-search {
+      margin-bottom: 6px;
+      padding: 6px 10px !important;
+      font-size: 12px !important;
     }
 
     .compare-box {
@@ -158,7 +172,23 @@
       font-size: 13px;
       font-weight: 700;
       color: #c084fc;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .pc-column {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pc-column-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #38bdf8;
     }
 
     .tools-row {
@@ -167,6 +197,45 @@
       flex-wrap: wrap;
       gap: 8px;
       align-items: center;
+    }
+
+    .bench-box {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-size: 13px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compat-box {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .compat-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .compat-chip {
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(30, 41, 59, 0.55);
+      border: 1px solid var(--border-color);
+      font-size: 12px;
     }
 
     .saved-builds-bar {
@@ -266,15 +335,9 @@
 
     .insights-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 12px;
       margin-top: 14px;
-    }
-
-    @media (max-width: 768px) {
-      .insights-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     .insight-box {
@@ -359,7 +422,7 @@
       align-items: end;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 820px) {
       .add-game-grid {
         grid-template-columns: 1fr;
       }
@@ -415,6 +478,7 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
+      min-height: 36px;
     }
 
     .btn:hover {
@@ -425,47 +489,19 @@
       padding: 6px 11px;
       font-size: 12px;
       border-radius: 8px;
+      min-height: 32px;
     }
 
-    .btn-green {
-      background: #16a34a;
-    }
-
-    .btn-green:hover {
-      background: #15803d;
-    }
-
-    .btn-purple {
-      background: #7c3aed;
-    }
-
-    .btn-purple:hover {
-      background: #6d28d9;
-    }
-
-    .btn-amber {
-      background: #d97706;
-    }
-
-    .btn-amber:hover {
-      background: #b45309;
-    }
-
-    .btn-red {
-      background: #dc2626;
-    }
-
-    .btn-red:hover {
-      background: #b91c1c;
-    }
-
-    .btn-discord {
-      background: #5865f2;
-    }
-
-    .btn-discord:hover {
-      background: #4752c4;
-    }
+    .btn-green { background: #16a34a; }
+    .btn-green:hover { background: #15803d; }
+    .btn-purple { background: #7c3aed; }
+    .btn-purple:hover { background: #6d28d9; }
+    .btn-amber { background: #d97706; }
+    .btn-amber:hover { background: #b45309; }
+    .btn-red { background: #dc2626; }
+    .btn-red:hover { background: #b91c1c; }
+    .btn-discord { background: #5865f2; }
+    .btn-discord:hover { background: #4752c4; }
 
     .btn-outline {
       background: var(--bg-input);
@@ -493,22 +529,69 @@
       color: #38bdf8;
     }
 
+    .controls-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
     .controls-bar {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
     }
 
-    .controls-bar input {
-      flex: 1 1 200px;
+    .search-wrap {
+      position: relative;
+      flex: 1 1 240px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-wrap input {
+      padding-inline-end: 34px;
+    }
+
+    .clear-search-btn {
+      position: absolute;
+      inset-inline-end: 8px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 2px 6px;
+    }
+
+    .results-count-pill {
+      font-size: 12px;
+      font-weight: 700;
+      color: #38bdf8;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      padding: 6px 11px;
+      border-radius: 999px;
     }
 
     .controls-bar select {
       width: auto;
-      min-width: 165px;
+      min-width: 175px;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .filter-buttons {
@@ -518,10 +601,10 @@
     }
 
     .filter-btn {
-      padding: 8px 12px;
+      padding: 7px 12px;
       border-radius: 10px;
       border: 1px solid var(--border-color);
-      background: var(--bg-card);
+      background: var(--bg-input);
       color: var(--text-label);
       cursor: pointer;
       font-size: 12px;
@@ -541,16 +624,22 @@
 
     .games-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 15px;
       margin-bottom: 26px;
+    }
+
+    @media (max-width: 480px) {
+      .games-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .game-card {
       background: var(--bg-game-card);
       border: 1px solid var(--border-card);
       border-radius: 14px;
-      padding: 17px;
+      padding: 16px;
       transition: transform 0.2s, border-color 0.2s;
     }
 
@@ -559,10 +648,7 @@
       border-color: var(--accent);
     }
 
-    .game-card.is-fav {
-      border-color: #eab308;
-    }
-
+    .game-card.is-fav { border-color: #eab308; }
     .game-card.is-picked {
       border-color: #38bdf8;
       box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
@@ -587,8 +673,8 @@
       border: 1px solid var(--border-color);
       color: #94a3b8;
       border-radius: 7px;
-      width: 25px;
-      height: 25px;
+      width: 26px;
+      height: 26px;
       font-size: 14px;
       cursor: pointer;
       line-height: 1;
@@ -605,8 +691,8 @@
       border: 1px solid rgba(248, 113, 113, 0.4);
       color: #f87171;
       border-radius: 7px;
-      width: 25px;
-      height: 25px;
+      width: 26px;
+      height: 26px;
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
@@ -621,6 +707,13 @@
     .game-title {
       font-size: 15px;
       font-weight: 700;
+      word-break: break-word;
+    }
+
+    .game-subtag {
+      font-size: 11px;
+      color: #38bdf8;
+      margin-top: 3px;
     }
 
     .badge {
@@ -654,6 +747,8 @@
       justify-content: space-between;
       align-items: baseline;
       margin-bottom: 6px;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
     .fps-number {
@@ -681,8 +776,8 @@
     }
 
     .compare-badge {
-      margin-bottom: 10px;
-      padding: 6px 10px;
+      margin-bottom: 6px;
+      padding: 5px 10px;
       border-radius: 8px;
       background: rgba(124, 58, 237, 0.14);
       border: 1px solid rgba(167, 139, 250, 0.3);
@@ -740,6 +835,7 @@
       font-size: 14px;
       font-weight: 700;
       color: #818cf8;
+      word-break: break-word;
     }
 
     .discord-actions {
@@ -750,15 +846,9 @@
 
     .support-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 12px;
       margin-bottom: 12px;
-    }
-
-    @media (max-width: 768px) {
-      .support-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     .status-msg {
@@ -795,6 +885,64 @@
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 10px;
       align-items: end;
+    }
+
+    .neox-footer {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .neox-brand-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .neox-logo-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 15px;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+
+    .neox-title {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .neox-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .dev-edit-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dev-edit-inline input {
+      width: auto;
+      min-width: 170px;
+      padding: 7px 10px;
+      font-size: 12px;
     }
 
     .modal-overlay {
@@ -848,6 +996,12 @@
       margin-bottom: 16px;
     }
 
+    @media (max-width: 460px) {
+      .poster-games {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .poster-game-item {
       background: rgba(30, 41, 59, 0.8);
       border: 1px solid rgba(56, 189, 248, 0.25);
@@ -879,7 +1033,7 @@
 
     <header class="header">
       <h1 id="mainTitle">FPS Lab — فاحص تشغيل الألعاب وتقدير الفريمات</h1>
-      <p id="mainSubtitle">اختر مواصفات جهازك أو جرّب التجميعات الجاهزة، واحصل على تحليل الأداء والترقية واستهلاك الطاقة</p>
+      <p id="mainSubtitle">اختر مواصفات جهازك أو جرّب التجميعات الجاهزة، واحصل على فحص التوافق والأداء والترقية واستهلاك الطاقة</p>
     </header>
 
     <section class="card-box">
@@ -894,11 +1048,13 @@
       <div class="specs-grid">
         <div class="field">
           <label for="gpuSelect" id="lblGpu">كرت الشاشة الأساسي (GPU 1)</label>
+          <input type="text" class="hw-mini-search" id="gpuFilterInput" maxlength="40" placeholder="ابحث عن كرت (مثلاً 3060, 4070)...">
           <select id="gpuSelect"></select>
         </div>
 
         <div class="field">
           <label for="cpuSelect" id="lblCpu">المعالج الأساسي (CPU 1)</label>
+          <input type="text" class="hw-mini-search" id="cpuFilterInput" maxlength="40" placeholder="ابحث عن معالج (مثلاً 5600X, i5)...">
           <select id="cpuSelect"></select>
         </div>
 
@@ -966,39 +1122,75 @@
         <button class="btn btn-outline btn-sm" id="streamToggleBtn" type="button">🎥 تسجيل / بث (OBS): مغلق</button>
         <button class="btn btn-outline btn-sm" id="modsToggleBtn" type="button">🧩 مودات ثقيلة (Mods): مغلق</button>
         <button class="btn btn-outline btn-sm" id="rtToggleBtn" type="button">🔆 تتبع الأشعة (Ray Tracing): مغلق</button>
-        <button class="btn btn-purple btn-sm" id="toggleCompareBtn" type="button">⚖️ مقارنة تجميعة ثانية</button>
+        <button class="btn btn-purple btn-sm" id="toggleCompareBtn" type="button">⚖️ مقارنة 3 تجميعات</button>
         <button class="btn btn-amber btn-sm" id="openPosterBtn" type="button">📸 بطاقة ملخص للتصوير</button>
         <button class="btn btn-green btn-sm" id="copyReportBtn" type="button">📄 نسخ تقرير كامل</button>
         <button class="btn btn-outline btn-sm" id="shareBuildBtn" type="button">🔗 نسخ رابط التجميعة</button>
       </div>
       <div class="status-msg" id="shareStatus"></div>
 
+      <div class="bench-box">
+        <div>
+          <strong>🧪 اختبار أداء مباشر للمتصفح:</strong>
+          <span id="browserBenchResult">لم يتم تشغيل الاختبار بعد — يقيس سرعة الإطارات والحسابات على جهازك الحالي.</span>
+        </div>
+        <button class="btn btn-sm" id="runBrowserBenchBtn" type="button">▶ بدء الاختبار الآن</button>
+      </div>
+
       <div class="exp-verdict-banner" id="expVerdictBanner"></div>
 
       <div class="compare-box" id="compareBox">
-        <div class="compare-title">⚖️ مواصفات التجميعة الثانية للمقارنة (PC 2):</div>
-        <div class="specs-grid">
-          <div class="field">
-            <label for="gpuSelect2">كرت الشاشة الثاني (GPU 2)</label>
-            <select id="gpuSelect2"></select>
+        <div class="compare-title">⚖️ مقارنة التجميعة الثانية والثالثة مع تجميعتك الأساسية (PC 1):</div>
+        <div class="compare-grid-3">
+          <div class="pc-column">
+            <div class="pc-column-title">🖥️ التجميعة الثانية (PC 2)</div>
+            <div class="field">
+              <label for="gpuSelect2">كرت الشاشة (GPU 2)</label>
+              <select id="gpuSelect2"></select>
+            </div>
+            <div class="field">
+              <label for="cpuSelect2">المعالج (CPU 2)</label>
+              <select id="cpuSelect2"></select>
+            </div>
+            <div class="field">
+              <label for="ramSelect2">الذاكرة (RAM 2)</label>
+              <select id="ramSelect2">
+                <option value="4">4 GB</option>
+                <option value="8">8 GB</option>
+                <option value="16" selected>16 GB</option>
+                <option value="32">32 GB</option>
+                <option value="64">64 GB</option>
+                <option value="128">128 GB</option>
+              </select>
+            </div>
           </div>
-          <div class="field">
-            <label for="cpuSelect2">المعالج الثاني (CPU 2)</label>
-            <select id="cpuSelect2"></select>
-          </div>
-          <div class="field">
-            <label for="ramSelect2">الذاكرة الثانية (RAM 2)</label>
-            <select id="ramSelect2">
-              <option value="4">4 GB</option>
-              <option value="8">8 GB</option>
-              <option value="16" selected>16 GB</option>
-              <option value="32">32 GB</option>
-              <option value="64">64 GB</option>
-              <option value="128">128 GB</option>
-            </select>
+
+          <div class="pc-column">
+            <div class="pc-column-title" style="color:#c084fc;">🖥️ التجميعة الثالثة (PC 3)</div>
+            <div class="field">
+              <label for="gpuSelect3">كرت الشاشة (GPU 3)</label>
+              <select id="gpuSelect3"></select>
+            </div>
+            <div class="field">
+              <label for="cpuSelect3">المعالج (CPU 3)</label>
+              <select id="cpuSelect3"></select>
+            </div>
+            <div class="field">
+              <label for="ramSelect3">الذاكرة (RAM 3)</label>
+              <select id="ramSelect3">
+                <option value="4">4 GB</option>
+                <option value="8">8 GB</option>
+                <option value="16">16 GB</option>
+                <option value="32" selected>32 GB</option>
+                <option value="64">64 GB</option>
+                <option value="128">128 GB</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="compat-box" id="compatCheckBox"></div>
 
       <div class="vram-warning-box" id="vramWarningBox"></div>
 
@@ -1012,7 +1204,7 @@
       <div class="best-match-box" id="bestMatchBox"></div>
 
       <div class="saved-builds-bar">
-        <input type="text" id="buildNameInput" placeholder="اسم التجميعة (مثلاً: جهازي الحالي)">
+        <input type="text" id="buildNameInput" maxlength="40" placeholder="اسم التجميعة (مثلاً: جهازي الحالي)">
         <button class="btn btn-green btn-sm" id="saveBuildBtn" type="button">💾 حفظ التجميعة</button>
         <button class="btn btn-outline btn-sm" id="toggleBackupBtn" type="button">📦 نسخة احتياطية JSON</button>
       </div>
@@ -1020,7 +1212,7 @@
 
       <div class="backup-box" id="backupBox" style="display:none;">
         <div style="font-size:12px; font-weight:700;">📦 نسخ أو استرجاع التجميعات المحفوظة والألعاب المضافة (JSON):</div>
-        <textarea id="backupJsonArea" placeholder="الصق نص النسخة الاحتياطية هنا ثم اضغط استرجاع..."></textarea>
+        <textarea id="backupJsonArea" maxlength="35000" placeholder="الصق نص النسخة الاحتياطية هنا ثم اضغط استرجاع..."></textarea>
         <div class="tools-row" style="margin-top:0;">
           <button class="btn btn-outline btn-sm" id="exportBackupBtn" type="button">📋 نسخ نسخة احتياطية</button>
           <button class="btn btn-green btn-sm" id="importBackupBtn" type="button">♻️ استرجاع البيانات</button>
@@ -1032,12 +1224,12 @@
 
     <section class="card-box">
       <div class="trending-row">
-        <span class="section-tag">🔥 ألعاب شائعة وثقيلة (وصول سريع):</span>
-        <button class="btn btn-outline btn-sm" data-quick-search="BeamNG" type="button">BeamNG.drive</button>
-        <button class="btn btn-outline btn-sm" data-quick-search="Cyberpunk" type="button">Cyberpunk 2077</button>
-        <button class="btn btn-outline btn-sm" data-quick-search="Assetto" type="button">Assetto Corsa</button>
-        <button class="btn btn-outline btn-sm" data-quick-search="Red Dead" type="button">RDR 2</button>
-        <button class="btn btn-outline btn-sm" data-quick-search="Flight" type="button">MSFS 2024</button>
+        <span class="section-tag">🔥 ألعاب شائعة و2026 (وصول سريع):</span>
+        <button class="btn btn-outline btn-sm" data-quick-search="forza horizon 6" type="button">Forza Horizon 6</button>
+        <button class="btn btn-outline btn-sm" data-quick-search="requiem" type="button">RE Requiem</button>
+        <button class="btn btn-outline btn-sm" data-quick-search="modern warfare 4" type="button">MW4 (2026)</button>
+        <button class="btn btn-outline btn-sm" data-quick-search="beamng" type="button">BeamNG.drive</button>
+        <button class="btn btn-outline btn-sm" data-quick-search="cp2077" type="button">Cyberpunk 2077</button>
         <button class="btn btn-purple btn-sm" id="randomGameBtn" type="button">🎲 لعبة عشوائية</button>
         <button class="btn btn-outline btn-sm" data-quick-search="" type="button">عرض الكل</button>
       </div>
@@ -1046,7 +1238,7 @@
       <div class="add-game-grid">
         <div class="field">
           <label for="newGameTitle">اسم اللعبة</label>
-          <input type="text" id="newGameTitle" placeholder="مثلاً: My Winter Car, Squad, GTA VI...">
+          <input type="text" id="newGameTitle" maxlength="70" placeholder="مثلاً: Phantom Blade Zero, Squad...">
         </div>
         <div class="field">
           <label for="newGameCat">التصنيف</label>
@@ -1079,21 +1271,38 @@
       </div>
     </section>
 
-    <section class="controls-bar">
-      <input type="text" id="searchInput" placeholder="ابحث في الألعاب...">
-      <select id="sortSelect" aria-label="ترتيب الألعاب">
-        <option value="default" selected>الترتيب: المفضلة والافتراضي</option>
-        <option value="fps-desc">الأعلى فريمات (FPS)</option>
-        <option value="fps-asc">الأقل فريمات (FPS)</option>
-        <option value="alpha">الاسم (A - Z)</option>
-      </select>
-      <div class="filter-buttons" id="filterButtons">
-        <button class="filter-btn active" data-cat="all">الكل</button>
-        <button class="filter-btn" data-cat="fav">⭐ المفضلة</button>
-        <button class="filter-btn" data-cat="sim">محاكاة وقيادة</button>
-        <button class="filter-btn" data-cat="action">عالم مفتوح وأكشن</button>
-        <button class="filter-btn" data-cat="fps">شوتر وتنافسية</button>
-        <button class="filter-btn" data-cat="rpg">بقاء و RPG</button>
+    <section class="controls-panel">
+      <div class="controls-bar">
+        <div class="search-wrap">
+          <input type="text" id="searchInput" maxlength="80" placeholder="ابحث باسم اللعبة أو الاختصار (مثلاً: fh6, requiem, rdr2, beamng)...">
+          <button type="button" class="clear-search-btn" id="clearSearchBtn" title="مسح البحث">×</button>
+        </div>
+        <span class="results-count-pill" id="resultsCountBadge">0 لعبة</span>
+        <select id="sortSelect" aria-label="ترتيب الألعاب">
+          <option value="default" selected>الترتيب: المفضلة والافتراضي</option>
+          <option value="fps-desc">الأعلى فريمات (FPS)</option>
+          <option value="fps-asc">الأقل فريمات (FPS)</option>
+          <option value="alpha">الاسم (A - Z)</option>
+        </select>
+      </div>
+
+      <div class="filter-row">
+        <div class="filter-buttons" id="filterButtons">
+          <button class="filter-btn active" data-cat="all">الكل</button>
+          <button class="filter-btn" data-cat="y2026">🆕 ألعاب 2026</button>
+          <button class="filter-btn" data-cat="fav">⭐ المفضلة</button>
+          <button class="filter-btn" data-cat="sim">محاكاة وقيادة</button>
+          <button class="filter-btn" data-cat="action">عالم مفتوح وأكشن</button>
+          <button class="filter-btn" data-cat="fps">شوتر وتنافسية</button>
+          <button class="filter-btn" data-cat="rpg">بقاء و RPG</button>
+        </div>
+
+        <div class="filter-buttons" id="playabilityButtons">
+          <button class="filter-btn active" data-play="all">كل الأداء</button>
+          <button class="filter-btn" data-play="smooth">🟢 سلس (60+ FPS)</button>
+          <button class="filter-btn" data-play="mid">🟡 مقبول (35–59)</button>
+          <button class="filter-btn" data-play="heavy">🔴 ثقيل (&lt; 35)</button>
+        </div>
       </div>
     </section>
 
@@ -1116,17 +1325,17 @@
       <div class="support-grid">
         <div class="field">
           <label for="myDiscordHandle">Discord ID للدعم</label>
-          <input type="text" id="myDiscordHandle" value="1501411543059923159">
+          <input type="text" id="myDiscordHandle" maxlength="32" value="1501411543059923159">
         </div>
         <div class="field">
           <label for="myDiscordInvite">رابط حساب أو سيرفر الدعم على Discord</label>
-          <input type="url" id="myDiscordInvite" value="https://discord.com/users/1501411543059923159">
+          <input type="url" id="myDiscordInvite" maxlength="180" value="https://discord.com/users/1501411543059923159">
         </div>
       </div>
 
       <div class="field">
         <label for="supportMessage">تفاصيل الطلب أو الرسالة (تُنسخ تلقائياً عند الضغط على تواصل مع الدعم)</label>
-        <textarea id="supportMessage" placeholder="اكتب مشكلتك أو اللعبة المطلوبة هنا..."></textarea>
+        <textarea id="supportMessage" maxlength="1500" placeholder="اكتب مشكلتك أو اللعبة المطلوبة هنا..."></textarea>
       </div>
 
       <div class="discord-actions">
@@ -1143,23 +1352,37 @@
       <div class="social-edit-grid">
         <div class="field">
           <label for="ytUrl">YouTube</label>
-          <input type="url" id="ytUrl" placeholder="https://youtube.com/...">
+          <input type="url" id="ytUrl" maxlength="180" placeholder="https://youtube.com/...">
         </div>
         <div class="field">
           <label for="ttUrl">TikTok</label>
-          <input type="url" id="ttUrl" placeholder="https://tiktok.com/...">
+          <input type="url" id="ttUrl" maxlength="180" placeholder="https://tiktok.com/...">
         </div>
         <div class="field">
           <label for="dcUrl">Discord</label>
-          <input type="url" id="dcUrl" placeholder="https://discord.com/users/1501411543059923159">
+          <input type="url" id="dcUrl" maxlength="180" placeholder="https://discord.com/users/1501411543059923159">
         </div>
         <div class="field">
           <label for="tgUrl">Telegram / Facebook</label>
-          <input type="url" id="tgUrl" placeholder="https://t.me/... أو facebook.com/...">
+          <input type="url" id="tgUrl" maxlength="180" placeholder="https://t.me/... أو facebook.com/...">
         </div>
         <button class="btn" id="saveSocialBtn" type="button">حفظ الروابط</button>
       </div>
     </section>
+
+    <footer class="neox-footer" id="neoxFooter">
+      <div class="neox-brand-block">
+        <div class="neox-logo-mark">NeoX</div>
+        <div>
+          <div class="neox-title">NeoX — FPS Lab</div>
+          <div class="neox-sub" id="developerCreditText">تطوير وإشراف: NeoX Dev</div>
+        </div>
+      </div>
+      <div class="dev-edit-inline">
+        <input type="text" id="devNameInput" maxlength="50" placeholder="اسم المطور (مثلاً: NeoX / عمر)">
+        <button class="btn btn-outline btn-sm" id="saveDevNameBtn" type="button">حفظ اسم المطور</button>
+      </div>
+    </footer>
   </div>
 
   <div class="modal-overlay" id="posterModal">

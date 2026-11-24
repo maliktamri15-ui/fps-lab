@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="FPS Lab — فاحص تشغيل الألعاب وتقدير الفريمات، فحص توافق المعالج وكرت الشاشة والرام، ومقارنة التجميعات.">
+  <meta name="description" content="FPS Lab — فاحص تشغيل الألعاب وتقدير نطاق الفريمات، فحص توافق المعالج وكرت الشاشة والرام، واختبار أداء المتصفح.">
   <title>FPS Lab | فاحص تشغيل الألعاب وتقدير الفريمات</title>
   <style>
     :root {
@@ -752,7 +752,7 @@
     }
 
     .fps-number {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 800;
     }
 
@@ -1033,7 +1033,7 @@
 
     <header class="header">
       <h1 id="mainTitle">FPS Lab — فاحص تشغيل الألعاب وتقدير الفريمات</h1>
-      <p id="mainSubtitle">اختر مواصفات جهازك أو جرّب التجميعات الجاهزة، واحصل على فحص التوافق والأداء والترقية واستهلاك الطاقة</p>
+      <p id="mainSubtitle">اختر مواصفات جهازك أو جرّب التجميعات الجاهزة، واحصل على نطاق الفريمات التقديري وفحص التوافق والترقية واستهلاك الطاقة</p>
     </header>
 
     <section class="card-box">
@@ -1061,20 +1061,14 @@
         <div class="field">
           <label for="ramSelect" id="lblRam">الذاكرة (RAM 1)</label>
           <select id="ramSelect">
-            <option value="2">2 GB</option>
             <option value="4">4 GB</option>
-            <option value="6">6 GB</option>
             <option value="8">8 GB</option>
             <option value="12">12 GB</option>
             <option value="16" selected>16 GB</option>
             <option value="24">24 GB</option>
             <option value="32">32 GB</option>
-            <option value="48">48 GB</option>
             <option value="64">64 GB</option>
-            <option value="96">96 GB</option>
             <option value="128">128 GB</option>
-            <option value="192">192 GB</option>
-            <option value="256">256 GB</option>
           </select>
         </div>
 
@@ -1111,9 +1105,9 @@
           <label for="upscaleSelect" id="lblUpscale">تقنية رفع الفريمات (DLSS / FSR)</label>
           <select id="upscaleSelect">
             <option value="1" selected>إيقاف (Native)</option>
-            <option value="1.25">DLSS / FSR Quality (+25%)</option>
-            <option value="1.42">DLSS / FSR Performance (+42%)</option>
-            <option value="1.75">Frame Generation (+75%)</option>
+            <option value="1.22">DLSS / FSR Quality (~+22%)</option>
+            <option value="1.38">DLSS / FSR Performance (~+38%)</option>
+            <option value="1.65">Frame Generation (~+65%)</option>
           </select>
         </div>
       </div>
@@ -1131,10 +1125,10 @@
 
       <div class="bench-box">
         <div>
-          <strong>🧪 اختبار أداء مباشر للمتصفح:</strong>
-          <span id="browserBenchResult">لم يتم تشغيل الاختبار بعد — يقيس سرعة الإطارات والحسابات على جهازك الحالي.</span>
+          <strong>🧪 اختبار أداء المتصفح (Web Bench):</strong>
+          <span id="browserBenchResult">لم يتم تشغيله بعد — يقيس إطارات المتصفح الفعلية (FPS) وسرعة المعالجة في المتصفح (ms).</span>
         </div>
-        <button class="btn btn-sm" id="runBrowserBenchBtn" type="button">▶ بدء الاختبار الآن</button>
+        <button class="btn btn-sm" id="runBrowserBenchBtn" type="button">▶ تشغيل اختبار المتصفح</button>
       </div>
 
       <div class="exp-verdict-banner" id="expVerdictBanner"></div>

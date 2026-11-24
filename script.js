@@ -1,37 +1,37 @@
 const gpus = [
-  { name: "GTX 750 Ti (2GB)", score: 15, tdp: 60 },
-  { name: "GTX 1050 Ti (4GB)", score: 26, tdp: 75 },
-  { name: "RX 570 / RX 580 (8GB)", score: 33, tdp: 185 },
-  { name: "GTX 1650 (4GB)", score: 35, tdp: 75 },
-  { name: "GTX 1060 (6GB)", score: 42, tdp: 120 },
-  { name: "GTX 1660 Super (6GB)", score: 48, tdp: 125 },
-  { name: "RTX 3050 (8GB)", score: 52, tdp: 130 },
-  { name: "RTX 2060 (6GB)", score: 56, tdp: 160 },
-  { name: "Intel Arc B580 (12GB)", score: 68, tdp: 190 },
-  { name: "RX 6600 (8GB)", score: 66, tdp: 132 },
-  { name: "RTX 3060 (12GB)", score: 72, tdp: 170 },
-  { name: "RTX 5050 (8GB)", score: 70, tdp: 135 },
-  { name: "RX 7600 XT (16GB)", score: 78, tdp: 190 },
-  { name: "RTX 3060 Ti (8GB)", score: 80, tdp: 200 },
-  { name: "RTX 4060 (8GB)", score: 84, tdp: 115 },
-  { name: "RTX 5060 (8GB)", score: 92, tdp: 145 },
-  { name: "RX 9060 XT (16GB)", score: 96, tdp: 170 },
-  { name: "RTX 3070 / 3070 Ti (8GB)", score: 94, tdp: 220 },
-  { name: "RTX 4060 Ti (8GB / 16GB)", score: 96, tdp: 165 },
-  { name: "RTX 5060 Ti (16GB)", score: 105, tdp: 180 },
-  { name: "RX 7800 XT (16GB)", score: 108, tdp: 263 },
-  { name: "RTX 3080 / 3080 Ti (12GB)", score: 112, tdp: 320 },
-  { name: "RTX 4070 / 4070 Super (12GB)", score: 118, tdp: 220 },
-  { name: "RTX 5070 (12GB GDDR7)", score: 128, tdp: 250 },
-  { name: "RX 9070 (16GB)", score: 128, tdp: 220 },
-  { name: "RTX 4070 Ti Super (16GB)", score: 132, tdp: 285 },
-  { name: "RX 9070 XT (16GB)", score: 140, tdp: 304 },
-  { name: "RTX 5070 Ti (16GB GDDR7)", score: 145, tdp: 300 },
-  { name: "RX 7900 XTX (24GB)", score: 146, tdp: 355 },
-  { name: "RTX 4080 / 4080 Super (16GB)", score: 148, tdp: 320 },
-  { name: "RTX 5080 (16GB GDDR7)", score: 162, tdp: 360 },
-  { name: "RTX 4090 (24GB GDDR6X)", score: 175, tdp: 450 },
-  { name: "RTX 5090 (32GB GDDR7) — الأقوى في العالم", score: 215, tdp: 575 }
+  { name: "GTX 750 Ti (2GB)", score: 15, tdp: 60, vram: 2 },
+  { name: "GTX 1050 Ti (4GB)", score: 26, tdp: 75, vram: 4 },
+  { name: "RX 570 / RX 580 (8GB)", score: 33, tdp: 185, vram: 8 },
+  { name: "GTX 1650 (4GB)", score: 35, tdp: 75, vram: 4 },
+  { name: "GTX 1060 (6GB)", score: 42, tdp: 120, vram: 6 },
+  { name: "GTX 1660 Super (6GB)", score: 48, tdp: 125, vram: 6 },
+  { name: "RTX 3050 (8GB)", score: 52, tdp: 130, vram: 8 },
+  { name: "RTX 2060 (6GB)", score: 56, tdp: 160, vram: 6 },
+  { name: "Intel Arc B580 (12GB)", score: 68, tdp: 190, vram: 12 },
+  { name: "RX 6600 (8GB)", score: 66, tdp: 132, vram: 8 },
+  { name: "RTX 3060 (12GB)", score: 72, tdp: 170, vram: 12 },
+  { name: "RTX 5050 (8GB)", score: 70, tdp: 135, vram: 8 },
+  { name: "RX 7600 XT (16GB)", score: 78, tdp: 190, vram: 16 },
+  { name: "RTX 3060 Ti (8GB)", score: 80, tdp: 200, vram: 8 },
+  { name: "RTX 4060 (8GB)", score: 84, tdp: 115, vram: 8 },
+  { name: "RTX 5060 (8GB)", score: 92, tdp: 145, vram: 8 },
+  { name: "RX 9060 XT (16GB)", score: 96, tdp: 170, vram: 16 },
+  { name: "RTX 3070 / 3070 Ti (8GB)", score: 94, tdp: 220, vram: 8 },
+  { name: "RTX 4060 Ti (8GB / 16GB)", score: 96, tdp: 165, vram: 16 },
+  { name: "RTX 5060 Ti (16GB)", score: 105, tdp: 180, vram: 16 },
+  { name: "RX 7800 XT (16GB)", score: 108, tdp: 263, vram: 16 },
+  { name: "RTX 3080 / 3080 Ti (12GB)", score: 112, tdp: 320, vram: 12 },
+  { name: "RTX 4070 / 4070 Super (12GB)", score: 118, tdp: 220, vram: 12 },
+  { name: "RTX 5070 (12GB GDDR7)", score: 128, tdp: 250, vram: 12 },
+  { name: "RX 9070 (16GB)", score: 128, tdp: 220, vram: 16 },
+  { name: "RTX 4070 Ti Super (16GB)", score: 132, tdp: 285, vram: 16 },
+  { name: "RX 9070 XT (16GB)", score: 140, tdp: 304, vram: 16 },
+  { name: "RTX 5070 Ti (16GB GDDR7)", score: 145, tdp: 300, vram: 16 },
+  { name: "RX 7900 XTX (24GB)", score: 146, tdp: 355, vram: 24 },
+  { name: "RTX 4080 / 4080 Super (16GB)", score: 148, tdp: 320, vram: 16 },
+  { name: "RTX 5080 (16GB GDDR7)", score: 162, tdp: 360, vram: 16 },
+  { name: "RTX 4090 (24GB GDDR6X)", score: 175, tdp: 450, vram: 24 },
+  { name: "RTX 5090 (32GB GDDR7) — الأقوى في العالم", score: 215, tdp: 575, vram: 32 }
 ];
 
 const cpus = [
@@ -136,11 +136,13 @@ const upscaleSelect = document.getElementById("upscaleSelect");
 
 const themeToggleBtn = document.getElementById("themeToggleBtn");
 const langToggleBtn = document.getElementById("langToggleBtn");
+const resetAllBtn = document.getElementById("resetAllBtn");
 const modsToggleBtn = document.getElementById("modsToggleBtn");
 const rtToggleBtn = document.getElementById("rtToggleBtn");
 const toggleCompareBtn = document.getElementById("toggleCompareBtn");
 const openPosterBtn = document.getElementById("openPosterBtn");
 const copyReportBtn = document.getElementById("copyReportBtn");
+const downloadPngBtn = document.getElementById("downloadPngBtn");
 const closePosterBtn = document.getElementById("closePosterBtn");
 const posterModal = document.getElementById("posterModal");
 const posterSpecsContent = document.getElementById("posterSpecsContent");
@@ -153,6 +155,7 @@ const gpuSelect2 = document.getElementById("gpuSelect2");
 const cpuSelect2 = document.getElementById("cpuSelect2");
 const ramSelect2 = document.getElementById("ramSelect2");
 
+const vramWarningBox = document.getElementById("vramWarningBox");
 const bottleneckBar = document.getElementById("bottleneckBar");
 const psuEstimatorBox = document.getElementById("psuEstimatorBox");
 const upgradeAdvisorBox = document.getElementById("upgradeAdvisorBox");
@@ -241,6 +244,39 @@ function applyUrlParams() {
   if (params.has("preset") && presetConfig[params.get("preset")]) globalPresetSelect.value = params.get("preset");
   if (params.has("up")) upscaleSelect.value = params.get("up");
 }
+
+resetAllBtn.addEventListener("click", () => {
+  gpuSelect.selectedIndex = 10;
+  cpuSelect.selectedIndex = 4;
+  ramSelect.value = "16";
+  resSelect.value = "1";
+  hzSelect.value = "60";
+  globalPresetSelect.value = "high";
+  upscaleSelect.value = "1";
+  sortSelect.value = "default";
+  searchInput.value = "";
+  currentCategory = "all";
+  rayTracingEnabled = false;
+  heavyModsEnabled = false;
+  compareMode = false;
+
+  rtToggleBtn.textContent = "🔆 تتبع الأشعة (Ray Tracing): مغلق";
+  rtToggleBtn.classList.remove("btn-amber");
+  rtToggleBtn.classList.add("btn-outline");
+
+  modsToggleBtn.textContent = "🧩 مودات ثقيلة (Mods): مغلق";
+  modsToggleBtn.classList.remove("btn-purple");
+  modsToggleBtn.classList.add("btn-outline");
+
+  compareBox.classList.remove("active");
+  toggleCompareBtn.textContent = "⚖️ مقارنة تجميعة ثانية";
+
+  perGamePresets = {};
+  localStorage.removeItem("gamecheck_game_presets");
+  filterButtons.forEach((b) => b.classList.toggle("active", b.dataset.cat === "all"));
+  shareStatus.textContent = "تمت إعادة ضبط جميع الإعدادات إلى الوضع الافتراضي.";
+  renderGames();
+});
 
 document.querySelectorAll("[data-preset-build]").forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -447,6 +483,9 @@ saveBuildBtn.addEventListener("click", () => {
   renderSavedBuilds();
 });
 
+// نافذة البطاقة + تحميل PNG مباشر عبر Canvas
+let posterSnapshotData = null;
+
 openPosterBtn.addEventListener("click", () => {
   const gpu = gpus[gpuSelect.value];
   const cpu = cpus[cpuSelect.value];
@@ -465,19 +504,89 @@ openPosterBtn.addEventListener("click", () => {
   `;
 
   const highlightIds = ["gtav", "rdr2", "cp2077", "beamng", "ets2", "cs2", "fortnite", "msfs24"];
-  const selectedGames = defaultGames.filter((g) => highlightIds.includes(g.id));
-
-  posterGamesContent.innerHTML = selectedGames.map((g) => {
+  const selectedGames = defaultGames.filter((g) => highlightIds.includes(g.id)).map((g) => {
+    const shortName = g.title.split("(")[0].trim();
     const res = calculateGameFps(g, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, globalPresetSelect.value);
-    return `
-      <div class="poster-game-item">
-        <span>${g.title.split("(")[0].trim()}</span>
-        <strong style="color:#4ade80;">${res.fps} FPS</strong>
-      </div>
-    `;
-  }).join("");
+    return { shortName, fps: res.fps };
+  });
+
+  posterSnapshotData = {
+    gpuName: gpu.name,
+    cpuName: cpu.name,
+    ramText: `${ram} GB | ${resSelect.options[resSelect.selectedIndex].text} (${hzSelect.value}Hz)`,
+    presetText: `${globalPresetSelect.options[globalPresetSelect.selectedIndex].text}${heavyModsEnabled ? " + Mods" : ""}${rayTracingEnabled ? " + RT" : ""}`,
+    games: selectedGames
+  };
+
+  posterGamesContent.innerHTML = selectedGames.map((item) => `
+    <div class="poster-game-item">
+      <span>${item.shortName}</span>
+      <strong style="color:#4ade80;">${item.fps} FPS</strong>
+    </div>
+  `).join("");
 
   posterModal.classList.add("open");
+});
+
+downloadPngBtn.addEventListener("click", () => {
+  if (!posterSnapshotData) return;
+
+  const canvas = document.createElement("canvas");
+  canvas.width = 900;
+  canvas.height = 560;
+  const ctx = canvas.getContext("2d");
+
+  const grad = ctx.createLinearGradient(0, 0, 900, 560);
+  grad.addColorStop(0, "#0f172a");
+  grad.addColorStop(1, "#1e1b4b");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 900, 560);
+
+  ctx.strokeStyle = "#38bdf8";
+  ctx.lineWidth = 4;
+  ctx.strokeRect(16, 16, 868, 528);
+
+  ctx.direction = "rtl";
+  ctx.textAlign = "right";
+  ctx.fillStyle = "#38bdf8";
+  ctx.font = "bold 30px Arial, sans-serif";
+  ctx.fillText("⚡ FPS Lab — بطاقة أداء التجميعة", 850, 68);
+
+  ctx.fillStyle = "#f8fafc";
+  ctx.font = "bold 20px Arial, sans-serif";
+  ctx.fillText(`GPU: ${posterSnapshotData.gpuName}`, 850, 120);
+  ctx.fillText(`CPU: ${posterSnapshotData.cpuName}`, 850, 155);
+
+  ctx.fillStyle = "#cbd5e1";
+  ctx.font = "18px Arial, sans-serif";
+  ctx.fillText(`RAM & Display: ${posterSnapshotData.ramText}`, 850, 190);
+  ctx.fillText(`Settings: ${posterSnapshotData.presetText}`, 850, 222);
+
+  posterSnapshotData.games.forEach((g, idx) => {
+    const col = idx % 2;
+    const row = Math.floor(idx / 2);
+    const x = col === 0 ? 850 : 430;
+    const y = 285 + row * 56;
+
+    ctx.fillStyle = "rgba(30, 41, 59, 0.9)";
+    ctx.fillRect(x - 390, y - 30, 390, 44);
+
+    ctx.fillStyle = "#f1f5f9";
+    ctx.font = "bold 17px Arial, sans-serif";
+    ctx.fillText(g.shortName, x - 12, y - 2);
+
+    ctx.fillStyle = "#4ade80";
+    ctx.fillText(`${g.fps} FPS`, x - 310, y - 2);
+  });
+
+  ctx.fillStyle = "#94a3b8";
+  ctx.font = "15px Arial, sans-serif";
+  ctx.fillText("FPS Lab — GameCheck AR", 850, 522);
+
+  const link = document.createElement("a");
+  link.download = "FPS-Lab-Build-Card.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
 });
 
 closePosterBtn.addEventListener("click", () => posterModal.classList.remove("open"));
@@ -615,20 +724,33 @@ addGameBtn.addEventListener("click", () => {
 function calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, selectedPresetKey) {
   const presetInfo = presetConfig[selectedPresetKey] || presetConfig.high;
   const requiredPower = game.reqScore * presetInfo.loadMultiplier;
-  const buildPower = rawScore * resMultiplier * upscaleMultiplier * rtMultiplier * modsMultiplier;
-  const performanceRatio = buildPower / requiredPower;
 
-  let fps = Math.round(game.baseFps * performanceRatio);
+  // توازن حسب نوع اللعبة: الشوتر والمحاكاة يعتمدان أكثر على المعالج، والأكشن يعتمد أكثر على الكرت
+  const cpuWeight = game.category === "fps" || game.category === "sim" ? 0.36 : 0.24;
+  const gpuWeight = 1 - cpuWeight;
+  const gpuIdx = Number(gpuSelect.value);
+  const cpuIdx = Number(cpuSelect.value);
+  const gameAwareRawScore = (gpus[gpuIdx].score * gpuWeight) + (cpus[cpuIdx].score * cpuWeight);
+  const baseScoreForCalc = rawScore === gameAwareRawScore ? rawScore : gameAwareRawScore;
+
+  const nativePower = baseScoreForCalc * resMultiplier * rtMultiplier * modsMultiplier;
+  const upscaledPower = nativePower * upscaleMultiplier;
+
+  let nativeFps = Math.round(game.baseFps * (nativePower / requiredPower));
+  let fps = Math.round(game.baseFps * (upscaledPower / requiredPower));
+
   let effectiveReqRam = selectedPresetKey === "ultra" ? game.reqRam + 4 : game.reqRam;
   if (heavyModsEnabled) effectiveReqRam += 4;
 
   if (ram < effectiveReqRam) {
     const ramRatio = Math.max(0.35, ram / effectiveReqRam);
+    nativeFps = Math.round(nativeFps * ramRatio);
     fps = Math.round(fps * ramRatio);
   }
 
   return {
     fps: Math.max(10, Math.min(fps, 360)),
+    nativeFps: Math.max(10, Math.min(nativeFps, 360)),
     effectiveReqRam,
     presetLabel: presetInfo.label
   };
@@ -638,21 +760,38 @@ function updateHardwareInsights(gpuIdx, cpuIdx, ram, resMultiplier) {
   const gpu = gpus[gpuIdx];
   const cpu = cpus[cpuIdx];
 
+  // تحذير VRAM
+  let neededVram = 4;
+  if (resMultiplier === 0.72) neededVram = 8;
+  else if (resMultiplier === 0.45) neededVram = 12;
+  if (rayTracingEnabled) neededVram += 2;
+  if (globalPresetSelect.value === "ultra") neededVram += 2;
+
+  if (gpu.vram < neededVram) {
+    vramWarningBox.classList.add("active");
+    vramWarningBox.innerHTML = `🚨 <strong>تنبيه VRAM:</strong> كرت الشاشة يملك <strong>${gpu.vram}GB VRAM</strong> بينما الإعدادات الحالية قد تحتاج إلى <strong>~${neededVram}GB+</strong>، مما قد يسبب تقطيعاً أو هبوطاً مفاجئاً في الفريمات.`;
+  } else {
+    vramWarningBox.classList.remove("active");
+    vramWarningBox.innerHTML = "";
+  }
+
+  // عنق الزجاجة
   const adjustedGpu = gpu.score * resMultiplier;
   const diffRatio = Math.abs(adjustedGpu - cpu.score) / Math.max(adjustedGpu, cpu.score);
   const pct = Math.min(45, Math.round(diffRatio * 100));
 
   if (pct <= 12) {
     bottleneckBar.className = "insight-box bn-good";
-    bottleneckBar.innerHTML = `✅ <strong>توافق القطع ممتاز:</strong> توازن مثالي بين المعالج وكرت الشاشة (نسبة عنق الزجاجة: ${pct}%).`;
+    bottleneckBar.innerHTML = `✅ <strong>توافق القطع ممتاز:</strong> توازن جيد بين المعالج والكرت (الفارق: ${pct}%). في الشوتر والمحاكاة يبرز المعالج، وفي الألعاب الثقيلة يبرز الكرت.`;
   } else if (adjustedGpu > cpu.score) {
     bottleneckBar.className = pct > 25 ? "insight-box bn-bad" : "insight-box bn-warn";
-    bottleneckBar.innerHTML = `⚠️ <strong>عنق زجاجة معالج (~${pct}%):</strong> المعالج (${cpu.name}) أضعف من كرت الشاشة على هذه الدقة.`;
+    bottleneckBar.innerHTML = `⚠️ <strong>عنق زجاجة معالج (~${pct}%):</strong> يظهر تأثيره بوضوح في ألعاب المحاكاة والشوتر على الدقة الحالية.`;
   } else {
     bottleneckBar.className = pct > 25 ? "insight-box bn-bad" : "insight-box bn-warn";
     bottleneckBar.innerHTML = `ℹ️ <strong>عنق زجاجة كرت شاشة (~${pct}%):</strong> كرت الشاشة (${gpu.name}) هو المحدّد الأساسي للأداء.`;
   }
 
+  // الباور سبلاي
   const systemOverhead = 90 + (ram > 16 ? 20 : 10);
   const estimatedWatts = gpu.tdp + cpu.tdp + systemOverhead;
   const recommendedPsu = Math.ceil((estimatedWatts * 1.35) / 50) * 50;
@@ -662,6 +801,7 @@ function updateHardwareInsights(gpuIdx, cpuIdx, ram, resMultiplier) {
     🔌 <strong>الباور سبلاي المقترح (PSU):</strong> ${recommendedPsu}W أو أعلى (80+ Bronze/Gold)
   `;
 
+  // مستشار الترقية الذكي
   let adviceText = "";
   let pillsHtml = "";
 
@@ -795,6 +935,10 @@ function renderGames() {
       barColor = "#eab308";
     }
 
+    const upscaleCompareHtml = upscaleMultiplier > 1
+      ? `<div class="native-fps-sub">الأصلي بدون رفع: ${res1.nativeFps} FPS ← بعد التفعيل: ${res1.fps} FPS</div>`
+      : "";
+
     const hzNote = res1.fps >= targetHz
       ? `🖥️ يغطي شاشة ${targetHz}Hz بالكامل`
       : `🖥️ أقل من شاشة ${targetHz}Hz (${targetHz - res1.fps} FPS فارق)`;
@@ -835,6 +979,7 @@ function renderGames() {
           </div>
           <span class="fps-unit">الرام المطلوب: ${res1.effectiveReqRam}GB</span>
         </div>
+        ${upscaleCompareHtml}
         <div class="hz-status">${hzNote}</div>
         ${compareHtml}
         <div class="progress-track">

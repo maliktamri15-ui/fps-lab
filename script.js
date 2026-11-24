@@ -1,58 +1,58 @@
 const gpus = [
-  { name: "GTX 750 Ti (2GB)", score: 15 },
-  { name: "GTX 1050 Ti (4GB)", score: 26 },
-  { name: "RX 570 / RX 580 (8GB)", score: 33 },
-  { name: "GTX 1650 (4GB)", score: 35 },
-  { name: "GTX 1060 (6GB)", score: 42 },
-  { name: "GTX 1660 Super (6GB)", score: 48 },
-  { name: "RTX 3050 (8GB)", score: 52 },
-  { name: "RTX 2060 (6GB)", score: 56 },
-  { name: "Intel Arc B580 (12GB)", score: 68 },
-  { name: "RX 6600 (8GB)", score: 66 },
-  { name: "RTX 3060 (12GB)", score: 72 },
-  { name: "RTX 5050 (8GB)", score: 70 },
-  { name: "RX 7600 XT (16GB)", score: 78 },
-  { name: "RTX 3060 Ti (8GB)", score: 80 },
-  { name: "RTX 4060 (8GB)", score: 84 },
-  { name: "RTX 5060 (8GB)", score: 92 },
-  { name: "RX 9060 XT (16GB)", score: 96 },
-  { name: "RTX 3070 / 3070 Ti (8GB)", score: 94 },
-  { name: "RTX 4060 Ti (8GB / 16GB)", score: 96 },
-  { name: "RTX 5060 Ti (16GB)", score: 105 },
-  { name: "RX 7800 XT (16GB)", score: 108 },
-  { name: "RTX 3080 / 3080 Ti (12GB)", score: 112 },
-  { name: "RTX 4070 / 4070 Super (12GB)", score: 118 },
-  { name: "RTX 5070 (12GB GDDR7)", score: 128 },
-  { name: "RX 9070 (16GB)", score: 128 },
-  { name: "RTX 4070 Ti Super (16GB)", score: 132 },
-  { name: "RX 9070 XT (16GB)", score: 140 },
-  { name: "RTX 5070 Ti (16GB GDDR7)", score: 145 },
-  { name: "RX 7900 XTX (24GB)", score: 146 },
-  { name: "RTX 4080 / 4080 Super (16GB)", score: 148 },
-  { name: "RTX 5080 (16GB GDDR7)", score: 162 },
-  { name: "RTX 4090 (24GB GDDR6X)", score: 175 },
-  { name: "RTX 5090 (32GB GDDR7) — الأقوى في العالم", score: 215 }
+  { name: "GTX 750 Ti (2GB)", score: 15, tdp: 60 },
+  { name: "GTX 1050 Ti (4GB)", score: 26, tdp: 75 },
+  { name: "RX 570 / RX 580 (8GB)", score: 33, tdp: 185 },
+  { name: "GTX 1650 (4GB)", score: 35, tdp: 75 },
+  { name: "GTX 1060 (6GB)", score: 42, tdp: 120 },
+  { name: "GTX 1660 Super (6GB)", score: 48, tdp: 125 },
+  { name: "RTX 3050 (8GB)", score: 52, tdp: 130 },
+  { name: "RTX 2060 (6GB)", score: 56, tdp: 160 },
+  { name: "Intel Arc B580 (12GB)", score: 68, tdp: 190 },
+  { name: "RX 6600 (8GB)", score: 66, tdp: 132 },
+  { name: "RTX 3060 (12GB)", score: 72, tdp: 170 },
+  { name: "RTX 5050 (8GB)", score: 70, tdp: 135 },
+  { name: "RX 7600 XT (16GB)", score: 78, tdp: 190 },
+  { name: "RTX 3060 Ti (8GB)", score: 80, tdp: 200 },
+  { name: "RTX 4060 (8GB)", score: 84, tdp: 115 },
+  { name: "RTX 5060 (8GB)", score: 92, tdp: 145 },
+  { name: "RX 9060 XT (16GB)", score: 96, tdp: 170 },
+  { name: "RTX 3070 / 3070 Ti (8GB)", score: 94, tdp: 220 },
+  { name: "RTX 4060 Ti (8GB / 16GB)", score: 96, tdp: 165 },
+  { name: "RTX 5060 Ti (16GB)", score: 105, tdp: 180 },
+  { name: "RX 7800 XT (16GB)", score: 108, tdp: 263 },
+  { name: "RTX 3080 / 3080 Ti (12GB)", score: 112, tdp: 320 },
+  { name: "RTX 4070 / 4070 Super (12GB)", score: 118, tdp: 220 },
+  { name: "RTX 5070 (12GB GDDR7)", score: 128, tdp: 250 },
+  { name: "RX 9070 (16GB)", score: 128, tdp: 220 },
+  { name: "RTX 4070 Ti Super (16GB)", score: 132, tdp: 285 },
+  { name: "RX 9070 XT (16GB)", score: 140, tdp: 304 },
+  { name: "RTX 5070 Ti (16GB GDDR7)", score: 145, tdp: 300 },
+  { name: "RX 7900 XTX (24GB)", score: 146, tdp: 355 },
+  { name: "RTX 4080 / 4080 Super (16GB)", score: 148, tdp: 320 },
+  { name: "RTX 5080 (16GB GDDR7)", score: 162, tdp: 360 },
+  { name: "RTX 4090 (24GB GDDR6X)", score: 175, tdp: 450 },
+  { name: "RTX 5090 (32GB GDDR7) — الأقوى في العالم", score: 215, tdp: 575 }
 ];
 
 const cpus = [
-  { name: "Core i3-10100F / 12100F", score: 46 },
-  { name: "Ryzen 5 2600 / 3600", score: 55 },
-  { name: "Core i5-10400F / 11400F", score: 62 },
-  { name: "Ryzen 5 5500 / 5600", score: 70 },
-  { name: "Ryzen 7 5600X / 5700X", score: 76 },
-  { name: "Core i5-12400F / 12600K", score: 82 },
-  { name: "Ryzen 5 7600X / 9600X", score: 90 },
-  { name: "Core Ultra 5 245K / 250K Plus", score: 94 },
-  { name: "Ryzen 7 5800X3D", score: 98 },
-  { name: "Core i5-13600K / 14600K", score: 104 },
-  { name: "Core i7-13700K / 14700K", score: 114 },
-  { name: "Ryzen 7 7700X / 9700X", score: 116 },
-  { name: "Core Ultra 7 265K / 270K Plus", score: 120 },
-  { name: "Ryzen 7 7800X3D", score: 126 },
-  { name: "Core i9-13900K / 14900K", score: 130 },
-  { name: "Core Ultra 9 285K", score: 134 },
-  { name: "Ryzen 7 9800X3D / 9850X3D", score: 145 },
-  { name: "Ryzen 9 9950X3D / 9950X3D2 — الأقوى في العالم", score: 152 }
+  { name: "Core i3-10100F / 12100F", score: 46, tdp: 65 },
+  { name: "Ryzen 5 2600 / 3600", score: 55, tdp: 65 },
+  { name: "Core i5-10400F / 11400F", score: 62, tdp: 65 },
+  { name: "Ryzen 5 5500 / 5600", score: 70, tdp: 65 },
+  { name: "Ryzen 7 5600X / 5700X", score: 76, tdp: 65 },
+  { name: "Core i5-12400F / 12600K", score: 82, tdp: 117 },
+  { name: "Ryzen 5 7600X / 9600X", score: 90, tdp: 105 },
+  { name: "Core Ultra 5 245K / 250K Plus", score: 94, tdp: 125 },
+  { name: "Ryzen 7 5800X3D", score: 98, tdp: 105 },
+  { name: "Core i5-13600K / 14600K", score: 104, tdp: 125 },
+  { name: "Core i7-13700K / 14700K", score: 114, tdp: 125 },
+  { name: "Ryzen 7 7700X / 9700X", score: 116, tdp: 105 },
+  { name: "Core Ultra 7 265K / 270K Plus", score: 120, tdp: 125 },
+  { name: "Ryzen 7 7800X3D", score: 126, tdp: 120 },
+  { name: "Core i9-13900K / 14900K", score: 130, tdp: 150 },
+  { name: "Core Ultra 9 285K", score: 134, tdp: 125 },
+  { name: "Ryzen 7 9800X3D / 9850X3D", score: 145, tdp: 120 },
+  { name: "Ryzen 9 9950X3D / 9950X3D2 — الأقوى في العالم", score: 152, tdp: 170 }
 ];
 
 const presetConfig = {
@@ -133,7 +133,16 @@ const resSelect = document.getElementById("resSelect");
 const globalPresetSelect = document.getElementById("globalPresetSelect");
 const upscaleSelect = document.getElementById("upscaleSelect");
 
+const themeToggleBtn = document.getElementById("themeToggleBtn");
+const langToggleBtn = document.getElementById("langToggleBtn");
+const rtToggleBtn = document.getElementById("rtToggleBtn");
 const toggleCompareBtn = document.getElementById("toggleCompareBtn");
+const openPosterBtn = document.getElementById("openPosterBtn");
+const closePosterBtn = document.getElementById("closePosterBtn");
+const posterModal = document.getElementById("posterModal");
+const posterSpecsContent = document.getElementById("posterSpecsContent");
+const posterGamesContent = document.getElementById("posterGamesContent");
+
 const shareBuildBtn = document.getElementById("shareBuildBtn");
 const shareStatus = document.getElementById("shareStatus");
 const compareBox = document.getElementById("compareBox");
@@ -142,7 +151,14 @@ const cpuSelect2 = document.getElementById("cpuSelect2");
 const ramSelect2 = document.getElementById("ramSelect2");
 
 const bottleneckBar = document.getElementById("bottleneckBar");
+const psuEstimatorBox = document.getElementById("psuEstimatorBox");
+const upgradeAdvisorBox = document.getElementById("upgradeAdvisorBox");
 const specsSummary = document.getElementById("specsSummary");
+
+const buildNameInput = document.getElementById("buildNameInput");
+const saveBuildBtn = document.getElementById("saveBuildBtn");
+const savedBuildsList = document.getElementById("savedBuildsList");
+
 const searchInput = document.getElementById("searchInput");
 const sortSelect = document.getElementById("sortSelect");
 const resultsDiv = document.getElementById("results");
@@ -173,8 +189,19 @@ const saveSocialBtn = document.getElementById("saveSocialBtn");
 
 let currentCategory = "all";
 let compareMode = false;
+let rayTracingEnabled = false;
+let currentThemeIndex = 0;
+const themes = [
+  { class: "", labelAr: "🎨 المظهر: داكن", labelEn: "🎨 Theme: Dark" },
+  { class: "theme-neon", labelAr: "🎨 المظهر: نيون", labelEn: "🎨 Theme: Neon" },
+  { class: "theme-light", labelAr: "🎨 المظهر: فاتح", labelEn: "🎨 Theme: Light" }
+];
+let currentLang = "ar";
+
 let perGamePresets = JSON.parse(localStorage.getItem("gamecheck_game_presets") || "{}");
 let customGames = JSON.parse(localStorage.getItem("gamecheck_custom_games") || "[]");
+let favGames = JSON.parse(localStorage.getItem("gamecheck_fav_games") || "[]");
+let savedBuilds = JSON.parse(localStorage.getItem("gamecheck_saved_builds") || "[]");
 let myDiscord = JSON.parse(localStorage.getItem("gamecheck_my_discord") || JSON.stringify({
   handle: DEFAULT_DISCORD_ID,
   invite: DEFAULT_DISCORD_URL
@@ -211,12 +238,101 @@ function applyUrlParams() {
   if (params.has("up")) upscaleSelect.value = params.get("up");
 }
 
+// التجميعات الجاهزة بنقرة واحدة
+document.querySelectorAll("[data-preset-build]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const type = btn.dataset.presetBuild;
+    if (type === "budget") {
+      gpuSelect.selectedIndex = 3; // GTX 1650
+      cpuSelect.selectedIndex = 0; // i3-12100F
+      ramSelect.value = "8";
+      resSelect.value = "1";
+      globalPresetSelect.value = "medium";
+    } else if (type === "sim") {
+      gpuSelect.selectedIndex = 10; // RTX 3060
+      cpuSelect.selectedIndex = 4; // Ryzen 7 5600X
+      ramSelect.value = "16";
+      resSelect.value = "1";
+      globalPresetSelect.value = "high";
+    } else if (type === "mid") {
+      gpuSelect.selectedIndex = 22; // RTX 4070
+      cpuSelect.selectedIndex = 9; // i5-13600K
+      ramSelect.value = "32";
+      resSelect.value = "0.72";
+      globalPresetSelect.value = "high";
+    } else if (type === "ultra4k") {
+      gpuSelect.selectedIndex = gpus.length - 1; // RTX 5090
+      cpuSelect.selectedIndex = cpus.length - 1; // Ryzen 9 9950X3D
+      ramSelect.value = "64";
+      resSelect.value = "0.45";
+      globalPresetSelect.value = "ultra";
+    }
+    renderGames();
+  });
+});
+
+// أزرار الوصول السريع للألعاب الشائعة
+document.querySelectorAll("[data-quick-search]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    searchInput.value = btn.dataset.quickSearch;
+    currentCategory = "all";
+    filterButtons.forEach((b) => b.classList.toggle("active", b.dataset.cat === "all"));
+    renderGames();
+  });
+});
+
+// تبديل المظهر
+themeToggleBtn.addEventListener("click", () => {
+  currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+  document.body.className = themes[currentThemeIndex].class;
+  themeToggleBtn.textContent = currentLang === "ar"
+    ? themes[currentThemeIndex].labelAr
+    : themes[currentThemeIndex].labelEn;
+});
+
+// تبديل اللغة AR / EN
+langToggleBtn.addEventListener("click", () => {
+  currentLang = currentLang === "ar" ? "en" : "ar";
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+  langToggleBtn.textContent = currentLang === "ar" ? "🌐 English" : "🌐 العربية";
+  themeToggleBtn.textContent = currentLang === "ar"
+    ? themes[currentThemeIndex].labelAr
+    : themes[currentThemeIndex].labelEn;
+
+  document.getElementById("mainTitle").textContent = currentLang === "ar"
+    ? "FPS Lab — فاحص تشغيل الألعاب وتقدير الفريمات"
+    : "FPS Lab — PC Game Benchmark & FPS Estimator";
+  document.getElementById("mainSubtitle").textContent = currentLang === "ar"
+    ? "اختر مواصفات جهازك أو جرّب التجميعات الجاهزة، واحصل على تحليل الأداء والترقية واستهلاك الطاقة"
+    : "Select your PC hardware or try instant presets to analyze FPS, bottlenecks, PSU wattage, and upgrades";
+  document.getElementById("lblGpu").textContent = currentLang === "ar" ? "كرت الشاشة الأساسي (GPU 1)" : "Primary Graphics Card (GPU 1)";
+  document.getElementById("lblCpu").textContent = currentLang === "ar" ? "المعالج الأساسي (CPU 1)" : "Primary Processor (CPU 1)";
+  document.getElementById("lblRam").textContent = currentLang === "ar" ? "الذاكرة (RAM 1)" : "Memory (RAM 1)";
+  document.getElementById("lblRes").textContent = currentLang === "ar" ? "دقة الشاشة (Resolution)" : "Screen Resolution";
+  document.getElementById("lblPreset").textContent = currentLang === "ar" ? "أداء اللعبة العام (Preset)" : "Graphics Quality Preset";
+  document.getElementById("lblUpscale").textContent = currentLang === "ar" ? "تقنية رفع الفريمات (DLSS / FSR)" : "Upscaling (DLSS / FSR / FG)";
+  searchInput.placeholder = currentLang === "ar" ? "ابحث في الألعاب..." : "Search games...";
+  renderGames();
+});
+
+// تبديل تتبع الأشعة Ray Tracing
+rtToggleBtn.addEventListener("click", () => {
+  rayTracingEnabled = !rayTracingEnabled;
+  rtToggleBtn.textContent = rayTracingEnabled
+    ? "🔆 تتبع الأشعة (Ray Tracing): مفعّل (-28% FPS)"
+    : "🔆 تتبع الأشعة (Ray Tracing): مغلق";
+  rtToggleBtn.classList.toggle("btn-amber", rayTracingEnabled);
+  rtToggleBtn.classList.toggle("btn-outline", !rayTracingEnabled);
+  renderGames();
+});
+
 toggleCompareBtn.addEventListener("click", () => {
   compareMode = !compareMode;
   compareBox.classList.toggle("active", compareMode);
   toggleCompareBtn.textContent = compareMode
-    ? "✖ إخفاء مقارنة التجميعة الثانية"
-    : "⚖️ تفعيل مقارنة تجميعة ثانية";
+    ? "✖ إخفاء المقارنة"
+    : "⚖️ مقارنة تجميعة ثانية";
   renderGames();
 });
 
@@ -238,10 +354,97 @@ shareBuildBtn.addEventListener("click", async () => {
   }
 });
 
+// حفظ التجميعات المخصصة
+function renderSavedBuilds() {
+  savedBuildsList.innerHTML = savedBuilds.map((b, idx) => `
+    <span class="saved-chip" data-load-build="${idx}">
+      🖥️ <strong>${b.name}</strong>
+      <span class="del-build" data-del-build="${idx}" title="حذف">×</span>
+    </span>
+  `).join("");
+
+  savedBuildsList.querySelectorAll("[data-load-build]").forEach((chip) => {
+    chip.addEventListener("click", (e) => {
+      if (e.target.dataset.delBuild !== undefined) return;
+      const b = savedBuilds[Number(chip.dataset.loadBuild)];
+      if (!b) return;
+      gpuSelect.value = b.gpu;
+      cpuSelect.value = b.cpu;
+      ramSelect.value = b.ram;
+      resSelect.value = b.res;
+      globalPresetSelect.value = b.preset;
+      renderGames();
+    });
+  });
+
+  savedBuildsList.querySelectorAll("[data-del-build]").forEach((delBtn) => {
+    delBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const idx = Number(delBtn.dataset.delBuild);
+      savedBuilds.splice(idx, 1);
+      localStorage.setItem("gamecheck_saved_builds", JSON.stringify(savedBuilds));
+      renderSavedBuilds();
+    });
+  });
+}
+
+saveBuildBtn.addEventListener("click", () => {
+  const name = buildNameInput.value.trim() || `تجميعة #${savedBuilds.length + 1}`;
+  savedBuilds.unshift({
+    name,
+    gpu: gpuSelect.value,
+    cpu: cpuSelect.value,
+    ram: ramSelect.value,
+    res: resSelect.value,
+    preset: globalPresetSelect.value
+  });
+  localStorage.setItem("gamecheck_saved_builds", JSON.stringify(savedBuilds));
+  buildNameInput.value = "";
+  renderSavedBuilds();
+});
+
+// نافذة بطاقة الملخص للتصوير
+openPosterBtn.addEventListener("click", () => {
+  const gpu = gpus[gpuSelect.value];
+  const cpu = cpus[cpuSelect.value];
+  const ram = Number(ramSelect.value);
+  const resMultiplier = Number(resSelect.value);
+  const upscaleMultiplier = Number(upscaleSelect.value);
+  const rtMultiplier = rayTracingEnabled ? 0.72 : 1.0;
+  const rawScore = (gpu.score * 0.72) + (cpu.score * 0.28);
+
+  posterSpecsContent.innerHTML = `
+    <div>🎮 <strong>كرت الشاشة:</strong> ${gpu.name}</div>
+    <div>🧠 <strong>المعالج:</strong> ${cpu.name}</div>
+    <div>💾 <strong>الرام والدقة:</strong> ${ram} GB | ${resSelect.options[resSelect.selectedIndex].text}</div>
+    <div>⚙️ <strong>الإعدادات:</strong> ${globalPresetSelect.options[globalPresetSelect.selectedIndex].text} ${rayTracingEnabled ? "+ Ray Tracing" : ""}</div>
+  `;
+
+  const highlightIds = ["gtav", "rdr2", "cp2077", "beamng", "ets2", "cs2", "fortnite", "msfs24"];
+  const selectedGames = defaultGames.filter((g) => highlightIds.includes(g.id));
+
+  posterGamesContent.innerHTML = selectedGames.map((g) => {
+    const res = calculateGameFps(g, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, globalPresetSelect.value);
+    return `
+      <div class="poster-game-item">
+        <span>${g.title.split("(")[0].trim()}</span>
+        <strong style="color:#4ade80;">${res.fps} FPS</strong>
+      </div>
+    `;
+  }).join("");
+
+  posterModal.classList.add("open");
+});
+
+closePosterBtn.addEventListener("click", () => posterModal.classList.remove("open"));
+posterModal.addEventListener("click", (e) => {
+  if (e.target === posterModal) posterModal.classList.remove("open");
+});
+
+// قسم الدعم على Discord
 function buildDiscordTargetUrl() {
   const rawInvite = (myDiscordInvite.value || myDiscord.invite || "").trim();
   const handleVal = (myDiscordHandle.value || myDiscord.handle || "").trim();
-
   if (/^https?:\/\//i.test(rawInvite)) return rawInvite;
   if (/^(discord\.gg|discord\.com)\//i.test(rawInvite)) return "https://" + rawInvite;
   if (/^\d{15,22}$/.test(handleVal)) return `https://discord.com/users/${handleVal}`;
@@ -270,7 +473,6 @@ function persistDiscordProfile() {
 
 saveDiscordBtn.addEventListener("click", () => {
   persistDiscordProfile();
-  supportStatus.style.color = "#4ade80";
   supportStatus.textContent = "تم حفظ إعدادات الدعم بنجاح.";
 });
 
@@ -283,7 +485,6 @@ attachSpecsBtn.addEventListener("click", () => {
 
   const summary = `مواصفات جهازي:\n- GPU: ${gpuName}\n- CPU: ${cpuName}\n- RAM: ${ramVal}\n- الدقة: ${resText} (${presetText})\n`;
   supportMessage.value = summary + (supportMessage.value ? "\n" + supportMessage.value : "");
-  supportStatus.style.color = "#38bdf8";
   supportStatus.textContent = "تم إدراج مواصفات جهازك في الرسالة.";
 });
 
@@ -302,7 +503,6 @@ contactSupportDiscordBtn.addEventListener("click", async (e) => {
     } catch {}
   }
 
-  supportStatus.style.color = "#4ade80";
   supportStatus.textContent = `تم فتح حساب الدعم (${handle}) ونسخ المعلومات للصقها في الدردشة.`;
   window.open(targetUrl, "_blank", "noopener,noreferrer");
   e.preventDefault();
@@ -313,14 +513,13 @@ copyDiscordBtn.addEventListener("click", async () => {
   const textToCopy = (myDiscord.handle || DEFAULT_DISCORD_ID).trim();
   try {
     await navigator.clipboard.writeText(textToCopy);
-    supportStatus.style.color = "#4ade80";
     supportStatus.textContent = `تم نسخ Discord ID: ${textToCopy}`;
   } catch {
-    supportStatus.style.color = "#38bdf8";
     supportStatus.textContent = `Discord ID: ${textToCopy}`;
   }
 });
 
+// الروابط الاجتماعية
 function renderSocialLinks() {
   ytUrl.value = socialLinks.yt || "";
   ttUrl.value = socialLinks.tt || "";
@@ -351,6 +550,7 @@ saveSocialBtn.addEventListener("click", () => {
   renderSocialLinks();
 });
 
+// إضافة لعبة مخصصة
 addGameBtn.addEventListener("click", () => {
   const title = newGameTitle.value.trim();
   if (!title) return;
@@ -371,10 +571,10 @@ addGameBtn.addEventListener("click", () => {
   renderGames();
 });
 
-function calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, selectedPresetKey) {
+function calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, selectedPresetKey) {
   const presetInfo = presetConfig[selectedPresetKey] || presetConfig.high;
   const requiredPower = game.reqScore * presetInfo.loadMultiplier;
-  const buildPower = rawScore * resMultiplier * upscaleMultiplier;
+  const buildPower = rawScore * resMultiplier * upscaleMultiplier * rtMultiplier;
   const performanceRatio = buildPower / requiredPower;
 
   let fps = Math.round(game.baseFps * performanceRatio);
@@ -392,38 +592,89 @@ function calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier,
   };
 }
 
-function updateBottleneckIndicator(gpu, cpu, resMultiplier) {
+function updateHardwareInsights(gpuIdx, cpuIdx, ram, resMultiplier) {
+  const gpu = gpus[gpuIdx];
+  const cpu = cpus[cpuIdx];
+
+  // 1. كشف عنق الزجاجة
   const adjustedGpu = gpu.score * resMultiplier;
   const diffRatio = Math.abs(adjustedGpu - cpu.score) / Math.max(adjustedGpu, cpu.score);
   const pct = Math.min(45, Math.round(diffRatio * 100));
 
   if (pct <= 12) {
-    bottleneckBar.className = "bottleneck-bar bn-good";
-    bottleneckBar.innerHTML = `
-      <span>✅ توافق القطع ممتاز (توازن مثالي بين المعالج وكرت الشاشة)</span>
-      <span>نسبة عنق الزجاجة: ${pct}%</span>
-    `;
+    bottleneckBar.className = "insight-box bn-good";
+    bottleneckBar.innerHTML = `✅ <strong>توافق القطع ممتاز:</strong> توازن مثالي بين المعالج وكرت الشاشة (نسبة عنق الزجاجة: ${pct}%).`;
   } else if (adjustedGpu > cpu.score) {
-    bottleneckBar.className = pct > 25 ? "bottleneck-bar bn-bad" : "bottleneck-bar bn-warn";
-    bottleneckBar.innerHTML = `
-      <span>⚠️ المعالج (${cpu.name}) أضعف من كرت الشاشة على هذه الدقة</span>
-      <span>عنق زجاجة معالج: ~${pct}%</span>
-    `;
+    bottleneckBar.className = pct > 25 ? "insight-box bn-bad" : "insight-box bn-warn";
+    bottleneckBar.innerHTML = `⚠️ <strong>عنق زجاجة معالج (~${pct}%):</strong> المعالج (${cpu.name}) أضعف من كرت الشاشة على هذه الدقة.`;
   } else {
-    bottleneckBar.className = pct > 25 ? "bottleneck-bar bn-bad" : "bottleneck-bar bn-warn";
-    bottleneckBar.innerHTML = `
-      <span>ℹ️ كرت الشاشة (${gpu.name}) هو المحدّد الأساسي للأداء</span>
-      <span>عنق زجاجة كرت شاشة: ~${pct}%</span>
-    `;
+    bottleneckBar.className = pct > 25 ? "insight-box bn-bad" : "insight-box bn-warn";
+    bottleneckBar.innerHTML = `ℹ️ <strong>عنق زجاجة كرت شاشة (~${pct}%):</strong> كرت الشاشة (${gpu.name}) هو المحدّد الأساسي للأداء.`;
   }
+
+  // 2. تقدير استهلاك الطاقة وحجم الباور سبلاي
+  const systemOverhead = 90 + (ram > 16 ? 20 : 10);
+  const estimatedWatts = gpu.tdp + cpu.tdp + systemOverhead;
+  const recommendedPsu = Math.ceil((estimatedWatts * 1.35) / 50) * 50;
+
+  psuEstimatorBox.innerHTML = `
+    ⚡ <strong>استهلاك الطاقة التقديري:</strong> ~${estimatedWatts}W تحت الضغط<br>
+    🔌 <strong>الباور سبلاي المقترح (PSU):</strong> ${recommendedPsu}W أو أعلى (80+ Bronze/Gold)
+  `;
+
+  // 3. مستشار الترقية الذكي
+  let adviceText = "";
+  let pillsHtml = "";
+
+  if (ram < 16) {
+    adviceText = `💡 <strong>مستشار الترقية:</strong> الذاكرة لديك (${ram} GB) تسبب هبوطاً في الفريمات بالألعاب الحديثة. ترقيتها إلى <strong>16GB أو 32GB</strong> ستعطي قفزة فورية.`;
+    pillsHtml = `<button class="upgrade-pill" data-upgrade-ram="16" type="button">ترقية إلى 16GB RAM</button>
+                 <button class="upgrade-pill" data-upgrade-ram="32" type="button">ترقية إلى 32GB RAM</button>`;
+  } else if (gpu.score <= cpu.score && gpuIdx < gpus.length - 1) {
+    const nextGpus = [gpuIdx + 2, gpuIdx + 4, gpuIdx + 6].filter((idx) => idx < gpus.length);
+    adviceText = `💡 <strong>مستشار الترقية:</strong> ترقية كرت الشاشة ستمنحك أكبر زيادة في الفريمات. جرّب أحد هذه الخيارات:`;
+    pillsHtml = nextGpus.map((idx) => `<button class="upgrade-pill" data-upgrade-gpu="${idx}" type="button">${gpus[idx].name}</button>`).join("");
+  } else if (cpuIdx < cpus.length - 1) {
+    const nextCpus = [cpuIdx + 1, cpuIdx + 2, cpuIdx + 3].filter((idx) => idx < cpus.length);
+    adviceText = `💡 <strong>مستشار الترقية:</strong> ترقية المعالج ستحرّر كامل قوة كرت الشاشة لديك وتزيد استقرار الفريمات:`;
+    pillsHtml = nextCpus.map((idx) => `<button class="upgrade-pill" data-upgrade-cpu="${idx}" type="button">${cpus[idx].name}</button>`).join("");
+  } else {
+    adviceText = `🏆 <strong>تجميعتك في القمة:</strong> تملك أقوى القطع المتوفرة حالياً!`;
+  }
+
+  upgradeAdvisorBox.innerHTML = `${adviceText}<div class="upgrade-pills">${pillsHtml}</div>`;
+
+  upgradeAdvisorBox.querySelectorAll("[data-upgrade-ram]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      ramSelect.value = btn.dataset.upgradeRam;
+      renderGames();
+    });
+  });
+
+  upgradeAdvisorBox.querySelectorAll("[data-upgrade-gpu]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      gpuSelect.value = btn.dataset.upgradeGpu;
+      renderGames();
+    });
+  });
+
+  upgradeAdvisorBox.querySelectorAll("[data-upgrade-cpu]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      cpuSelect.value = btn.dataset.upgradeCpu;
+      renderGames();
+    });
+  });
 }
 
 function renderGames() {
-  const gpu = gpus[gpuSelect.value];
-  const cpu = cpus[cpuSelect.value];
+  const gpuIdx = Number(gpuSelect.value);
+  const cpuIdx = Number(cpuSelect.value);
+  const gpu = gpus[gpuIdx];
+  const cpu = cpus[cpuIdx];
   const ram = Number(ramSelect.value);
   const resMultiplier = Number(resSelect.value);
   const upscaleMultiplier = Number(upscaleSelect.value);
+  const rtMultiplier = rayTracingEnabled ? 0.72 : 1.0;
   const defaultPresetKey = globalPresetSelect.value;
   const searchText = searchInput.value.trim().toLowerCase();
   const sortMode = sortSelect.value;
@@ -435,9 +686,9 @@ function renderGames() {
 
   const allGames = [...customGames, ...defaultGames];
   const rawScore = (gpu.score * 0.72) + (cpu.score * 0.28);
-  const effectiveScore = Math.round(rawScore * resMultiplier * upscaleMultiplier);
+  const effectiveScore = Math.round(rawScore * resMultiplier * upscaleMultiplier * rtMultiplier);
 
-  updateBottleneckIndicator(gpu, cpu, resMultiplier);
+  updateHardwareInsights(gpuIdx, cpuIdx, ram, resMultiplier);
 
   let tier = "متوسط";
   if (rawScore >= 145) tier = "وحش خارق (Ultra Flagship)";
@@ -448,22 +699,27 @@ function renderGames() {
   specsSummary.innerHTML = `
     <span>تقييم التجميعة: <strong>${tier}</strong></span>
     <span>عدد الألعاب: <strong>${allGames.length} لعبة</strong></span>
-    <span>نقاط الأداء: <strong>${effectiveScore} نقطة</strong></span>
+    <span>نقاط الأداء الفعلية: <strong>${effectiveScore} نقطة</strong></span>
   `;
 
   let computedList = allGames
     .filter((game) => {
-      const matchCat = currentCategory === "all" || game.category === currentCategory;
+      const isFav = favGames.includes(game.id);
+      const matchCat =
+        currentCategory === "all" ||
+        (currentCategory === "fav" && isFav) ||
+        game.category === currentCategory;
       const matchSearch = game.title.toLowerCase().includes(searchText);
       return matchCat && matchSearch;
     })
     .map((game) => {
+      const isFav = favGames.includes(game.id);
       const selectedPresetKey = perGamePresets[game.id] || defaultPresetKey;
-      const res1 = calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, selectedPresetKey);
+      const res1 = calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, selectedPresetKey);
       const res2 = compareMode
-        ? calculateGameFps(game, rawScore2, ram2, resMultiplier, upscaleMultiplier, selectedPresetKey)
+        ? calculateGameFps(game, rawScore2, ram2, resMultiplier, upscaleMultiplier, rtMultiplier, selectedPresetKey)
         : null;
-      return { game, selectedPresetKey, res1, res2 };
+      return { game, isFav, selectedPresetKey, res1, res2 };
     });
 
   if (sortMode === "fps-desc") {
@@ -472,6 +728,8 @@ function renderGames() {
     computedList.sort((a, b) => a.res1.fps - b.res1.fps);
   } else if (sortMode === "alpha") {
     computedList.sort((a, b) => a.game.title.localeCompare(b.game.title));
+  } else {
+    computedList.sort((a, b) => Number(b.isFav) - Number(a.isFav));
   }
 
   resultsDiv.innerHTML = "";
@@ -481,7 +739,7 @@ function renderGames() {
     return;
   }
 
-  computedList.forEach(({ game, selectedPresetKey, res1, res2 }) => {
+  computedList.forEach(({ game, isFav, selectedPresetKey, res1, res2 }) => {
     let badgeClass = "badge-high";
     let badgeText = "سلس وممتاز";
     let barColor = "#22c55e";
@@ -516,11 +774,12 @@ function renderGames() {
       : "";
 
     resultsDiv.innerHTML += `
-      <article class="game-card">
+      <article class="game-card ${isFav ? "is-fav" : ""}">
         <div class="card-top">
           <div class="game-title">${game.title}</div>
           <div class="card-actions-top">
             <span class="badge ${badgeClass}">${badgeText}</span>
+            <button class="fav-btn ${isFav ? "active" : ""}" data-fav-id="${game.id}" title="تفضيل" type="button">★</button>
             ${deleteBtnHtml}
           </div>
         </div>
@@ -553,6 +812,19 @@ function renderGames() {
       const gameId = e.target.dataset.gameId;
       perGamePresets[gameId] = e.target.value;
       localStorage.setItem("gamecheck_game_presets", JSON.stringify(perGamePresets));
+      renderGames();
+    });
+  });
+
+  document.querySelectorAll(".fav-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const favId = e.target.dataset.favId;
+      if (favGames.includes(favId)) {
+        favGames = favGames.filter((id) => id !== favId);
+      } else {
+        favGames.push(favId);
+      }
+      localStorage.setItem("gamecheck_fav_games", JSON.stringify(favGames));
       renderGames();
     });
   });
@@ -590,6 +862,7 @@ filterButtons.forEach((btn) => {
 
 populateHardwareSelects();
 applyUrlParams();
+renderSavedBuilds();
 renderDiscordProfile();
 renderSocialLinks();
 renderGames();

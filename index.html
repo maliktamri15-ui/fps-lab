@@ -80,7 +80,6 @@
       font-weight: 800;
       font-size: 16px;
       color: #38bdf8;
-      letter-spacing: 0.4px;
     }
 
     .top-controls {
@@ -586,6 +585,13 @@
       color: var(--text-muted);
     }
 
+    .hz-status {
+      font-size: 11px;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
     .compare-badge {
       margin-bottom: 10px;
       padding: 6px 10px;
@@ -703,7 +709,6 @@
       align-items: end;
     }
 
-    /* Modal بطاقة الملخص الجاهزة للتصوير */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -783,9 +788,9 @@
 
     <section class="card-box">
       <div class="quick-presets-row">
-        <span class="section-tag" id="quickTag">⚡ تجميعات جاهزة بنقرة واحدة:</span>
+        <span class="section-tag" id="quickTag">⚡ تجميعات جاهزة ومختارة:</span>
         <button class="btn btn-outline btn-sm" data-preset-build="budget" type="button">تجميعة اقتصادية</button>
-        <button class="btn btn-outline btn-sm" data-preset-build="sim" type="button">تجميعة محاكاة (RTX 3060)</button>
+        <button class="btn btn-outline btn-sm" data-preset-build="sim" type="button">تجميعة محاكاة وتصوير</button>
         <button class="btn btn-outline btn-sm" data-preset-build="mid" type="button">تجميعة 2K متوازنة</button>
         <button class="btn btn-outline btn-sm" data-preset-build="ultra4k" type="button">تجميعة 4K خارقة</button>
       </div>
@@ -831,6 +836,16 @@
         </div>
 
         <div class="field">
+          <label for="hzSelect">معدل تحديث الشاشة (Hz)</label>
+          <select id="hzSelect">
+            <option value="60" selected>60 Hz</option>
+            <option value="120">120 Hz</option>
+            <option value="144">144 Hz</option>
+            <option value="240">240 Hz</option>
+          </select>
+        </div>
+
+        <div class="field">
           <label for="globalPresetSelect" id="lblPreset">أداء اللعبة العام (Preset)</label>
           <select id="globalPresetSelect">
             <option value="low">Low (منخفض)</option>
@@ -852,9 +867,11 @@
       </div>
 
       <div class="tools-row">
+        <button class="btn btn-outline btn-sm" id="modsToggleBtn" type="button">🧩 مودات ثقيلة (Mods): مغلق</button>
         <button class="btn btn-outline btn-sm" id="rtToggleBtn" type="button">🔆 تتبع الأشعة (Ray Tracing): مغلق</button>
         <button class="btn btn-purple btn-sm" id="toggleCompareBtn" type="button">⚖️ مقارنة تجميعة ثانية</button>
         <button class="btn btn-amber btn-sm" id="openPosterBtn" type="button">📸 بطاقة ملخص للتصوير</button>
+        <button class="btn btn-green btn-sm" id="copyReportBtn" type="button">📄 نسخ تقرير كامل</button>
         <button class="btn btn-outline btn-sm" id="shareBuildBtn" type="button">🔗 نسخ رابط التجميعة</button>
       </div>
       <div class="status-msg" id="shareStatus"></div>
@@ -1031,7 +1048,6 @@
     </section>
   </div>
 
-  <!-- نافذة بطاقة الملخص الجاهزة للتصوير -->
   <div class="modal-overlay" id="posterModal">
     <div class="poster-card">
       <div class="poster-header">

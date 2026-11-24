@@ -212,6 +212,58 @@
       padding: 0 3px;
     }
 
+    .backup-box {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+    }
+
+    .backup-box textarea {
+      min-height: 68px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .exp-verdict-banner {
+      margin-top: 12px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(59, 130, 246, 0.14);
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      color: #93c5fd;
+    }
+
+    .best-match-box {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      font-size: 13px;
+    }
+
+    .best-match-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .match-pill {
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: var(--bg-input);
+      border: 1px solid #22c55e;
+      color: #4ade80;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
     .insights-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -509,6 +561,11 @@
 
     .game-card.is-fav {
       border-color: #eab308;
+    }
+
+    .game-card.is-picked {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
     }
 
     .card-top {
@@ -906,6 +963,7 @@
       </div>
 
       <div class="tools-row">
+        <button class="btn btn-outline btn-sm" id="streamToggleBtn" type="button">🎥 تسجيل / بث (OBS): مغلق</button>
         <button class="btn btn-outline btn-sm" id="modsToggleBtn" type="button">🧩 مودات ثقيلة (Mods): مغلق</button>
         <button class="btn btn-outline btn-sm" id="rtToggleBtn" type="button">🔆 تتبع الأشعة (Ray Tracing): مغلق</button>
         <button class="btn btn-purple btn-sm" id="toggleCompareBtn" type="button">⚖️ مقارنة تجميعة ثانية</button>
@@ -914,6 +972,8 @@
         <button class="btn btn-outline btn-sm" id="shareBuildBtn" type="button">🔗 نسخ رابط التجميعة</button>
       </div>
       <div class="status-msg" id="shareStatus"></div>
+
+      <div class="exp-verdict-banner" id="expVerdictBanner"></div>
 
       <div class="compare-box" id="compareBox">
         <div class="compare-title">⚖️ مواصفات التجميعة الثانية للمقارنة (PC 2):</div>
@@ -949,11 +1009,23 @@
 
       <div class="upgrade-advisor-box" id="upgradeAdvisorBox"></div>
 
+      <div class="best-match-box" id="bestMatchBox"></div>
+
       <div class="saved-builds-bar">
         <input type="text" id="buildNameInput" placeholder="اسم التجميعة (مثلاً: جهازي الحالي)">
         <button class="btn btn-green btn-sm" id="saveBuildBtn" type="button">💾 حفظ التجميعة</button>
+        <button class="btn btn-outline btn-sm" id="toggleBackupBtn" type="button">📦 نسخة احتياطية JSON</button>
       </div>
       <div class="saved-builds-list" id="savedBuildsList"></div>
+
+      <div class="backup-box" id="backupBox" style="display:none;">
+        <div style="font-size:12px; font-weight:700;">📦 نسخ أو استرجاع التجميعات المحفوظة والألعاب المضافة (JSON):</div>
+        <textarea id="backupJsonArea" placeholder="الصق نص النسخة الاحتياطية هنا ثم اضغط استرجاع..."></textarea>
+        <div class="tools-row" style="margin-top:0;">
+          <button class="btn btn-outline btn-sm" id="exportBackupBtn" type="button">📋 نسخ نسخة احتياطية</button>
+          <button class="btn btn-green btn-sm" id="importBackupBtn" type="button">♻️ استرجاع البيانات</button>
+        </div>
+      </div>
 
       <div class="summary-bar" id="specsSummary"></div>
     </section>
@@ -966,6 +1038,7 @@
         <button class="btn btn-outline btn-sm" data-quick-search="Assetto" type="button">Assetto Corsa</button>
         <button class="btn btn-outline btn-sm" data-quick-search="Red Dead" type="button">RDR 2</button>
         <button class="btn btn-outline btn-sm" data-quick-search="Flight" type="button">MSFS 2024</button>
+        <button class="btn btn-purple btn-sm" id="randomGameBtn" type="button">🎲 لعبة عشوائية</button>
         <button class="btn btn-outline btn-sm" data-quick-search="" type="button">عرض الكل</button>
       </div>
 

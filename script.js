@@ -119,14 +119,33 @@ const defaultGames = [
 const DEFAULT_DISCORD_ID = "1501411543059923159";
 const DEFAULT_DISCORD_URL = `https://discord.com/users/${DEFAULT_DISCORD_ID}`;
 
+const DEFAULT_SOCIAL_LINKS = {
+  yt: "https://youtube.com",
+  tt: "https://tiktok.com",
+  dc: DEFAULT_DISCORD_URL,
+  tg: "https://t.me"
+};
+
 const gpuSelect = document.getElementById("gpuSelect");
 const cpuSelect = document.getElementById("cpuSelect");
 const ramSelect = document.getElementById("ramSelect");
 const resSelect = document.getElementById("resSelect");
 const globalPresetSelect = document.getElementById("globalPresetSelect");
-const searchInput = document.getElementById("searchInput");
-const resultsDiv = document.getElementById("results");
+const upscaleSelect = document.getElementById("upscaleSelect");
+
+const toggleCompareBtn = document.getElementById("toggleCompareBtn");
+const shareBuildBtn = document.getElementById("shareBuildBtn");
+const shareStatus = document.getElementById("shareStatus");
+const compareBox = document.getElementById("compareBox");
+const gpuSelect2 = document.getElementById("gpuSelect2");
+const cpuSelect2 = document.getElementById("cpuSelect2");
+const ramSelect2 = document.getElementById("ramSelect2");
+
+const bottleneckBar = document.getElementById("bottleneckBar");
 const specsSummary = document.getElementById("specsSummary");
+const searchInput = document.getElementById("searchInput");
+const sortSelect = document.getElementById("sortSelect");
+const resultsDiv = document.getElementById("results");
 const filterButtons = document.querySelectorAll(".filter-btn");
 
 const newGameTitle = document.getElementById("newGameTitle");
@@ -137,6 +156,7 @@ const addGameBtn = document.getElementById("addGameBtn");
 
 const discordDisplay = document.getElementById("discordDisplay");
 const contactSupportDiscordBtn = document.getElementById("contactSupportDiscordBtn");
+const attachSpecsBtn = document.getElementById("attachSpecsBtn");
 const copyDiscordBtn = document.getElementById("copyDiscordBtn");
 const myDiscordHandle = document.getElementById("myDiscordHandle");
 const myDiscordInvite = document.getElementById("myDiscordInvite");
@@ -152,44 +172,79 @@ const tgUrl = document.getElementById("tgUrl");
 const saveSocialBtn = document.getElementById("saveSocialBtn");
 
 let currentCategory = "all";
+let compareMode = false;
 let perGamePresets = JSON.parse(localStorage.getItem("gamecheck_game_presets") || "{}");
 let customGames = JSON.parse(localStorage.getItem("gamecheck_custom_games") || "[]");
 let myDiscord = JSON.parse(localStorage.getItem("gamecheck_my_discord") || JSON.stringify({
   handle: DEFAULT_DISCORD_ID,
   invite: DEFAULT_DISCORD_URL
 }));
-let socialLinks = JSON.parse(localStorage.getItem("gamecheck_social_links") || JSON.stringify({
-  yt: "https://youtube.com",
-  tt: "https://tiktok.com",
-  dc: DEFAULT_DISCORD_URL,
-  tg: "https://t.me"
-}));
+let socialLinks = JSON.parse(localStorage.getItem("gamecheck_social_links") || JSON.stringify(DEFAULT_SOCIAL_LINKS));
 
-gpuSelect.innerHTML = "";
-gpus.forEach((gpu, i) => {
-  const selected = gpu.name.includes("RTX 3060 (12GB)") ? "selected" : "";
-  gpuSelect.innerHTML += `<option value="${i}" ${selected}>${gpu.name}</option>`;
+function populateHardwareSelects() {
+  gpuSelect.innerHTML = "";
+  gpuSelect2.innerHTML = "";
+  gpus.forEach((gpu, i) => {
+    const sel1 = gpu.name.includes("RTX 3060 (12GB)") ? "selected" : "";
+    const sel2 = gpu.name.includes("RTX 4060 (8GB)") ? "selected" : "";
+    gpuSelect.innerHTML += `<option value="${i}" ${sel1}>${gpu.name}</option>`;
+    gpuSelect2.innerHTML += `<option value="${i}" ${sel2}>${gpu.name}</option>`;
+  });
+
+  cpuSelect.innerHTML = "";
+  cpuSelect2.innerHTML = "";
+  cpus.forEach((cpu, i) => {
+    const sel1 = cpu.name.includes("5600X") ? "selected" : "";
+    const sel2 = cpu.name.includes("13600K") ? "selected" : "";
+    cpuSelect.innerHTML += `<option value="${i}" ${sel1}>${cpu.name}</option>`;
+    cpuSelect2.innerHTML += `<option value="${i}" ${sel2}>${cpu.name}</option>`;
+  });
+}
+
+function applyUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("gpu") && gpus[params.get("gpu")]) gpuSelect.value = params.get("gpu");
+  if (params.has("cpu") && cpus[params.get("cpu")]) cpuSelect.value = params.get("cpu");
+  if (params.has("ram")) ramSelect.value = params.get("ram");
+  if (params.has("res")) resSelect.value = params.get("res");
+  if (params.has("preset") && presetConfig[params.get("preset")]) globalPresetSelect.value = params.get("preset");
+  if (params.has("up")) upscaleSelect.value = params.get("up");
+}
+
+toggleCompareBtn.addEventListener("click", () => {
+  compareMode = !compareMode;
+  compareBox.classList.toggle("active", compareMode);
+  toggleCompareBtn.textContent = compareMode
+    ? "✖ إخفاء مقارنة التجميعة الثانية"
+    : "⚖️ تفعيل مقارنة تجميعة ثانية";
+  renderGames();
 });
 
-cpuSelect.innerHTML = "";
-cpus.forEach((cpu, i) => {
-  const selected = cpu.name.includes("5600X") ? "selected" : "";
-  cpuSelect.innerHTML += `<option value="${i}" ${selected}>${cpu.name}</option>`;
+shareBuildBtn.addEventListener("click", async () => {
+  const url = new URL(window.location.href);
+  url.searchParams.set("gpu", gpuSelect.value);
+  url.searchParams.set("cpu", cpuSelect.value);
+  url.searchParams.set("ram", ramSelect.value);
+  url.searchParams.set("res", resSelect.value);
+  url.searchParams.set("preset", globalPresetSelect.value);
+  url.searchParams.set("up", upscaleSelect.value);
+
+  const shareUrl = url.toString();
+  try {
+    await navigator.clipboard.writeText(shareUrl);
+    shareStatus.textContent = "تم نسخ رابط التجميعة! أرسله لأي شخص ليفتح الموقع بنفس مواصفاتك.";
+  } catch {
+    shareStatus.textContent = `رابط التجميعة: ${shareUrl}`;
+  }
 });
 
 function buildDiscordTargetUrl() {
   const rawInvite = (myDiscordInvite.value || myDiscord.invite || "").trim();
   const handleVal = (myDiscordHandle.value || myDiscord.handle || "").trim();
 
-  if (/^https?:\/\//i.test(rawInvite)) {
-    return rawInvite;
-  }
-  if (/^(discord\.gg|discord\.com)\//i.test(rawInvite)) {
-    return "https://" + rawInvite;
-  }
-  if (/^\d{15,22}$/.test(handleVal)) {
-    return `https://discord.com/users/${handleVal}`;
-  }
+  if (/^https?:\/\//i.test(rawInvite)) return rawInvite;
+  if (/^(discord\.gg|discord\.com)\//i.test(rawInvite)) return "https://" + rawInvite;
+  if (/^\d{15,22}$/.test(handleVal)) return `https://discord.com/users/${handleVal}`;
   return DEFAULT_DISCORD_URL;
 }
 
@@ -208,10 +263,7 @@ function persistDiscordProfile() {
       ? `https://discord.com/users/${handleVal}`
       : DEFAULT_DISCORD_URL;
   }
-  myDiscord = {
-    handle: handleVal,
-    invite: inviteVal
-  };
+  myDiscord = { handle: handleVal, invite: inviteVal };
   localStorage.setItem("gamecheck_my_discord", JSON.stringify(myDiscord));
   renderDiscordProfile();
 }
@@ -219,13 +271,20 @@ function persistDiscordProfile() {
 saveDiscordBtn.addEventListener("click", () => {
   persistDiscordProfile();
   supportStatus.style.color = "#4ade80";
-  supportStatus.textContent = "تم حفظ حساب Discord للدعم بنجاح.";
+  supportStatus.textContent = "تم حفظ إعدادات الدعم بنجاح.";
 });
 
-[myDiscordHandle, myDiscordInvite].forEach((input) => {
-  input.addEventListener("input", () => {
-    contactSupportDiscordBtn.href = buildDiscordTargetUrl();
-  });
+attachSpecsBtn.addEventListener("click", () => {
+  const gpuName = gpus[gpuSelect.value].name;
+  const cpuName = cpus[cpuSelect.value].name;
+  const ramVal = ramSelect.value + " GB";
+  const resText = resSelect.options[resSelect.selectedIndex].text;
+  const presetText = globalPresetSelect.options[globalPresetSelect.selectedIndex].text;
+
+  const summary = `مواصفات جهازي:\n- GPU: ${gpuName}\n- CPU: ${cpuName}\n- RAM: ${ramVal}\n- الدقة: ${resText} (${presetText})\n`;
+  supportMessage.value = summary + (supportMessage.value ? "\n" + supportMessage.value : "");
+  supportStatus.style.color = "#38bdf8";
+  supportStatus.textContent = "تم إدراج مواصفات جهازك في الرسالة.";
 });
 
 contactSupportDiscordBtn.addEventListener("click", async (e) => {
@@ -244,8 +303,7 @@ contactSupportDiscordBtn.addEventListener("click", async (e) => {
   }
 
   supportStatus.style.color = "#4ade80";
-  supportStatus.textContent = `تم فتح صفحة حساب الدعم (${handle}) ونسخ المعلومات بنجاح.`;
-
+  supportStatus.textContent = `تم فتح حساب الدعم (${handle}) ونسخ المعلومات للصقها في الدردشة.`;
   window.open(targetUrl, "_blank", "noopener,noreferrer");
   e.preventDefault();
 });
@@ -303,7 +361,8 @@ addGameBtn.addEventListener("click", () => {
     category: newGameCat.value,
     reqScore: Number(newGameWeight.value),
     reqRam: Number(newGameRam.value),
-    baseFps: 75
+    baseFps: 75,
+    isCustom: true
   };
 
   customGames.unshift(newGame);
@@ -312,17 +371,73 @@ addGameBtn.addEventListener("click", () => {
   renderGames();
 });
 
+function calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, selectedPresetKey) {
+  const presetInfo = presetConfig[selectedPresetKey] || presetConfig.high;
+  const requiredPower = game.reqScore * presetInfo.loadMultiplier;
+  const buildPower = rawScore * resMultiplier * upscaleMultiplier;
+  const performanceRatio = buildPower / requiredPower;
+
+  let fps = Math.round(game.baseFps * performanceRatio);
+  const effectiveReqRam = selectedPresetKey === "ultra" ? game.reqRam + 4 : game.reqRam;
+
+  if (ram < effectiveReqRam) {
+    const ramRatio = Math.max(0.35, ram / effectiveReqRam);
+    fps = Math.round(fps * ramRatio);
+  }
+
+  return {
+    fps: Math.max(10, Math.min(fps, 360)),
+    effectiveReqRam,
+    presetLabel: presetInfo.label
+  };
+}
+
+function updateBottleneckIndicator(gpu, cpu, resMultiplier) {
+  const adjustedGpu = gpu.score * resMultiplier;
+  const diffRatio = Math.abs(adjustedGpu - cpu.score) / Math.max(adjustedGpu, cpu.score);
+  const pct = Math.min(45, Math.round(diffRatio * 100));
+
+  if (pct <= 12) {
+    bottleneckBar.className = "bottleneck-bar bn-good";
+    bottleneckBar.innerHTML = `
+      <span>✅ توافق القطع ممتاز (توازن مثالي بين المعالج وكرت الشاشة)</span>
+      <span>نسبة عنق الزجاجة: ${pct}%</span>
+    `;
+  } else if (adjustedGpu > cpu.score) {
+    bottleneckBar.className = pct > 25 ? "bottleneck-bar bn-bad" : "bottleneck-bar bn-warn";
+    bottleneckBar.innerHTML = `
+      <span>⚠️ المعالج (${cpu.name}) أضعف من كرت الشاشة على هذه الدقة</span>
+      <span>عنق زجاجة معالج: ~${pct}%</span>
+    `;
+  } else {
+    bottleneckBar.className = pct > 25 ? "bottleneck-bar bn-bad" : "bottleneck-bar bn-warn";
+    bottleneckBar.innerHTML = `
+      <span>ℹ️ كرت الشاشة (${gpu.name}) هو المحدّد الأساسي للأداء</span>
+      <span>عنق زجاجة كرت شاشة: ~${pct}%</span>
+    `;
+  }
+}
+
 function renderGames() {
   const gpu = gpus[gpuSelect.value];
   const cpu = cpus[cpuSelect.value];
   const ram = Number(ramSelect.value);
   const resMultiplier = Number(resSelect.value);
+  const upscaleMultiplier = Number(upscaleSelect.value);
   const defaultPresetKey = globalPresetSelect.value;
   const searchText = searchInput.value.trim().toLowerCase();
+  const sortMode = sortSelect.value;
+
+  const gpu2 = gpus[gpuSelect2.value];
+  const cpu2 = cpus[cpuSelect2.value];
+  const ram2 = Number(ramSelect2.value);
+  const rawScore2 = (gpu2.score * 0.72) + (cpu2.score * 0.28);
 
   const allGames = [...customGames, ...defaultGames];
   const rawScore = (gpu.score * 0.72) + (cpu.score * 0.28);
-  const effectiveScore = Math.round(rawScore * resMultiplier);
+  const effectiveScore = Math.round(rawScore * resMultiplier * upscaleMultiplier);
+
+  updateBottleneckIndicator(gpu, cpu, resMultiplier);
 
   let tier = "متوسط";
   if (rawScore >= 145) tier = "وحش خارق (Ultra Flagship)";
@@ -336,71 +451,92 @@ function renderGames() {
     <span>نقاط الأداء: <strong>${effectiveScore} نقطة</strong></span>
   `;
 
-  const filteredGames = allGames.filter((game) => {
-    const matchCat = currentCategory === "all" || game.category === currentCategory;
-    const matchSearch = game.title.toLowerCase().includes(searchText);
-    return matchCat && matchSearch;
-  });
+  let computedList = allGames
+    .filter((game) => {
+      const matchCat = currentCategory === "all" || game.category === currentCategory;
+      const matchSearch = game.title.toLowerCase().includes(searchText);
+      return matchCat && matchSearch;
+    })
+    .map((game) => {
+      const selectedPresetKey = perGamePresets[game.id] || defaultPresetKey;
+      const res1 = calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, selectedPresetKey);
+      const res2 = compareMode
+        ? calculateGameFps(game, rawScore2, ram2, resMultiplier, upscaleMultiplier, selectedPresetKey)
+        : null;
+      return { game, selectedPresetKey, res1, res2 };
+    });
+
+  if (sortMode === "fps-desc") {
+    computedList.sort((a, b) => b.res1.fps - a.res1.fps);
+  } else if (sortMode === "fps-asc") {
+    computedList.sort((a, b) => a.res1.fps - b.res1.fps);
+  } else if (sortMode === "alpha") {
+    computedList.sort((a, b) => a.game.title.localeCompare(b.game.title));
+  }
 
   resultsDiv.innerHTML = "";
 
-  if (filteredGames.length === 0) {
+  if (computedList.length === 0) {
     resultsDiv.innerHTML = `<p style="color:#94a3b8; grid-column:1/-1; text-align:center;">لا توجد ألعاب مطابقة لبحثك.</p>`;
     return;
   }
 
-  filteredGames.forEach((game) => {
-    const selectedPresetKey = perGamePresets[game.id] || defaultPresetKey;
-    const presetInfo = presetConfig[selectedPresetKey] || presetConfig.high;
-
-    const requiredPower = game.reqScore * presetInfo.loadMultiplier;
-    const buildPower = rawScore * resMultiplier;
-    const performanceRatio = buildPower / requiredPower;
-
-    let fps = Math.round(game.baseFps * performanceRatio);
-
-    const effectiveReqRam = selectedPresetKey === "ultra" ? game.reqRam + 4 : game.reqRam;
-    if (ram < effectiveReqRam) {
-      const ramRatio = Math.max(0.35, ram / effectiveReqRam);
-      fps = Math.round(fps * ramRatio);
-    }
-
-    fps = Math.max(10, Math.min(fps, 360));
-
+  computedList.forEach(({ game, selectedPresetKey, res1, res2 }) => {
     let badgeClass = "badge-high";
     let badgeText = "سلس وممتاز";
     let barColor = "#22c55e";
 
-    if (fps < 35) {
+    if (res1.fps < 35) {
       badgeClass = "badge-low";
       badgeText = "ثقيل على التجميعة";
       barColor = "#ef4444";
-    } else if (fps < 60) {
+    } else if (res1.fps < 60) {
       badgeClass = "badge-mid";
       badgeText = "مقبول للتجميعة";
       barColor = "#eab308";
     }
 
-    const barWidth = Math.min(100, Math.round((fps / 240) * 100));
+    const barWidth = Math.min(100, Math.round((res1.fps / 240) * 100));
+
+    let compareHtml = "";
+    if (compareMode && res2) {
+      const diff = res2.fps - res1.fps;
+      const diffSign = diff > 0 ? `+${diff}` : `${diff}`;
+      const diffColor = diff >= 0 ? "#4ade80" : "#f87171";
+      compareHtml = `
+        <div class="compare-badge">
+          <span>التجميعة الثانية: <strong>${res2.fps} FPS</strong></span>
+          <strong style="color:${diffColor}">(${diffSign} FPS)</strong>
+        </div>
+      `;
+    }
+
+    const deleteBtnHtml = game.isCustom
+      ? `<button class="delete-game-btn" data-delete-id="${game.id}" title="حذف اللعبة" type="button">×</button>`
+      : "";
 
     resultsDiv.innerHTML += `
       <article class="game-card">
         <div class="card-top">
           <div class="game-title">${game.title}</div>
-          <span class="badge ${badgeClass}">${badgeText}</span>
+          <div class="card-actions-top">
+            <span class="badge ${badgeClass}">${badgeText}</span>
+            ${deleteBtnHtml}
+          </div>
         </div>
         <div class="fps-row">
           <div>
-            <span class="fps-number" style="color:${barColor}">${fps}</span>
+            <span class="fps-number" style="color:${barColor}">${res1.fps}</span>
             <span class="fps-unit">FPS تقريباً</span>
           </div>
-          <span class="fps-unit">الرام المطلوب: ${effectiveReqRam}GB</span>
+          <span class="fps-unit">الرام المطلوب: ${res1.effectiveReqRam}GB</span>
         </div>
+        ${compareHtml}
         <div class="progress-track">
           <div class="progress-fill" style="width:${barWidth}%; background:${barColor};"></div>
         </div>
         <div class="game-meta">
-          <span>جودة الأداء (${presetInfo.label}):</span>
+          <span>جودة الأداء (${res1.presetLabel}):</span>
           <select class="card-preset-select" data-game-id="${game.id}">
             <option value="low" ${selectedPresetKey === "low" ? "selected" : ""}>Low</option>
             <option value="medium" ${selectedPresetKey === "medium" ? "selected" : ""}>Medium</option>
@@ -420,6 +556,15 @@ function renderGames() {
       renderGames();
     });
   });
+
+  document.querySelectorAll(".delete-game-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const idToDelete = e.target.dataset.deleteId;
+      customGames = customGames.filter((g) => g.id !== idToDelete);
+      localStorage.setItem("gamecheck_custom_games", JSON.stringify(customGames));
+      renderGames();
+    });
+  });
 }
 
 globalPresetSelect.addEventListener("change", () => {
@@ -428,7 +573,7 @@ globalPresetSelect.addEventListener("change", () => {
   renderGames();
 });
 
-[gpuSelect, cpuSelect, ramSelect, resSelect].forEach((el) => {
+[gpuSelect, cpuSelect, ramSelect, resSelect, upscaleSelect, gpuSelect2, cpuSelect2, ramSelect2, sortSelect].forEach((el) => {
   el.addEventListener("change", renderGames);
 });
 
@@ -443,6 +588,8 @@ filterButtons.forEach((btn) => {
   });
 });
 
+populateHardwareSelects();
+applyUrlParams();
 renderDiscordProfile();
 renderSocialLinks();
 renderGames();

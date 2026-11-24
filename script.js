@@ -130,14 +130,17 @@ const gpuSelect = document.getElementById("gpuSelect");
 const cpuSelect = document.getElementById("cpuSelect");
 const ramSelect = document.getElementById("ramSelect");
 const resSelect = document.getElementById("resSelect");
+const hzSelect = document.getElementById("hzSelect");
 const globalPresetSelect = document.getElementById("globalPresetSelect");
 const upscaleSelect = document.getElementById("upscaleSelect");
 
 const themeToggleBtn = document.getElementById("themeToggleBtn");
 const langToggleBtn = document.getElementById("langToggleBtn");
+const modsToggleBtn = document.getElementById("modsToggleBtn");
 const rtToggleBtn = document.getElementById("rtToggleBtn");
 const toggleCompareBtn = document.getElementById("toggleCompareBtn");
 const openPosterBtn = document.getElementById("openPosterBtn");
+const copyReportBtn = document.getElementById("copyReportBtn");
 const closePosterBtn = document.getElementById("closePosterBtn");
 const posterModal = document.getElementById("posterModal");
 const posterSpecsContent = document.getElementById("posterSpecsContent");
@@ -190,6 +193,7 @@ const saveSocialBtn = document.getElementById("saveSocialBtn");
 let currentCategory = "all";
 let compareMode = false;
 let rayTracingEnabled = false;
+let heavyModsEnabled = false;
 let currentThemeIndex = 0;
 const themes = [
   { class: "", labelAr: "🎨 المظهر: داكن", labelEn: "🎨 Theme: Dark" },
@@ -238,31 +242,30 @@ function applyUrlParams() {
   if (params.has("up")) upscaleSelect.value = params.get("up");
 }
 
-// التجميعات الجاهزة بنقرة واحدة
 document.querySelectorAll("[data-preset-build]").forEach((btn) => {
   btn.addEventListener("click", () => {
     const type = btn.dataset.presetBuild;
     if (type === "budget") {
-      gpuSelect.selectedIndex = 3; // GTX 1650
-      cpuSelect.selectedIndex = 0; // i3-12100F
+      gpuSelect.selectedIndex = 3;
+      cpuSelect.selectedIndex = 0;
       ramSelect.value = "8";
       resSelect.value = "1";
       globalPresetSelect.value = "medium";
     } else if (type === "sim") {
-      gpuSelect.selectedIndex = 10; // RTX 3060
-      cpuSelect.selectedIndex = 4; // Ryzen 7 5600X
+      gpuSelect.selectedIndex = 10;
+      cpuSelect.selectedIndex = 4;
       ramSelect.value = "16";
       resSelect.value = "1";
       globalPresetSelect.value = "high";
     } else if (type === "mid") {
-      gpuSelect.selectedIndex = 22; // RTX 4070
-      cpuSelect.selectedIndex = 9; // i5-13600K
+      gpuSelect.selectedIndex = 22;
+      cpuSelect.selectedIndex = 9;
       ramSelect.value = "32";
       resSelect.value = "0.72";
       globalPresetSelect.value = "high";
     } else if (type === "ultra4k") {
-      gpuSelect.selectedIndex = gpus.length - 1; // RTX 5090
-      cpuSelect.selectedIndex = cpus.length - 1; // Ryzen 9 9950X3D
+      gpuSelect.selectedIndex = gpus.length - 1;
+      cpuSelect.selectedIndex = cpus.length - 1;
       ramSelect.value = "64";
       resSelect.value = "0.45";
       globalPresetSelect.value = "ultra";
@@ -271,7 +274,6 @@ document.querySelectorAll("[data-preset-build]").forEach((btn) => {
   });
 });
 
-// أزرار الوصول السريع للألعاب الشائعة
 document.querySelectorAll("[data-quick-search]").forEach((btn) => {
   btn.addEventListener("click", () => {
     searchInput.value = btn.dataset.quickSearch;
@@ -281,7 +283,6 @@ document.querySelectorAll("[data-quick-search]").forEach((btn) => {
   });
 });
 
-// تبديل المظهر
 themeToggleBtn.addEventListener("click", () => {
   currentThemeIndex = (currentThemeIndex + 1) % themes.length;
   document.body.className = themes[currentThemeIndex].class;
@@ -290,7 +291,6 @@ themeToggleBtn.addEventListener("click", () => {
     : themes[currentThemeIndex].labelEn;
 });
 
-// تبديل اللغة AR / EN
 langToggleBtn.addEventListener("click", () => {
   currentLang = currentLang === "ar" ? "en" : "ar";
   document.documentElement.lang = currentLang;
@@ -316,7 +316,16 @@ langToggleBtn.addEventListener("click", () => {
   renderGames();
 });
 
-// تبديل تتبع الأشعة Ray Tracing
+modsToggleBtn.addEventListener("click", () => {
+  heavyModsEnabled = !heavyModsEnabled;
+  modsToggleBtn.textContent = heavyModsEnabled
+    ? "🧩 مودات ثقيلة (Mods): مفعّل (-22% FPS)"
+    : "🧩 مودات ثقيلة (Mods): مغلق";
+  modsToggleBtn.classList.toggle("btn-purple", heavyModsEnabled);
+  modsToggleBtn.classList.toggle("btn-outline", !heavyModsEnabled);
+  renderGames();
+});
+
 rtToggleBtn.addEventListener("click", () => {
   rayTracingEnabled = !rayTracingEnabled;
   rtToggleBtn.textContent = rayTracingEnabled
@@ -334,6 +343,42 @@ toggleCompareBtn.addEventListener("click", () => {
     ? "✖ إخفاء المقارنة"
     : "⚖️ مقارنة تجميعة ثانية";
   renderGames();
+});
+
+copyReportBtn.addEventListener("click", async () => {
+  const gpu = gpus[gpuSelect.value];
+  const cpu = cpus[cpuSelect.value];
+  const ram = Number(ramSelect.value);
+  const resMultiplier = Number(resSelect.value);
+  const upscaleMultiplier = Number(upscaleSelect.value);
+  const modsMultiplier = heavyModsEnabled ? 0.78 : 1.0;
+  const rtMultiplier = rayTracingEnabled ? 0.72 : 1.0;
+  const rawScore = (gpu.score * 0.72) + (cpu.score * 0.28);
+
+  const sampleIds = ["gtav", "rdr2", "cp2077", "beamng", "ets2", "cs2"];
+  const lines = sampleIds.map((id) => {
+    const g = defaultGames.find((item) => item.id === id);
+    if (!g) return "";
+    const calc = calculateGameFps(g, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, globalPresetSelect.value);
+    return `- ${g.title}: ~${calc.fps} FPS`;
+  }).filter(Boolean);
+
+  const report = [
+    "⚡ تقرير تجميعة FPS Lab:",
+    `- GPU: ${gpu.name}`,
+    `- CPU: ${cpu.name}`,
+    `- RAM: ${ram} GB | شاشة: ${resSelect.options[resSelect.selectedIndex].text} (${hzSelect.value}Hz)`,
+    `- الإعدادات: ${globalPresetSelect.options[globalPresetSelect.selectedIndex].text}${heavyModsEnabled ? " + Heavy Mods" : ""}${rayTracingEnabled ? " + Ray Tracing" : ""}`,
+    "أبرز النتائج التقديرية:",
+    ...lines
+  ].join("\n");
+
+  try {
+    await navigator.clipboard.writeText(report);
+    shareStatus.textContent = "تم نسخ تقرير التجميعة الكامل! يمكنك لصقه مباشرة في Discord.";
+  } catch {
+    shareStatus.textContent = "تعذر النسخ التلقائي من المتصفح.";
+  }
 });
 
 shareBuildBtn.addEventListener("click", async () => {
@@ -354,7 +399,6 @@ shareBuildBtn.addEventListener("click", async () => {
   }
 });
 
-// حفظ التجميعات المخصصة
 function renderSavedBuilds() {
   savedBuildsList.innerHTML = savedBuilds.map((b, idx) => `
     <span class="saved-chip" data-load-build="${idx}">
@@ -403,28 +447,28 @@ saveBuildBtn.addEventListener("click", () => {
   renderSavedBuilds();
 });
 
-// نافذة بطاقة الملخص للتصوير
 openPosterBtn.addEventListener("click", () => {
   const gpu = gpus[gpuSelect.value];
   const cpu = cpus[cpuSelect.value];
   const ram = Number(ramSelect.value);
   const resMultiplier = Number(resSelect.value);
   const upscaleMultiplier = Number(upscaleSelect.value);
+  const modsMultiplier = heavyModsEnabled ? 0.78 : 1.0;
   const rtMultiplier = rayTracingEnabled ? 0.72 : 1.0;
   const rawScore = (gpu.score * 0.72) + (cpu.score * 0.28);
 
   posterSpecsContent.innerHTML = `
     <div>🎮 <strong>كرت الشاشة:</strong> ${gpu.name}</div>
     <div>🧠 <strong>المعالج:</strong> ${cpu.name}</div>
-    <div>💾 <strong>الرام والدقة:</strong> ${ram} GB | ${resSelect.options[resSelect.selectedIndex].text}</div>
-    <div>⚙️ <strong>الإعدادات:</strong> ${globalPresetSelect.options[globalPresetSelect.selectedIndex].text} ${rayTracingEnabled ? "+ Ray Tracing" : ""}</div>
+    <div>💾 <strong>الرام والشاشة:</strong> ${ram} GB | ${resSelect.options[resSelect.selectedIndex].text} (${hzSelect.value}Hz)</div>
+    <div>⚙️ <strong>الإعدادات:</strong> ${globalPresetSelect.options[globalPresetSelect.selectedIndex].text}${heavyModsEnabled ? " + Mods" : ""}${rayTracingEnabled ? " + RT" : ""}</div>
   `;
 
   const highlightIds = ["gtav", "rdr2", "cp2077", "beamng", "ets2", "cs2", "fortnite", "msfs24"];
   const selectedGames = defaultGames.filter((g) => highlightIds.includes(g.id));
 
   posterGamesContent.innerHTML = selectedGames.map((g) => {
-    const res = calculateGameFps(g, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, globalPresetSelect.value);
+    const res = calculateGameFps(g, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, globalPresetSelect.value);
     return `
       <div class="poster-game-item">
         <span>${g.title.split("(")[0].trim()}</span>
@@ -441,7 +485,6 @@ posterModal.addEventListener("click", (e) => {
   if (e.target === posterModal) posterModal.classList.remove("open");
 });
 
-// قسم الدعم على Discord
 function buildDiscordTargetUrl() {
   const rawInvite = (myDiscordInvite.value || myDiscord.invite || "").trim();
   const handleVal = (myDiscordHandle.value || myDiscord.handle || "").trim();
@@ -519,7 +562,6 @@ copyDiscordBtn.addEventListener("click", async () => {
   }
 });
 
-// الروابط الاجتماعية
 function renderSocialLinks() {
   ytUrl.value = socialLinks.yt || "";
   ttUrl.value = socialLinks.tt || "";
@@ -550,7 +592,6 @@ saveSocialBtn.addEventListener("click", () => {
   renderSocialLinks();
 });
 
-// إضافة لعبة مخصصة
 addGameBtn.addEventListener("click", () => {
   const title = newGameTitle.value.trim();
   if (!title) return;
@@ -571,14 +612,15 @@ addGameBtn.addEventListener("click", () => {
   renderGames();
 });
 
-function calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, selectedPresetKey) {
+function calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, selectedPresetKey) {
   const presetInfo = presetConfig[selectedPresetKey] || presetConfig.high;
   const requiredPower = game.reqScore * presetInfo.loadMultiplier;
-  const buildPower = rawScore * resMultiplier * upscaleMultiplier * rtMultiplier;
+  const buildPower = rawScore * resMultiplier * upscaleMultiplier * rtMultiplier * modsMultiplier;
   const performanceRatio = buildPower / requiredPower;
 
   let fps = Math.round(game.baseFps * performanceRatio);
-  const effectiveReqRam = selectedPresetKey === "ultra" ? game.reqRam + 4 : game.reqRam;
+  let effectiveReqRam = selectedPresetKey === "ultra" ? game.reqRam + 4 : game.reqRam;
+  if (heavyModsEnabled) effectiveReqRam += 4;
 
   if (ram < effectiveReqRam) {
     const ramRatio = Math.max(0.35, ram / effectiveReqRam);
@@ -596,7 +638,6 @@ function updateHardwareInsights(gpuIdx, cpuIdx, ram, resMultiplier) {
   const gpu = gpus[gpuIdx];
   const cpu = cpus[cpuIdx];
 
-  // 1. كشف عنق الزجاجة
   const adjustedGpu = gpu.score * resMultiplier;
   const diffRatio = Math.abs(adjustedGpu - cpu.score) / Math.max(adjustedGpu, cpu.score);
   const pct = Math.min(45, Math.round(diffRatio * 100));
@@ -612,7 +653,6 @@ function updateHardwareInsights(gpuIdx, cpuIdx, ram, resMultiplier) {
     bottleneckBar.innerHTML = `ℹ️ <strong>عنق زجاجة كرت شاشة (~${pct}%):</strong> كرت الشاشة (${gpu.name}) هو المحدّد الأساسي للأداء.`;
   }
 
-  // 2. تقدير استهلاك الطاقة وحجم الباور سبلاي
   const systemOverhead = 90 + (ram > 16 ? 20 : 10);
   const estimatedWatts = gpu.tdp + cpu.tdp + systemOverhead;
   const recommendedPsu = Math.ceil((estimatedWatts * 1.35) / 50) * 50;
@@ -622,7 +662,6 @@ function updateHardwareInsights(gpuIdx, cpuIdx, ram, resMultiplier) {
     🔌 <strong>الباور سبلاي المقترح (PSU):</strong> ${recommendedPsu}W أو أعلى (80+ Bronze/Gold)
   `;
 
-  // 3. مستشار الترقية الذكي
   let adviceText = "";
   let pillsHtml = "";
 
@@ -673,7 +712,9 @@ function renderGames() {
   const cpu = cpus[cpuIdx];
   const ram = Number(ramSelect.value);
   const resMultiplier = Number(resSelect.value);
+  const targetHz = Number(hzSelect.value);
   const upscaleMultiplier = Number(upscaleSelect.value);
+  const modsMultiplier = heavyModsEnabled ? 0.78 : 1.0;
   const rtMultiplier = rayTracingEnabled ? 0.72 : 1.0;
   const defaultPresetKey = globalPresetSelect.value;
   const searchText = searchInput.value.trim().toLowerCase();
@@ -686,7 +727,7 @@ function renderGames() {
 
   const allGames = [...customGames, ...defaultGames];
   const rawScore = (gpu.score * 0.72) + (cpu.score * 0.28);
-  const effectiveScore = Math.round(rawScore * resMultiplier * upscaleMultiplier * rtMultiplier);
+  const effectiveScore = Math.round(rawScore * resMultiplier * upscaleMultiplier * rtMultiplier * modsMultiplier);
 
   updateHardwareInsights(gpuIdx, cpuIdx, ram, resMultiplier);
 
@@ -715,9 +756,9 @@ function renderGames() {
     .map((game) => {
       const isFav = favGames.includes(game.id);
       const selectedPresetKey = perGamePresets[game.id] || defaultPresetKey;
-      const res1 = calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, selectedPresetKey);
+      const res1 = calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, selectedPresetKey);
       const res2 = compareMode
-        ? calculateGameFps(game, rawScore2, ram2, resMultiplier, upscaleMultiplier, rtMultiplier, selectedPresetKey)
+        ? calculateGameFps(game, rawScore2, ram2, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, selectedPresetKey)
         : null;
       return { game, isFav, selectedPresetKey, res1, res2 };
     });
@@ -753,6 +794,10 @@ function renderGames() {
       badgeText = "مقبول للتجميعة";
       barColor = "#eab308";
     }
+
+    const hzNote = res1.fps >= targetHz
+      ? `🖥️ يغطي شاشة ${targetHz}Hz بالكامل`
+      : `🖥️ أقل من شاشة ${targetHz}Hz (${targetHz - res1.fps} FPS فارق)`;
 
     const barWidth = Math.min(100, Math.round((res1.fps / 240) * 100));
 
@@ -790,6 +835,7 @@ function renderGames() {
           </div>
           <span class="fps-unit">الرام المطلوب: ${res1.effectiveReqRam}GB</span>
         </div>
+        <div class="hz-status">${hzNote}</div>
         ${compareHtml}
         <div class="progress-track">
           <div class="progress-fill" style="width:${barWidth}%; background:${barColor};"></div>
@@ -845,7 +891,7 @@ globalPresetSelect.addEventListener("change", () => {
   renderGames();
 });
 
-[gpuSelect, cpuSelect, ramSelect, resSelect, upscaleSelect, gpuSelect2, cpuSelect2, ramSelect2, sortSelect].forEach((el) => {
+[gpuSelect, cpuSelect, ramSelect, resSelect, hzSelect, upscaleSelect, gpuSelect2, cpuSelect2, ramSelect2, sortSelect].forEach((el) => {
   el.addEventListener("change", renderGames);
 });
 

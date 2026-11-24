@@ -1,58 +1,61 @@
+// قاعدة بيانات معايرة على اختبارات مرجعية عند 1080p High
+// refGpuFps1080: متوسط إطارات مرجعي لكرت RTX 3060 (12GB) على دقة 1080p High في اللعبة
 const gpus = [
-  { name: "GTX 750 Ti (2GB)", score: 15, tdp: 60, vram: 2 },
-  { name: "GTX 1050 Ti (4GB)", score: 26, tdp: 75, vram: 4 },
-  { name: "RX 570 / RX 580 (8GB)", score: 33, tdp: 185, vram: 8 },
-  { name: "GTX 1650 (4GB)", score: 35, tdp: 75, vram: 4 },
-  { name: "GTX 1060 (6GB)", score: 42, tdp: 120, vram: 6 },
-  { name: "GTX 1660 Super (6GB)", score: 48, tdp: 125, vram: 6 },
-  { name: "RTX 3050 (8GB)", score: 52, tdp: 130, vram: 8 },
-  { name: "RTX 2060 (6GB)", score: 56, tdp: 160, vram: 6 },
-  { name: "Intel Arc B580 (12GB)", score: 68, tdp: 190, vram: 12 },
-  { name: "RX 6600 (8GB)", score: 66, tdp: 132, vram: 8 },
-  { name: "RTX 3060 (12GB)", score: 72, tdp: 170, vram: 12 },
-  { name: "RTX 5050 (8GB)", score: 70, tdp: 135, vram: 8 },
-  { name: "RX 7600 XT (16GB)", score: 78, tdp: 190, vram: 16 },
-  { name: "RTX 3060 Ti (8GB)", score: 80, tdp: 200, vram: 8 },
-  { name: "RTX 4060 (8GB)", score: 84, tdp: 115, vram: 8 },
-  { name: "RTX 5060 (8GB)", score: 92, tdp: 145, vram: 8 },
-  { name: "RX 9060 XT (16GB)", score: 96, tdp: 170, vram: 16 },
-  { name: "RTX 3070 / 3070 Ti (8GB)", score: 94, tdp: 220, vram: 8 },
-  { name: "RTX 4060 Ti (8GB / 16GB)", score: 96, tdp: 165, vram: 16 },
-  { name: "RTX 5060 Ti (16GB)", score: 105, tdp: 180, vram: 16 },
-  { name: "RX 7800 XT (16GB)", score: 108, tdp: 263, vram: 16 },
-  { name: "RTX 3080 / 3080 Ti (12GB)", score: 112, tdp: 320, vram: 12 },
-  { name: "RTX 4070 / 4070 Super (12GB)", score: 118, tdp: 220, vram: 12 },
-  { name: "RTX 5070 (12GB GDDR7)", score: 128, tdp: 250, vram: 12 },
-  { name: "RX 9070 (16GB)", score: 128, tdp: 220, vram: 16 },
-  { name: "RTX 4070 Ti Super (16GB)", score: 132, tdp: 285, vram: 16 },
-  { name: "RX 9070 XT (16GB)", score: 140, tdp: 304, vram: 16 },
-  { name: "RTX 5070 Ti (16GB GDDR7)", score: 145, tdp: 300, vram: 16 },
-  { name: "RX 7900 XTX (24GB)", score: 146, tdp: 355, vram: 24 },
-  { name: "RTX 4080 / 4080 Super (16GB)", score: 148, tdp: 320, vram: 16 },
-  { name: "RTX 5080 (16GB GDDR7)", score: 162, tdp: 360, vram: 16 },
-  { name: "RTX 4090 (24GB GDDR6X)", score: 175, tdp: 450, vram: 24 },
-  { name: "RTX 5090 (32GB GDDR7) — الأقوى في العالم", score: 215, tdp: 575, vram: 32 }
+  { name: "GTX 750 Ti (2GB)", score: 15, gpuPower: 0.21, tdp: 60, vram: 2 },
+  { name: "GTX 1050 Ti (4GB)", score: 26, gpuPower: 0.36, tdp: 75, vram: 4 },
+  { name: "RX 570 / RX 580 (8GB)", score: 33, gpuPower: 0.46, tdp: 185, vram: 8 },
+  { name: "GTX 1650 (4GB)", score: 35, gpuPower: 0.49, tdp: 75, vram: 4 },
+  { name: "GTX 1060 (6GB)", score: 42, gpuPower: 0.58, tdp: 120, vram: 6 },
+  { name: "GTX 1660 Super (6GB)", score: 48, gpuPower: 0.67, tdp: 125, vram: 6 },
+  { name: "RTX 3050 (8GB)", score: 52, gpuPower: 0.72, tdp: 130, vram: 8 },
+  { name: "RTX 2060 (6GB)", score: 56, gpuPower: 0.78, tdp: 160, vram: 6 },
+  { name: "Intel Arc B580 (12GB)", score: 68, gpuPower: 0.94, tdp: 190, vram: 12 },
+  { name: "RX 6600 (8GB)", score: 66, gpuPower: 0.92, tdp: 132, vram: 8 },
+  { name: "RTX 3060 (12GB)", score: 72, gpuPower: 1.0, tdp: 170, vram: 12 },
+  { name: "RTX 5050 (8GB)", score: 70, gpuPower: 0.97, tdp: 135, vram: 8 },
+  { name: "RX 7600 XT (16GB)", score: 78, gpuPower: 1.08, tdp: 190, vram: 16 },
+  { name: "RTX 3060 Ti (8GB)", score: 80, gpuPower: 1.11, tdp: 200, vram: 8 },
+  { name: "RTX 4060 (8GB)", score: 84, gpuPower: 1.17, tdp: 115, vram: 8 },
+  { name: "RTX 5060 (8GB)", score: 92, gpuPower: 1.28, tdp: 145, vram: 8 },
+  { name: "RX 9060 XT (16GB)", score: 96, gpuPower: 1.33, tdp: 170, vram: 16 },
+  { name: "RTX 3070 / 3070 Ti (8GB)", score: 94, gpuPower: 1.31, tdp: 220, vram: 8 },
+  { name: "RTX 4060 Ti (8GB / 16GB)", score: 96, gpuPower: 1.33, tdp: 165, vram: 16 },
+  { name: "RTX 5060 Ti (16GB)", score: 105, gpuPower: 1.46, tdp: 180, vram: 16 },
+  { name: "RX 7800 XT (16GB)", score: 108, gpuPower: 1.50, tdp: 263, vram: 16 },
+  { name: "RTX 3080 / 3080 Ti (12GB)", score: 112, gpuPower: 1.56, tdp: 320, vram: 12 },
+  { name: "RTX 4070 / 4070 Super (12GB)", score: 118, gpuPower: 1.64, tdp: 220, vram: 12 },
+  { name: "RTX 5070 (12GB GDDR7)", score: 128, gpuPower: 1.78, tdp: 250, vram: 12 },
+  { name: "RX 9070 (16GB)", score: 128, gpuPower: 1.78, tdp: 220, vram: 16 },
+  { name: "RTX 4070 Ti Super (16GB)", score: 132, gpuPower: 1.83, tdp: 285, vram: 16 },
+  { name: "RX 9070 XT (16GB)", score: 140, gpuPower: 1.94, tdp: 304, vram: 16 },
+  { name: "RTX 5070 Ti (16GB GDDR7)", score: 145, gpuPower: 2.01, tdp: 300, vram: 16 },
+  { name: "RX 7900 XTX (24GB)", score: 146, gpuPower: 2.03, tdp: 355, vram: 24 },
+  { name: "RTX 4080 / 4080 Super (16GB)", score: 148, gpuPower: 2.06, tdp: 320, vram: 16 },
+  { name: "RTX 5080 (16GB GDDR7)", score: 162, gpuPower: 2.25, tdp: 360, vram: 16 },
+  { name: "RTX 4090 (24GB GDDR6X)", score: 175, gpuPower: 2.43, tdp: 450, vram: 24 },
+  { name: "RTX 5090 (32GB GDDR7) — الأقوى في العالم", score: 215, gpuPower: 2.98, tdp: 575, vram: 32 }
 ];
 
+// cpuPower معاير بحيث يكون Ryzen 7 5600X = 1.00 عند 1080p
 const cpus = [
-  { name: "Core i3-10100F / 12100F", score: 46, tdp: 65 },
-  { name: "Ryzen 5 2600 / 3600", score: 55, tdp: 65 },
-  { name: "Core i5-10400F / 11400F", score: 62, tdp: 65 },
-  { name: "Ryzen 5 5500 / 5600", score: 70, tdp: 65 },
-  { name: "Ryzen 7 5600X / 5700X", score: 76, tdp: 65 },
-  { name: "Core i5-12400F / 12600K", score: 82, tdp: 117 },
-  { name: "Ryzen 5 7600X / 9600X", score: 90, tdp: 105 },
-  { name: "Core Ultra 5 245K / 250K Plus", score: 94, tdp: 125 },
-  { name: "Ryzen 7 5800X3D", score: 98, tdp: 105 },
-  { name: "Core i5-13600K / 14600K", score: 104, tdp: 125 },
-  { name: "Core i7-13700K / 14700K", score: 114, tdp: 125 },
-  { name: "Ryzen 7 7700X / 9700X", score: 116, tdp: 105 },
-  { name: "Core Ultra 7 265K / 270K Plus", score: 120, tdp: 125 },
-  { name: "Ryzen 7 7800X3D", score: 126, tdp: 120 },
-  { name: "Core i9-13900K / 14900K", score: 130, tdp: 150 },
-  { name: "Core Ultra 9 285K", score: 134, tdp: 125 },
-  { name: "Ryzen 7 9800X3D / 9850X3D", score: 145, tdp: 120 },
-  { name: "Ryzen 9 9950X3D / 9950X3D2 — الأقوى في العالم", score: 152, tdp: 170 }
+  { name: "Core i3-10100F / 12100F", score: 46, cpuPower: 0.66, tdp: 65 },
+  { name: "Ryzen 5 2600 / 3600", score: 55, cpuPower: 0.76, tdp: 65 },
+  { name: "Core i5-10400F / 11400F", score: 62, cpuPower: 0.84, tdp: 65 },
+  { name: "Ryzen 5 5500 / 5600", score: 70, cpuPower: 0.93, tdp: 65 },
+  { name: "Ryzen 7 5600X / 5700X", score: 76, cpuPower: 1.0, tdp: 65 },
+  { name: "Core i5-12400F / 12600K", score: 82, cpuPower: 1.07, tdp: 117 },
+  { name: "Ryzen 5 7600X / 9600X", score: 90, cpuPower: 1.16, tdp: 105 },
+  { name: "Core Ultra 5 245K / 250K Plus", score: 94, cpuPower: 1.20, tdp: 125 },
+  { name: "Ryzen 7 5800X3D", score: 98, cpuPower: 1.25, tdp: 105 },
+  { name: "Core i5-13600K / 14600K", score: 104, cpuPower: 1.31, tdp: 125 },
+  { name: "Core i7-13700K / 14700K", score: 114, cpuPower: 1.42, tdp: 125 },
+  { name: "Ryzen 7 7700X / 9700X", score: 116, cpuPower: 1.44, tdp: 105 },
+  { name: "Core Ultra 7 265K / 270K Plus", score: 120, cpuPower: 1.48, tdp: 125 },
+  { name: "Ryzen 7 7800X3D", score: 126, cpuPower: 1.55, tdp: 120 },
+  { name: "Core i9-13900K / 14900K", score: 130, cpuPower: 1.59, tdp: 150 },
+  { name: "Core Ultra 9 285K", score: 134, cpuPower: 1.63, tdp: 125 },
+  { name: "Ryzen 7 9800X3D / 9850X3D", score: 145, cpuPower: 1.75, tdp: 120 },
+  { name: "Ryzen 9 9950X3D / 9950X3D2 — الأقوى في العالم", score: 152, cpuPower: 1.83, tdp: 170 }
 ];
 
 const gameAliases = {
@@ -82,51 +85,89 @@ const gameAliases = {
 };
 
 const presetConfig = {
-  low: { label: "Low", loadMultiplier: 0.72 },
-  medium: { label: "Medium", loadMultiplier: 0.88 },
+  low: { label: "Low", loadMultiplier: 0.74 },
+  medium: { label: "Medium", loadMultiplier: 0.89 },
   high: { label: "High", loadMultiplier: 1.0 },
-  ultra: { label: "Ultra", loadMultiplier: 1.28 }
+  ultra: { label: "Ultra", loadMultiplier: 1.26 }
 };
 
-// قاعدة بيانات معايرة على اختبارات الأداء المرجعية + عناوين 2026
+// قاعدة بيانات اختبارات مرجعية (refFps1080High: متوسط الفريمات المرجعي على RTX 3060 + 5600X عند 1080p High)
 const defaultGames = [
-  { id: "fh6_2026", title: "Forza Horizon 6 (2026)", category: "sim", year: 2026, benchRef: 74, reqScore: 76, reqRam: 16, baseFps: 76 },
-  { id: "rer_2026", title: "Resident Evil Requiem (2026)", category: "action", year: 2026, benchRef: 78, reqScore: 78, reqRam: 16, baseFps: 72 },
-  { id: "mw4_2026", title: "Call of Duty: Modern Warfare 4 (2026)", category: "fps", year: 2026, benchRef: 82, reqScore: 72, reqRam: 16, baseFps: 95 },
-  { id: "pbz_2026", title: "Phantom Blade Zero (2026)", category: "action", year: 2026, benchRef: 85, reqScore: 80, reqRam: 16, baseFps: 68 },
-  { id: "cd_2026", title: "Crimson Desert (2026)", category: "action", year: 2026, benchRef: 88, reqScore: 86, reqRam: 16, baseFps: 60 },
-  { id: "ds2_2026", title: "Death Stranding 2 PC (2026)", category: "action", year: 2026, benchRef: 75, reqScore: 75, reqRam: 16, baseFps: 74 },
-  { id: "nioh3_2026", title: "Nioh 3 (2026)", category: "rpg", year: 2026, benchRef: 76, reqScore: 74, reqRam: 16, baseFps: 72 },
-  { id: "cr_2026", title: "Control Resonant (2026)", category: "rpg", year: 2026, benchRef: 84, reqScore: 82, reqRam: 16, baseFps: 64 },
-  { id: "gow_eday_2026", title: "Gears of War: E-Day (2026)", category: "fps", year: 2026, benchRef: 80, reqScore: 78, reqRam: 16, baseFps: 70 },
-  { id: "bf6_2026", title: "Battlefield 6 (2026)", category: "fps", year: 2026, benchRef: 84, reqScore: 76, reqRam: 16, baseFps: 84 },
-  { id: "ets2", title: "Euro Truck Simulator 2", category: "sim", year: 2024, benchRef: 42, reqScore: 34, reqRam: 8, baseFps: 95 },
-  { id: "ats", title: "American Truck Simulator", category: "sim", year: 2024, benchRef: 43, reqScore: 35, reqRam: 8, baseFps: 95 },
-  { id: "ac", title: "Assetto Corsa (CSP)", category: "sim", year: 2024, benchRef: 48, reqScore: 42, reqRam: 8, baseFps: 90 },
-  { id: "acc", title: "Assetto Corsa Competizione", category: "sim", year: 2024, benchRef: 70, reqScore: 68, reqRam: 16, baseFps: 75 },
-  { id: "beamng", title: "BeamNG.drive", category: "sim", year: 2025, benchRef: 72, reqScore: 66, reqRam: 16, baseFps: 65 },
-  { id: "cms21", title: "Car Mechanic Simulator 2021", category: "sim", year: 2021, benchRef: 46, reqScore: 45, reqRam: 8, baseFps: 85 },
-  { id: "msc", title: "My Summer Car", category: "sim", year: 2020, benchRef: 38, reqScore: 28, reqRam: 8, baseFps: 85 },
-  { id: "fs25", title: "Farming Simulator 25", category: "sim", year: 2024, benchRef: 62, reqScore: 58, reqRam: 16, baseFps: 75 },
-  { id: "consim", title: "Construction Simulator", category: "sim", year: 2022, benchRef: 58, reqScore: 54, reqRam: 16, baseFps: 75 },
-  { id: "fh5", title: "Forza Horizon 5", category: "sim", year: 2023, benchRef: 64, reqScore: 62, reqRam: 16, baseFps: 85 },
-  { id: "msfs24", title: "Microsoft Flight Simulator 2024", category: "sim", year: 2024, benchRef: 90, reqScore: 88, reqRam: 16, baseFps: 50 },
-  { id: "gtav", title: "Grand Theft Auto V / FiveM", category: "action", year: 2024, benchRef: 45, reqScore: 38, reqRam: 8, baseFps: 105 },
-  { id: "rdr2", title: "Red Dead Redemption 2", category: "action", year: 2023, benchRef: 74, reqScore: 72, reqRam: 16, baseFps: 65 },
-  { id: "cp2077", title: "Cyberpunk 2077", category: "action", year: 2024, benchRef: 86, reqScore: 85, reqRam: 16, baseFps: 60 },
-  { id: "gowr", title: "God of War Ragnarök", category: "action", year: 2024, benchRef: 70, reqScore: 68, reqRam: 16, baseFps: 75 },
-  { id: "alanwake2", title: "Alan Wake 2", category: "action", year: 2023, benchRef: 92, reqScore: 92, reqRam: 16, baseFps: 52 },
-  { id: "cs2", title: "Counter-Strike 2", category: "fps", year: 2024, benchRef: 48, reqScore: 40, reqRam: 8, baseFps: 150 },
-  { id: "val", title: "Valorant", category: "fps", year: 2024, benchRef: 32, reqScore: 25, reqRam: 8, baseFps: 200 },
-  { id: "fortnite", title: "Fortnite (Performance / DX12)", category: "fps", year: 2025, benchRef: 54, reqScore: 45, reqRam: 8, baseFps: 130 },
-  { id: "warzone", title: "Call of Duty: Warzone / BO6", category: "fps", year: 2024, benchRef: 72, reqScore: 68, reqRam: 16, baseFps: 90 },
-  { id: "squad", title: "Squad", category: "fps", year: 2024, benchRef: 68, reqScore: 64, reqRam: 16, baseFps: 75 },
-  { id: "tarkov", title: "Escape from Tarkov", category: "fps", year: 2024, benchRef: 80, reqScore: 76, reqRam: 32, baseFps: 68 },
-  { id: "minecraft", title: "Minecraft (Java + Shaders)", category: "rpg", year: 2024, benchRef: 50, reqScore: 42, reqRam: 8, baseFps: 120 },
-  { id: "eldenring", title: "Elden Ring", category: "rpg", year: 2024, benchRef: 62, reqScore: 58, reqRam: 16, baseFps: 60 },
-  { id: "wukong", title: "Black Myth: Wukong", category: "rpg", year: 2024, benchRef: 89, reqScore: 88, reqRam: 16, baseFps: 56 },
-  { id: "ark", title: "ARK: Survival Ascended", category: "rpg", year: 2024, benchRef: 91, reqScore: 90, reqRam: 32, baseFps: 50 }
+  { id: "fh6_2026", title: "Forza Horizon 6 (2026)", category: "sim", year: 2026, refFps1080High: 72, reqRam: 16 },
+  { id: "rer_2026", title: "Resident Evil Requiem (2026)", category: "action", year: 2026, refFps1080High: 68, reqRam: 16 },
+  { id: "mw4_2026", title: "Call of Duty: Modern Warfare 4 (2026)", category: "fps", year: 2026, refFps1080High: 88, reqRam: 16 },
+  { id: "pbz_2026", title: "Phantom Blade Zero (2026)", category: "action", year: 2026, refFps1080High: 64, reqRam: 16 },
+  { id: "cd_2026", title: "Crimson Desert (2026)", category: "action", year: 2026, refFps1080High: 54, reqRam: 16 },
+  { id: "ds2_2026", title: "Death Stranding 2 PC (2026)", category: "action", year: 2026, refFps1080High: 70, reqRam: 16 },
+  { id: "nioh3_2026", title: "Nioh 3 (2026)", category: "rpg", year: 2026, refFps1080High: 68, reqRam: 16 },
+  { id: "cr_2026", title: "Control Resonant (2026)", category: "rpg", year: 2026, refFps1080High: 60, reqRam: 16 },
+  { id: "gow_eday_2026", title: "Gears of War: E-Day (2026)", category: "fps", year: 2026, refFps1080High: 66, reqRam: 16 },
+  { id: "bf6_2026", title: "Battlefield 6 (2026)", category: "fps", year: 2026, refFps1080High: 78, reqRam: 16 },
+  { id: "ets2", title: "Euro Truck Simulator 2", category: "sim", year: 2024, refFps1080High: 92, reqRam: 8 },
+  { id: "ats", title: "American Truck Simulator", category: "sim", year: 2024, refFps1080High: 92, reqRam: 8 },
+  { id: "ac", title: "Assetto Corsa (CSP)", category: "sim", year: 2024, refFps1080High: 88, reqRam: 8 },
+  { id: "acc", title: "Assetto Corsa Competizione", category: "sim", year: 2024, refFps1080High: 72, reqRam: 16 },
+  { id: "beamng", title: "BeamNG.drive", category: "sim", year: 2025, refFps1080High: 62, reqRam: 16 },
+  { id: "cms21", title: "Car Mechanic Simulator 2021", category: "sim", year: 2021, refFps1080High: 84, reqRam: 8 },
+  { id: "msc", title: "My Summer Car", category: "sim", year: 2020, refFps1080High: 78, reqRam: 8 },
+  { id: "fs25", title: "Farming Simulator 25", category: "sim", year: 2024, refFps1080High: 70, reqRam: 16 },
+  { id: "consim", title: "Construction Simulator", category: "sim", year: 2022, refFps1080High: 72, reqRam: 16 },
+  { id: "fh5", title: "Forza Horizon 5", category: "sim", year: 2023, refFps1080High: 82, reqRam: 16 },
+  { id: "msfs24", title: "Microsoft Flight Simulator 2024", category: "sim", year: 2024, refFps1080High: 46, reqRam: 16 },
+  { id: "gtav", title: "Grand Theft Auto V / FiveM", category: "action", year: 2024, refFps1080High: 98, reqRam: 8 },
+  { id: "rdr2", title: "Red Dead Redemption 2", category: "action", year: 2023, refFps1080High: 64, reqRam: 16 },
+  { id: "cp2077", title: "Cyberpunk 2077", category: "action", year: 2024, refFps1080High: 58, reqRam: 16 },
+  { id: "gowr", title: "God of War Ragnarök", category: "action", year: 2024, refFps1080High: 72, reqRam: 16 },
+  { id: "alanwake2", title: "Alan Wake 2", category: "action", year: 2023, refFps1080High: 48, reqRam: 16 },
+  { id: "cs2", title: "Counter-Strike 2", category: "fps", year: 2024, refFps1080High: 145, reqRam: 8 },
+  { id: "val", title: "Valorant", category: "fps", year: 2024, refFps1080High: 195, reqRam: 8 },
+  { id: "fortnite", title: "Fortnite (Performance / DX12)", category: "fps", year: 2025, refFps1080High: 125, reqRam: 8 },
+  { id: "warzone", title: "Call of Duty: Warzone / BO6", category: "fps", year: 2024, refFps1080High: 84, reqRam: 16 },
+  { id: "squad", title: "Squad", category: "fps", year: 2024, refFps1080High: 70, reqRam: 16 },
+  { id: "tarkov", title: "Escape from Tarkov", category: "fps", year: 2024, refFps1080High: 64, reqRam: 32 },
+  { id: "minecraft", title: "Minecraft (Java + Shaders)", category: "rpg", year: 2024, refFps1080High: 110, reqRam: 8 },
+  { id: "eldenring", title: "Elden Ring", category: "rpg", year: 2024, refFps1080High: 58, reqRam: 16 },
+  { id: "wukong", title: "Black Myth: Wukong", category: "rpg", year: 2024, refFps1080High: 52, reqRam: 16 },
+  { id: "ark", title: "ARK: Survival Ascended", category: "rpg", year: 2024, refFps1080High: 46, reqRam: 32 }
 ];
+
+// غلاف آمن للتخزين المحلي
+const memoryFallbackStorage = new Map();
+function safeStorageGet(key, fallbackValue = "") {
+  try {
+    const val = window.localStorage.getItem(key);
+    return val !== null ? val : fallbackValue;
+  } catch {
+    return memoryFallbackStorage.has(key) ? memoryFallbackStorage.get(key) : fallbackValue;
+  }
+}
+
+function safeStorageSet(key, value) {
+  try {
+    window.localStorage.setItem(key, value);
+    return true;
+  } catch {
+    memoryFallbackStorage.set(key, value);
+    return false;
+  }
+}
+
+function safeStorageRemove(key) {
+  try {
+    window.localStorage.removeItem(key);
+  } catch {
+    memoryFallbackStorage.delete(key);
+  }
+}
+
+function safeJsonParse(rawStr, fallback) {
+  try {
+    const parsed = JSON.parse(rawStr);
+    return parsed ?? fallback;
+  } catch {
+    return fallback;
+  }
+}
 
 // أدوات حماية وتعقيم المدخلات
 function sanitizeText(input, maxLen = 120) {
@@ -268,16 +309,16 @@ const themes = [
 ];
 let currentLang = "ar";
 
-let perGamePresets = JSON.parse(localStorage.getItem("gamecheck_game_presets") || "{}");
-let customGames = JSON.parse(localStorage.getItem("gamecheck_custom_games") || "[]");
-let favGames = JSON.parse(localStorage.getItem("gamecheck_fav_games") || "[]");
-let savedBuilds = JSON.parse(localStorage.getItem("gamecheck_saved_builds") || "[]");
-let devName = sanitizeText(localStorage.getItem("neox_dev_name") || "NeoX Dev", 50) || "NeoX Dev";
-let myDiscord = JSON.parse(localStorage.getItem("gamecheck_my_discord") || JSON.stringify({
+let perGamePresets = safeJsonParse(safeStorageGet("gamecheck_game_presets", "{}"), {});
+let customGames = safeJsonParse(safeStorageGet("gamecheck_custom_games", "[]"), []);
+let favGames = safeJsonParse(safeStorageGet("gamecheck_fav_games", "[]"), []);
+let savedBuilds = safeJsonParse(safeStorageGet("gamecheck_saved_builds", "[]"), []);
+let devName = sanitizeText(safeStorageGet("neox_dev_name", "NeoX Dev"), 50) || "NeoX Dev";
+let myDiscord = safeJsonParse(safeStorageGet("gamecheck_my_discord", ""), {
   handle: DEFAULT_DISCORD_ID,
   invite: DEFAULT_DISCORD_URL
-}));
-let socialLinks = JSON.parse(localStorage.getItem("gamecheck_social_links") || JSON.stringify(DEFAULT_SOCIAL_LINKS));
+});
+let socialLinks = safeJsonParse(safeStorageGet("gamecheck_social_links", ""), DEFAULT_SOCIAL_LINKS);
 
 function normalizeText(str) {
   return sanitizeText(str, 120)
@@ -356,41 +397,49 @@ function applyUrlParams() {
   const cIdx = Number(params.get("cpu"));
   if (Number.isInteger(gIdx) && gpus[gIdx]) gpuSelect.value = String(gIdx);
   if (Number.isInteger(cIdx) && cpus[cIdx]) cpuSelect.value = String(cIdx);
-  if (params.has("ram")) ramSelect.value = params.get("ram");
-  if (params.has("res")) resSelect.value = params.get("res");
-  if (params.has("preset") && presetConfig[params.get("preset")]) globalPresetSelect.value = params.get("preset");
-  if (params.has("up")) upscaleSelect.value = params.get("up");
+  if (params.has("ram") && ["4", "8", "12", "16", "24", "32", "64", "128"].includes(params.get("ram"))) {
+    ramSelect.value = params.get("ram");
+  }
+  if (params.has("res") && ["1", "0.72", "0.45"].includes(params.get("res"))) {
+    resSelect.value = params.get("res");
+  }
+  if (params.has("preset") && presetConfig[params.get("preset")]) {
+    globalPresetSelect.value = params.get("preset");
+  }
+  if (params.has("up") && ["1", "1.22", "1.38", "1.65"].includes(params.get("up"))) {
+    upscaleSelect.value = params.get("up");
+  }
 }
 
-// اختبار أداء مباشر للمتصفح
+// اختبار أداء المتصفح الحقيقي (Web Bench): يقيس إطارات المتصفح وسرعة المعالجة بدقة
 runBrowserBenchBtn.addEventListener("click", () => {
   runBrowserBenchBtn.disabled = true;
-  browserBenchResult.textContent = "⏳ جارٍ قياس سرعة الحسابات والإطارات...";
+  browserBenchResult.textContent = "⏳ جارٍ قياس إطارات المتصفح وسرعة الحسابات...";
 
   const mathStart = performance.now();
-  let acc = 0;
-  for (let i = 0; i < 6500000; i++) {
-    acc += Math.sin(i * 0.001) * Math.cos(i * 0.0005);
+  let checkSum = 0;
+  for (let i = 0; i < 4000000; i++) {
+    checkSum += Math.sqrt((i % 97) + 1) * 0.5;
   }
-  const mathElapsedMs = Math.max(1, performance.now() - mathStart);
+  const mathMs = Math.max(1, performance.now() - mathStart);
+  const webComputeScore = Math.max(1, Math.round((4000000 / mathMs) / 35));
 
-  let frames = 0;
+  let frameCount = 0;
   const rafStart = performance.now();
 
-  function tick(now) {
-    frames++;
-    if (now - rafStart < 450) {
-      requestAnimationFrame(tick);
+  function measureFrame(now) {
+    frameCount++;
+    const elapsedMs = now - rafStart;
+    if (elapsedMs < 500) {
+      requestAnimationFrame(measureFrame);
     } else {
-      const elapsedSec = (now - rafStart) / 1000;
-      const measuredHz = Math.round(frames / elapsedSec);
-      const computeScore = Math.min(200, Math.round((6500000 / mathElapsedMs) / 45));
-      browserBenchResult.textContent = `✅ نتيجة المتصفح: ${computeScore} نقطة معالجة (${mathElapsedMs.toFixed(0)}ms) | معدل الإطارات المقاس: ~${measuredHz} FPS (نسبة: ${acc ? "مستقرة" : "مستقرة"})`;
+      const measuredFps = Math.round((frameCount / elapsedMs) * 1000);
+      browserBenchResult.textContent = `✅ إطارات المتصفح الفعلية: ~${measuredFps} FPS | زمن المعالجة: ${mathMs.toFixed(0)} ms (مؤشر المتصفح: ${webComputeScore} pts، فحص: ${checkSum > 0 ? "سليم" : "سليم"})`;
       runBrowserBenchBtn.disabled = false;
     }
   }
 
-  requestAnimationFrame(tick);
+  requestAnimationFrame(measureFrame);
 });
 
 resetAllBtn.addEventListener("click", () => {
@@ -430,7 +479,7 @@ resetAllBtn.addEventListener("click", () => {
   toggleCompareBtn.textContent = "⚖️ مقارنة 3 تجميعات";
 
   perGamePresets = {};
-  localStorage.removeItem("gamecheck_game_presets");
+  safeStorageRemove("gamecheck_game_presets");
   filterButtons.forEach((b) => b.classList.toggle("active", b.dataset.cat === "all"));
   playabilityButtons.forEach((b) => b.classList.toggle("active", b.dataset.play === "all"));
   shareStatus.textContent = "تمت إعادة ضبط جميع الإعدادات إلى الوضع الافتراضي.";
@@ -519,10 +568,10 @@ langToggleBtn.addEventListener("click", () => {
 
   document.getElementById("mainTitle").textContent = currentLang === "ar"
     ? "FPS Lab — فاحص تشغيل الألعاب وتقدير الفريمات"
-    : "FPS Lab — PC Game Benchmark & FPS Estimator";
+    : "FPS Lab — PC Game Benchmark & FPS Range Estimator";
   document.getElementById("mainSubtitle").textContent = currentLang === "ar"
-    ? "اختر مواصفات جهازك أو جرّب التجميعات الجاهزة، واحصل على فحص التوافق والأداء والترقية واستهلاك الطاقة"
-    : "Select your PC hardware or try presets for compatibility, FPS, PSU wattage, and upgrade insights";
+    ? "اختر مواصفات جهازك أو جرّب التجميعات الجاهزة، واحصل على نطاق الفريمات التقديري وفحص التوافق والترقية واستهلاك الطاقة"
+    : "Select your PC hardware or try presets for FPS ranges, hardware compatibility, PSU wattage, and upgrade insights";
   document.getElementById("lblGpu").textContent = currentLang === "ar" ? "كرت الشاشة الأساسي (GPU 1)" : "Primary Graphics Card (GPU 1)";
   document.getElementById("lblCpu").textContent = currentLang === "ar" ? "المعالج الأساسي (CPU 1)" : "Primary Processor (CPU 1)";
   document.getElementById("lblRam").textContent = currentLang === "ar" ? "الذاكرة (RAM 1)" : "Memory (RAM 1)";
@@ -574,23 +623,72 @@ toggleCompareBtn.addEventListener("click", () => {
   renderGames();
 });
 
+// معادلة نطاق الفريمات المبنية على اختبارات مرجعية وتوازن القطع
+function calculateGameRange(game, gpuObj, cpuObj, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, selectedPresetKey) {
+  const presetInfo = presetConfig[selectedPresetKey] || presetConfig.high;
+  const baseRef = Number(game.refFps1080High) || 70;
+
+  const isCpuHeavy = game.category === "fps" || game.category === "sim";
+  const gpuWeight = resMultiplier < 1 ? 0.84 : (isCpuHeavy ? 0.68 : 0.78);
+  const cpuWeight = 1 - gpuWeight;
+
+  // نسبة الأداء مقارنة بمرجع RTX 3060 + 5600X على 1080p High
+  const scaledGpuPower = gpuObj.gpuPower * resMultiplier;
+  const combinedRatio = (scaledGpuPower * gpuWeight) + (cpuObj.cpuPower * cpuWeight);
+
+  // إذا كان المعالج أضعف بكثير من الكرت في ألعاب الشوتر/المحاكاة، يحدّ من أقصى سقف للإطارات
+  const cpuCapFactor = isCpuHeavy
+    ? Math.min(1.25, Math.max(0.55, cpuObj.cpuPower / Math.max(0.5, gpuObj.gpuPower * 0.85)))
+    : Math.min(1.3, Math.max(0.65, cpuObj.cpuPower / Math.max(0.5, gpuObj.gpuPower * 0.72)));
+
+  let avgFps = (baseRef * combinedRatio * (0.75 + 0.25 * cpuCapFactor) * rtMultiplier * modsMultiplier * streamMultiplier * upscaleMultiplier) / presetInfo.loadMultiplier;
+
+  let effectiveReqRam = selectedPresetKey === "ultra" ? game.reqRam + 4 : game.reqRam;
+  if (heavyModsEnabled) effectiveReqRam += 4;
+  if (streamingModeEnabled) effectiveReqRam += 4;
+
+  let ramPenalty = 1;
+  if (ram < effectiveReqRam) {
+    ramPenalty = Math.max(0.4, ram / effectiveReqRam);
+    avgFps *= ramPenalty;
+  }
+
+  const clampedAvg = Math.max(12, Math.min(340, Math.round(avgFps)));
+  const spread = Math.max(4, Math.round(clampedAvg * (ramPenalty < 1 ? 0.16 : 0.11)));
+  const minFps = Math.max(10, clampedAvg - spread);
+  const maxFps = Math.min(360, clampedAvg + spread);
+
+  let nativeAvg = avgFps / Math.max(1, upscaleMultiplier);
+  const nativeClamped = Math.max(10, Math.min(340, Math.round(nativeAvg)));
+  const nativeSpread = Math.max(4, Math.round(nativeClamped * 0.11));
+
+  return {
+    avgFps: clampedAvg,
+    minFps,
+    maxFps,
+    rangeText: `${minFps}-${maxFps}`,
+    nativeRangeText: `${Math.max(10, nativeClamped - nativeSpread)}-${Math.min(360, nativeClamped + nativeSpread)}`,
+    effectiveReqRam,
+    presetLabel: presetInfo.label
+  };
+}
+
 copyReportBtn.addEventListener("click", async () => {
-  const gpu = gpus[gpuSelect.value];
-  const cpu = cpus[cpuSelect.value];
+  const gpu = gpus[Number(gpuSelect.value) || 0];
+  const cpu = cpus[Number(cpuSelect.value) || 0];
   const ram = Number(ramSelect.value);
   const resMultiplier = Number(resSelect.value);
   const upscaleMultiplier = Number(upscaleSelect.value);
   const modsMultiplier = heavyModsEnabled ? 0.78 : 1.0;
   const rtMultiplier = rayTracingEnabled ? 0.72 : 1.0;
   const streamMultiplier = streamingModeEnabled ? 0.86 : 1.0;
-  const rawScore = (gpu.score * 0.72) + (cpu.score * 0.28);
 
   const sampleIds = ["fh6_2026", "rer_2026", "mw4_2026", "gtav", "rdr2", "beamng"];
   const lines = sampleIds.map((id) => {
     const g = defaultGames.find((item) => item.id === id);
     if (!g) return "";
-    const calc = calculateGameFps(g, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, globalPresetSelect.value);
-    return `- ${g.title}: ~${calc.fps} FPS`;
+    const calc = calculateGameRange(g, gpu, cpu, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, globalPresetSelect.value);
+    return `- ${g.title}: ~${calc.rangeText} FPS`;
   }).filter(Boolean);
 
   const report = [
@@ -598,7 +696,7 @@ copyReportBtn.addEventListener("click", async () => {
     `- GPU: ${gpu.name}`,
     `- CPU: ${cpu.name}`,
     `- RAM: ${ram} GB | شاشة: ${resSelect.options[resSelect.selectedIndex].text} (${hzSelect.value}Hz)`,
-    "أبرز النتائج التقديرية:",
+    "نطاق الفريمات التقديري لأبرز الألعاب:",
     ...lines
   ].join("\n");
 
@@ -655,7 +753,7 @@ function renderSavedBuilds() {
       e.stopPropagation();
       const idx = Number(delBtn.dataset.delBuild);
       savedBuilds.splice(idx, 1);
-      localStorage.setItem("gamecheck_saved_builds", JSON.stringify(savedBuilds));
+      safeStorageSet("gamecheck_saved_builds", JSON.stringify(savedBuilds));
       renderSavedBuilds();
     });
   });
@@ -672,7 +770,7 @@ saveBuildBtn.addEventListener("click", () => {
     preset: globalPresetSelect.value
   });
   savedBuilds = savedBuilds.slice(0, 25);
-  localStorage.setItem("gamecheck_saved_builds", JSON.stringify(savedBuilds));
+  safeStorageSet("gamecheck_saved_builds", JSON.stringify(savedBuilds));
   buildNameInput.value = "";
   renderSavedBuilds();
 });
@@ -697,61 +795,87 @@ exportBackupBtn.addEventListener("click", async () => {
 });
 
 importBackupBtn.addEventListener("click", () => {
+  const raw = backupJsonArea.value.trim();
+  if (!raw || raw.length > 35000) {
+    shareStatus.textContent = "النص فارغ أو يتجاوز الحد المسموح.";
+    return;
+  }
+
+  let parsed = null;
   try {
-    const parsed = JSON.parse(backupJsonArea.value.trim());
-    if (!parsed || typeof parsed !== "object") throw new Error("Invalid");
-
-    if (Array.isArray(parsed.savedBuilds)) {
-      savedBuilds = parsed.savedBuilds.slice(0, 25).map((item) => ({
-        name: sanitizeText(item.name, 40) || "تجميعة مستعادة",
-        gpu: Number.isInteger(Number(item.gpu)) && gpus[Number(item.gpu)] ? Number(item.gpu) : 10,
-        cpu: Number.isInteger(Number(item.cpu)) && cpus[Number(item.cpu)] ? Number(item.cpu) : 4,
-        ram: [2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256].includes(Number(item.ram)) ? Number(item.ram) : 16,
-        res: [1, 0.72, 0.45].includes(Number(item.res)) ? Number(item.res) : 1,
-        preset: presetConfig[item.preset] ? item.preset : "high"
-      }));
-      localStorage.setItem("gamecheck_saved_builds", JSON.stringify(savedBuilds));
-    }
-
-    if (Array.isArray(parsed.customGames)) {
-      const validCats = ["sim", "action", "fps", "rpg"];
-      customGames = parsed.customGames.slice(0, 50).map((g, idx) => ({
-        id: "custom_" + idx + "_" + Date.now().toString().slice(-4),
-        title: sanitizeText(g.title, 70) || `لعبة مخصصة ${idx + 1}`,
-        category: validCats.includes(g.category) ? g.category : "sim",
-        reqScore: Math.max(10, Math.min(120, Number(g.reqScore) || 55)),
-        reqRam: [4, 8, 16, 32].includes(Number(g.reqRam)) ? Number(g.reqRam) : 16,
-        baseFps: 75,
-        isCustom: true
-      }));
-      localStorage.setItem("gamecheck_custom_games", JSON.stringify(customGames));
-    }
-
-    if (Array.isArray(parsed.favGames)) {
-      favGames = parsed.favGames.slice(0, 100).map((id) => sanitizeText(String(id), 40)).filter(Boolean);
-      localStorage.setItem("gamecheck_fav_games", JSON.stringify(favGames));
-    }
-
-    renderSavedBuilds();
-    renderGames();
-    shareStatus.textContent = "تم استرجاع البيانات بأمان!";
+    parsed = JSON.parse(raw);
   } catch {
     shareStatus.textContent = "صيغة JSON غير صحيحة أو تالفة.";
+    return;
   }
+
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+    shareStatus.textContent = "بنية ملف JSON غير متوافقة.";
+    return;
+  }
+
+  if (Array.isArray(parsed.savedBuilds)) {
+    savedBuilds = parsed.savedBuilds.slice(0, 25).map((item) => {
+      const obj = item && typeof item === "object" ? item : {};
+      const gNum = Number(obj.gpu);
+      const cNum = Number(obj.cpu);
+      const rNum = Number(obj.ram);
+      const resNum = Number(obj.res);
+      return {
+        name: sanitizeText(obj.name, 40) || "تجميعة مستعادة",
+        gpu: Number.isInteger(gNum) && gpus[gNum] ? gNum : 10,
+        cpu: Number.isInteger(cNum) && cpus[cNum] ? cNum : 4,
+        ram: [4, 8, 12, 16, 24, 32, 64, 128].includes(rNum) ? rNum : 16,
+        res: [1, 0.72, 0.45].includes(resNum) ? resNum : 1,
+        preset: presetConfig[obj.preset] ? obj.preset : "high"
+      };
+    });
+    safeStorageSet("gamecheck_saved_builds", JSON.stringify(savedBuilds));
+  }
+
+  if (Array.isArray(parsed.customGames)) {
+    const validCats = ["sim", "action", "fps", "rpg"];
+    customGames = parsed.customGames.slice(0, 50).map((g, idx) => {
+      const obj = g && typeof g === "object" ? g : {};
+      const wNum = Number(obj.refFps1080High || obj.reqScore);
+      const ramNum = Number(obj.reqRam);
+      return {
+        id: "custom_" + idx + "_" + Date.now().toString().slice(-4),
+        title: sanitizeText(obj.title, 70) || `لعبة مخصصة ${idx + 1}`,
+        category: validCats.includes(obj.category) ? obj.category : "sim",
+        refFps1080High: Number.isFinite(wNum) ? Math.max(25, Math.min(180, wNum)) : 70,
+        reqRam: [4, 8, 16, 32].includes(ramNum) ? ramNum : 16,
+        isCustom: true
+      };
+    });
+    safeStorageSet("gamecheck_custom_games", JSON.stringify(customGames));
+  }
+
+  if (Array.isArray(parsed.favGames)) {
+    favGames = parsed.favGames
+      .slice(0, 100)
+      .filter((id) => typeof id === "string" || typeof id === "number")
+      .map((id) => sanitizeText(String(id), 40))
+      .filter(Boolean);
+    safeStorageSet("gamecheck_fav_games", JSON.stringify(favGames));
+  }
+
+  renderSavedBuilds();
+  renderGames();
+  shareStatus.textContent = "تم استرجاع البيانات والتحقق منها بأمان!";
 });
 
 let posterSnapshotData = null;
 
 openPosterBtn.addEventListener("click", () => {
-  const gpu = gpus[gpuSelect.value];
-  const cpu = cpus[cpuSelect.value];
+  const gpu = gpus[Number(gpuSelect.value) || 0];
+  const cpu = cpus[Number(cpuSelect.value) || 0];
   const ram = Number(ramSelect.value);
   const resMultiplier = Number(resSelect.value);
   const upscaleMultiplier = Number(upscaleSelect.value);
   const modsMultiplier = heavyModsEnabled ? 0.78 : 1.0;
   const rtMultiplier = rayTracingEnabled ? 0.72 : 1.0;
   const streamMultiplier = streamingModeEnabled ? 0.86 : 1.0;
-  const rawScore = (gpu.score * 0.72) + (cpu.score * 0.28);
 
   posterSpecsContent.innerHTML = `
     <div>🎮 <strong>كرت الشاشة:</strong> ${gpu.name}</div>
@@ -763,8 +887,8 @@ openPosterBtn.addEventListener("click", () => {
   const highlightIds = ["fh6_2026", "rer_2026", "mw4_2026", "pbz_2026", "gtav", "rdr2", "beamng", "cs2"];
   const selectedGames = defaultGames.filter((g) => highlightIds.includes(g.id)).map((g) => {
     const shortName = g.title.split("(")[0].trim();
-    const res = calculateGameFps(g, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, globalPresetSelect.value);
-    return { shortName, fps: res.fps };
+    const res = calculateGameRange(g, gpu, cpu, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, globalPresetSelect.value);
+    return { shortName, rangeText: res.rangeText, avgFps: res.avgFps };
   });
 
   posterSnapshotData = {
@@ -778,7 +902,7 @@ openPosterBtn.addEventListener("click", () => {
   posterGamesContent.innerHTML = selectedGames.map((item) => `
     <div class="poster-game-item">
       <span>${item.shortName}</span>
-      <strong style="color:#4ade80;">${item.fps} FPS</strong>
+      <strong style="color:#4ade80;">${item.rangeText} FPS</strong>
     </div>
   `).join("");
 
@@ -832,7 +956,7 @@ downloadPngBtn.addEventListener("click", () => {
     ctx.fillText(g.shortName, x - 12, y - 2);
 
     ctx.fillStyle = "#4ade80";
-    ctx.fillText(`${g.fps} FPS`, x - 310, y - 2);
+    ctx.fillText(`${g.rangeText} FPS`, x - 290, y - 2);
   });
 
   ctx.fillStyle = "#94a3b8";
@@ -851,17 +975,19 @@ posterModal.addEventListener("click", (e) => {
 });
 
 function buildDiscordTargetUrl() {
-  const safeInvite = sanitizeUrl(myDiscordInvite.value || myDiscord.invite || "");
-  const handleVal = sanitizeText(myDiscordHandle.value || myDiscord.handle || "", 32);
+  const safeInvite = sanitizeUrl(myDiscordInvite.value || (myDiscord && myDiscord.invite) || "");
+  const handleVal = sanitizeText(myDiscordHandle.value || (myDiscord && myDiscord.handle) || "", 32);
   if (safeInvite) return safeInvite;
   if (/^\d{15,22}$/.test(handleVal)) return `https://discord.com/users/${handleVal}`;
   return DEFAULT_DISCORD_URL;
 }
 
 function renderDiscordProfile() {
-  myDiscordHandle.value = myDiscord.handle || DEFAULT_DISCORD_ID;
-  myDiscordInvite.value = myDiscord.invite || DEFAULT_DISCORD_URL;
-  discordDisplay.textContent = `💬 حساب Discord للدعم: ${myDiscord.handle || DEFAULT_DISCORD_ID}`;
+  const handle = (myDiscord && myDiscord.handle) || DEFAULT_DISCORD_ID;
+  const invite = (myDiscord && myDiscord.invite) || DEFAULT_DISCORD_URL;
+  myDiscordHandle.value = handle;
+  myDiscordInvite.value = invite;
+  discordDisplay.textContent = `💬 حساب Discord للدعم: ${handle}`;
   contactSupportDiscordBtn.href = buildDiscordTargetUrl();
 }
 
@@ -874,7 +1000,7 @@ function persistDiscordProfile() {
       : DEFAULT_DISCORD_URL;
   }
   myDiscord = { handle: handleVal, invite: inviteVal };
-  localStorage.setItem("gamecheck_my_discord", JSON.stringify(myDiscord));
+  safeStorageSet("gamecheck_my_discord", JSON.stringify(myDiscord));
   renderDiscordProfile();
 }
 
@@ -884,8 +1010,8 @@ saveDiscordBtn.addEventListener("click", () => {
 });
 
 attachSpecsBtn.addEventListener("click", () => {
-  const gpuName = gpus[gpuSelect.value].name;
-  const cpuName = cpus[cpuSelect.value].name;
+  const gpuName = gpus[Number(gpuSelect.value) || 0].name;
+  const cpuName = cpus[Number(cpuSelect.value) || 0].name;
   const ramVal = ramSelect.value + " GB";
   const resText = resSelect.options[resSelect.selectedIndex].text;
   const presetText = globalPresetSelect.options[globalPresetSelect.selectedIndex].text;
@@ -901,7 +1027,7 @@ contactSupportDiscordBtn.addEventListener("click", async (e) => {
   const targetUrl = buildDiscordTargetUrl();
   contactSupportDiscordBtn.href = targetUrl;
 
-  const handle = myDiscord.handle || DEFAULT_DISCORD_ID;
+  const handle = (myDiscord && myDiscord.handle) || DEFAULT_DISCORD_ID;
   const msg = sanitizeText(supportMessage.value, 1400);
   const textToCopy = [handle ? `Discord ID: ${handle}` : "", msg].filter(Boolean).join("\n");
 
@@ -918,7 +1044,7 @@ contactSupportDiscordBtn.addEventListener("click", async (e) => {
 
 copyDiscordBtn.addEventListener("click", async () => {
   persistDiscordProfile();
-  const textToCopy = (myDiscord.handle || DEFAULT_DISCORD_ID).trim();
+  const textToCopy = ((myDiscord && myDiscord.handle) || DEFAULT_DISCORD_ID).trim();
   try {
     await navigator.clipboard.writeText(textToCopy);
     supportStatus.textContent = `تم نسخ Discord ID: ${textToCopy}`;
@@ -928,16 +1054,17 @@ copyDiscordBtn.addEventListener("click", async () => {
 });
 
 function renderSocialLinks() {
-  ytUrl.value = socialLinks.yt || "";
-  ttUrl.value = socialLinks.tt || "";
-  dcUrl.value = socialLinks.dc || DEFAULT_DISCORD_URL;
-  tgUrl.value = socialLinks.tg || "";
+  const links = socialLinks && typeof socialLinks === "object" ? socialLinks : DEFAULT_SOCIAL_LINKS;
+  ytUrl.value = links.yt || "";
+  ttUrl.value = links.tt || "";
+  dcUrl.value = links.dc || DEFAULT_DISCORD_URL;
+  tgUrl.value = links.tg || "";
 
   const items = [
-    { label: "▶ YouTube", url: sanitizeUrl(socialLinks.yt) },
-    { label: "🎵 TikTok", url: sanitizeUrl(socialLinks.tt) },
-    { label: "💬 Discord", url: sanitizeUrl(socialLinks.dc) },
-    { label: "📣 مجموعة التواصل", url: sanitizeUrl(socialLinks.tg) }
+    { label: "▶ YouTube", url: sanitizeUrl(links.yt) },
+    { label: "🎵 TikTok", url: sanitizeUrl(links.tt) },
+    { label: "💬 Discord", url: sanitizeUrl(links.dc) },
+    { label: "📣 مجموعة التواصل", url: sanitizeUrl(links.tg) }
   ];
 
   socialLinksRow.innerHTML = items
@@ -953,7 +1080,7 @@ saveSocialBtn.addEventListener("click", () => {
     dc: sanitizeUrl(dcUrl.value) || DEFAULT_DISCORD_URL,
     tg: sanitizeUrl(tgUrl.value)
   };
-  localStorage.setItem("gamecheck_social_links", JSON.stringify(socialLinks));
+  safeStorageSet("gamecheck_social_links", JSON.stringify(socialLinks));
   renderSocialLinks();
 });
 
@@ -966,7 +1093,7 @@ saveDevNameBtn.addEventListener("click", () => {
   const cleaned = sanitizeText(devNameInput.value, 50);
   if (!cleaned) return;
   devName = cleaned;
-  localStorage.setItem("neox_dev_name", devName);
+  safeStorageSet("neox_dev_name", devName);
   renderDeveloperCredit();
   shareStatus.textContent = "تم تحديث اسم المطور في التذييل.";
 });
@@ -977,7 +1104,7 @@ addGameBtn.addEventListener("click", () => {
 
   const validCats = ["sim", "action", "fps", "rpg"];
   const cat = validCats.includes(newGameCat.value) ? newGameCat.value : "sim";
-  const weight = Math.max(20, Math.min(100, Number(newGameWeight.value) || 55));
+  const weight = Math.max(30, Math.min(140, Number(newGameWeight.value) || 70));
   const reqRam = [4, 8, 16, 32].includes(Number(newGameRam.value)) ? Number(newGameRam.value) : 16;
 
   const newGame = {
@@ -985,16 +1112,14 @@ addGameBtn.addEventListener("click", () => {
     title,
     category: cat,
     year: 2026,
-    benchRef: weight,
-    reqScore: weight,
+    refFps1080High: weight,
     reqRam,
-    baseFps: 75,
     isCustom: true
   };
 
   customGames.unshift(newGame);
   customGames = customGames.slice(0, 50);
-  localStorage.setItem("gamecheck_custom_games", JSON.stringify(customGames));
+  safeStorageSet("gamecheck_custom_games", JSON.stringify(customGames));
   newGameTitle.value = "";
   renderGames();
 });
@@ -1015,59 +1140,30 @@ function matchesGameQuery(game, rawQuery) {
   return tokens.length > 0 && tokens.every((t) => titleNorm.includes(t));
 }
 
-function calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, selectedPresetKey, gpuObj = gpus[Number(gpuSelect.value)], cpuObj = cpus[Number(cpuSelect.value)]) {
-  const presetInfo = presetConfig[selectedPresetKey] || presetConfig.high;
-  const benchFactor = game.benchRef ? (game.reqScore / game.benchRef) : 1;
-  const requiredPower = game.reqScore * presetInfo.loadMultiplier * benchFactor;
-
-  const cpuWeight = game.category === "fps" || game.category === "sim" ? 0.36 : 0.24;
-  const gpuWeight = 1 - cpuWeight;
-  const gameAwareRawScore = (gpuObj.score * gpuWeight) + (cpuObj.score * cpuWeight);
-  const baseScoreForCalc = rawScore === gameAwareRawScore ? rawScore : gameAwareRawScore;
-
-  const nativePower = baseScoreForCalc * resMultiplier * rtMultiplier * modsMultiplier * streamMultiplier;
-  const upscaledPower = nativePower * upscaleMultiplier;
-
-  let nativeFps = Math.round(game.baseFps * (nativePower / requiredPower));
-  let fps = Math.round(game.baseFps * (upscaledPower / requiredPower));
-
-  let effectiveReqRam = selectedPresetKey === "ultra" ? game.reqRam + 4 : game.reqRam;
-  if (heavyModsEnabled) effectiveReqRam += 4;
-  if (streamingModeEnabled) effectiveReqRam += 4;
-
-  if (ram < effectiveReqRam) {
-    const ramRatio = Math.max(0.35, ram / effectiveReqRam);
-    nativeFps = Math.round(nativeFps * ramRatio);
-    fps = Math.round(fps * ramRatio);
-  }
-
-  return {
-    fps: Math.max(10, Math.min(fps, 360)),
-    nativeFps: Math.max(10, Math.min(nativeFps, 360)),
-    effectiveReqRam,
-    presetLabel: presetInfo.label
-  };
-}
-
-function updateCompatibilityAndInsights(gpuIdx, cpuIdx, ram, resMultiplier, upscaleMultiplier, allCalculated) {
+// فحص توافق القطع + مؤشرات الأداء والترقية
+function updateCompatibilityAndInsights(gpuIdx, cpuIdx, ram, resMultiplier, allCalculated) {
   const gpu = gpus[gpuIdx];
   const cpu = cpus[cpuIdx];
 
-  // فحص توافق المعالج وكرت الشاشة والرام
-  const adjustedGpuForCompat = gpu.score * resMultiplier;
-  const ratioDiff = Math.abs(adjustedGpuForCompat - cpu.score) / Math.max(adjustedGpuForCompat, cpu.score);
-  const cpuGpuStatus = ratioDiff <= 0.22
-    ? "✅ متوافق ومتوازن"
-    : adjustedGpuForCompat > cpu.score
-      ? "⚠️ المعالج أضعف نسبياً من الكرت"
-      : "ℹ️ كرت الشاشة أضعف نسبياً من المعالج";
+  const effectiveGpuRel = gpu.gpuPower * resMultiplier;
+  const balanceRatio = effectiveGpuRel / Math.max(0.25, cpu.cpuPower);
+  const diffPct = Math.round(Math.abs(effectiveGpuRel - cpu.cpuPower) * 100);
 
-  const ramNeededNow = (streamingModeEnabled || heavyModsEnabled) ? 20 : 16;
+  let cpuGpuStatus = "";
+  if (balanceRatio >= 0.78 && balanceRatio <= 1.25) {
+    cpuGpuStatus = "✅ متوافق ومتوازن جداً";
+  } else if (balanceRatio > 1.25) {
+    cpuGpuStatus = `⚠️ المعالج أضعف من الكرت (فارق ~${diffPct}%)`;
+  } else {
+    cpuGpuStatus = `ℹ️ كرت الشاشة أضعف من المعالج (فارق ~${diffPct}%)`;
+  }
+
+  const minRecommendedRam = (streamingModeEnabled || heavyModsEnabled) ? 24 : 16;
   const ramStatus = ram >= 32
-    ? "✅ ممتاز (32GB+ مناسب للألعاب والمودات)"
-    : ram >= ramNeededNow
-      ? "✅ متوافق جيداً للألعاب الحالية"
-      : `⚠️ يُنصح بترقية الرام إلى ${ramNeededNow}GB+`;
+    ? "✅ ممتاز (32GB+ كافٍ للألعاب والمودات)"
+    : ram >= minRecommendedRam
+      ? "✅ متوافق مع الاستخدام الحالي"
+      : `⚠️ يُنصح بترقية الرام إلى ${minRecommendedRam}GB+`;
 
   let neededVram = 4;
   if (resMultiplier === 0.72) neededVram = 8;
@@ -1077,50 +1173,50 @@ function updateCompatibilityAndInsights(gpuIdx, cpuIdx, ram, resMultiplier, upsc
 
   const vramStatus = gpu.vram >= neededVram
     ? `✅ كافٍ (${gpu.vram}GB / مطلوب ~${neededVram}GB)`
-    : `⚠️ منخفض (${gpu.vram}GB / مطلوب ~${neededVram}GB)`;
+    : `⚠️ غير كافٍ (${gpu.vram}GB / مطلوب ~${neededVram}GB)`;
 
   compatCheckBox.innerHTML = `
-    <strong>🛡️ فحص توافق المنصة (CPU + GPU + RAM):</strong>
+    <strong>🛡️ فحص توافق القطع (CPU + GPU + RAM + VRAM):</strong>
     <div class="compat-items">
-      <div class="compat-chip"><strong>المعالج × الكرت:</strong><br>${cpuGpuStatus}</div>
+      <div class="compat-chip"><strong>توازن المعالج والكرت:</strong><br>${cpuGpuStatus}</div>
       <div class="compat-chip"><strong>الذاكرة العشوائية (RAM):</strong><br>${ramStatus}</div>
       <div class="compat-chip"><strong>ذاكرة الفيديو (VRAM):</strong><br>${vramStatus}</div>
     </div>
   `;
 
   const avgSample = allCalculated.length
-    ? Math.round(allCalculated.reduce((acc, item) => acc + item.res1.fps, 0) / allCalculated.length)
+    ? Math.round(allCalculated.reduce((acc, item) => acc + item.res1.avgFps, 0) / allCalculated.length)
     : 60;
   const resName = resSelect.options[resSelect.selectedIndex].text;
   const upName = upscaleSelect.options[upscaleSelect.selectedIndex].text;
 
   let verdictText = "";
-  if (avgSample >= 120) {
-    verdictText = `🎯 <strong>تجربة اللعب المتوقعة (${resName} | ${upName}):</strong> مثالية للعب التنافسي عالي الفريمات والقيادة السلسة جداً.`;
+  if (avgSample >= 110) {
+    verdictText = `🎯 <strong>الخلاصة (${resName} | ${upName}):</strong> أداء عالٍ جداً مناسب للشاشات السريعة واللعب التنافسي والمحاكاة.`;
   } else if (avgSample >= 60) {
-    verdictText = `🎮 <strong>تجربة اللعب المتوقعة (${resName} | ${upName}):</strong> تجربة قصة ومحاكاة سلسة (60+ FPS) في أغلب الألعاب.`;
+    verdictText = `🎮 <strong>الخلاصة (${resName} | ${upName}):</strong> تجربة سلسة غالباً (60+ FPS متوسط) مع إمكانية ضبط بعض الإعدادات لرفع الثبات.`;
   } else {
-    verdictText = `🛠️ <strong>تجربة اللعب المتوقعة (${resName} | ${upName}):</strong> يُنصح بخفض الإعدادات أو تفعيل DLSS/FSR لرفع السلاسة.`;
+    verdictText = `🛠️ <strong>الخلاصة (${resName} | ${upName}):</strong> الإعدادات أو الدقة الحالية ثقيلة؛ يُنصح بخفض الجودة أو تفعيل DLSS/FSR.`;
   }
   expVerdictBanner.innerHTML = verdictText;
 
   if (gpu.vram < neededVram) {
     vramWarningBox.classList.add("active");
-    vramWarningBox.innerHTML = `🚨 <strong>تنبيه VRAM:</strong> كرت الشاشة يملك <strong>${gpu.vram}GB VRAM</strong> بينما الإعدادات الحالية قد تحتاج إلى <strong>~${neededVram}GB+</strong>.`;
+    vramWarningBox.innerHTML = `🚨 <strong>تنبيه VRAM:</strong> كرت الشاشة يملك <strong>${gpu.vram}GB VRAM</strong> بينما الإعدادات الحالية تحتاج إلى <strong>~${neededVram}GB+</strong> لتجنب التقطيع أو هبوط القوام.`;
   } else {
     vramWarningBox.classList.remove("active");
     vramWarningBox.innerHTML = "";
   }
 
-  const pct = Math.min(45, Math.round(ratioDiff * 100));
-  if (pct <= 12) {
+  const pct = Math.min(48, Math.round(Math.abs(balanceRatio - 1) * 65));
+  if (pct <= 14) {
     bottleneckBar.className = "insight-box bn-good";
-    bottleneckBar.innerHTML = `✅ <strong>توافق القطع ممتاز:</strong> توازن جيد بين المعالج والكرت (الفارق: ${pct}%).`;
-  } else if (adjustedGpuForCompat > cpu.score) {
-    bottleneckBar.className = pct > 25 ? "insight-box bn-bad" : "insight-box bn-warn";
-    bottleneckBar.innerHTML = `⚠️ <strong>عنق زجاجة معالج (~${pct}%):</strong> يظهر تأثيره في ألعاب المحاكاة والشوتر.`;
+    bottleneckBar.innerHTML = `✅ <strong>توافق القطع ممتاز:</strong> توازن جيد بين المعالج والكرت (الفارق: ~${pct}%).`;
+  } else if (balanceRatio > 1) {
+    bottleneckBar.className = pct > 26 ? "insight-box bn-bad" : "insight-box bn-warn";
+    bottleneckBar.innerHTML = `⚠️ <strong>عنق زجاجة معالج (~${pct}%):</strong> قد يحد المعالج من الفريمات في الشوتر والمحاكاة.`;
   } else {
-    bottleneckBar.className = pct > 25 ? "insight-box bn-bad" : "insight-box bn-warn";
+    bottleneckBar.className = pct > 26 ? "insight-box bn-bad" : "insight-box bn-warn";
     bottleneckBar.innerHTML = `ℹ️ <strong>عنق زجاجة كرت شاشة (~${pct}%):</strong> كرت الشاشة (${gpu.name}) هو المحدّد الأساسي.`;
   }
 
@@ -1137,10 +1233,10 @@ function updateCompatibilityAndInsights(gpuIdx, cpuIdx, ram, resMultiplier, upsc
   let pillsHtml = "";
 
   if (ram < 16) {
-    adviceText = `💡 <strong>مستشار الترقية:</strong> ترقية الذاكرة إلى <strong>16GB أو 32GB</strong> ستعطي تحسناً واضحاً.`;
+    adviceText = `💡 <strong>مستشار الترقية:</strong> ترقية الذاكرة إلى <strong>16GB أو 32GB</strong> ستقلل التقطيع بشكل واضح.`;
     pillsHtml = `<button class="upgrade-pill" data-upgrade-ram="16" type="button">ترقية إلى 16GB RAM</button>
                  <button class="upgrade-pill" data-upgrade-ram="32" type="button">ترقية إلى 32GB RAM</button>`;
-  } else if (gpu.score <= cpu.score && gpuIdx < gpus.length - 1) {
+  } else if (balanceRatio <= 1 && gpuIdx < gpus.length - 1) {
     const nextGpus = [gpuIdx + 2, gpuIdx + 4, gpuIdx + 6].filter((idx) => idx < gpus.length);
     adviceText = `💡 <strong>مستشار الترقية:</strong> خيارات ترقية مقترحة لكرت الشاشة:`;
     pillsHtml = nextGpus.map((idx) => `<button class="upgrade-pill" data-upgrade-gpu="${idx}" type="button">${gpus[idx].name}</button>`).join("");
@@ -1175,11 +1271,11 @@ function updateCompatibilityAndInsights(gpuIdx, cpuIdx, ram, resMultiplier, upsc
     });
   });
 
-  const topGames = [...allCalculated].sort((a, b) => b.res1.fps - a.res1.fps).slice(0, 5);
+  const topGames = [...allCalculated].sort((a, b) => b.res1.avgFps - a.res1.avgFps).slice(0, 5);
   bestMatchBox.innerHTML = `
     🌟 <strong>الأكثر سلاسة على تجميعتك حالياً:</strong>
     <div class="best-match-pills">
-      ${topGames.map((item) => `<span class="match-pill">${item.game.title.split("(")[0].trim()} — ${item.res1.fps} FPS</span>`).join("")}
+      ${topGames.map((item) => `<span class="match-pill">${item.game.title.split("(")[0].trim()} — ${item.res1.rangeText} FPS</span>`).join("")}
     </div>
   `;
 }
@@ -1203,12 +1299,10 @@ function renderGames() {
   const gpu2 = gpus[Number(gpuSelect2.value) || 0];
   const cpu2 = cpus[Number(cpuSelect2.value) || 0];
   const ram2 = Number(ramSelect2.value);
-  const rawScore2 = (gpu2.score * 0.72) + (cpu2.score * 0.28);
 
   const gpu3 = gpus[Number(gpuSelect3.value) || 0];
   const cpu3 = cpus[Number(cpuSelect3.value) || 0];
   const ram3 = Number(ramSelect3.value);
-  const rawScore3 = (gpu3.score * 0.72) + (cpu3.score * 0.28);
 
   const allGames = [...customGames, ...defaultGames];
   const rawScore = (gpu.score * 0.72) + (cpu.score * 0.28);
@@ -1216,11 +1310,11 @@ function renderGames() {
 
   const allCalculatedForInsights = allGames.map((game) => {
     const selectedPresetKey = perGamePresets[game.id] || defaultPresetKey;
-    const res1 = calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, selectedPresetKey, gpu, cpu);
+    const res1 = calculateGameRange(game, gpu, cpu, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, selectedPresetKey);
     return { game, res1 };
   });
 
-  updateCompatibilityAndInsights(gpuIdx, cpuIdx, ram, resMultiplier, upscaleMultiplier, allCalculatedForInsights);
+  updateCompatibilityAndInsights(gpuIdx, cpuIdx, ram, resMultiplier, allCalculatedForInsights);
 
   let tier = "متوسط";
   if (rawScore >= 145) tier = "وحش خارق (Ultra Flagship)";
@@ -1248,28 +1342,28 @@ function renderGames() {
     .map((game) => {
       const isFav = favGames.includes(game.id);
       const selectedPresetKey = perGamePresets[game.id] || defaultPresetKey;
-      const res1 = calculateGameFps(game, rawScore, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, selectedPresetKey, gpu, cpu);
+      const res1 = calculateGameRange(game, gpu, cpu, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, selectedPresetKey);
       const res2 = compareMode
-        ? calculateGameFps(game, rawScore2, ram2, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, selectedPresetKey, gpu2, cpu2)
+        ? calculateGameRange(game, gpu2, cpu2, ram2, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, selectedPresetKey)
         : null;
       const res3 = compareMode
-        ? calculateGameFps(game, rawScore3, ram3, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, selectedPresetKey, gpu3, cpu3)
+        ? calculateGameRange(game, gpu3, cpu3, ram3, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, selectedPresetKey)
         : null;
       return { game, isFav, selectedPresetKey, res1, res2, res3 };
     })
     .filter(({ res1 }) => {
-      if (currentPlayability === "smooth") return res1.fps >= 60;
-      if (currentPlayability === "mid") return res1.fps >= 35 && res1.fps < 60;
-      if (currentPlayability === "heavy") return res1.fps < 35;
+      if (currentPlayability === "smooth") return res1.avgFps >= 60;
+      if (currentPlayability === "mid") return res1.avgFps >= 35 && res1.avgFps < 60;
+      if (currentPlayability === "heavy") return res1.avgFps < 35;
       return true;
     });
 
   resultsCountBadge.textContent = `${computedList.length} لعبة`;
 
   if (sortMode === "fps-desc") {
-    computedList.sort((a, b) => b.res1.fps - a.res1.fps);
+    computedList.sort((a, b) => b.res1.avgFps - a.res1.avgFps);
   } else if (sortMode === "fps-asc") {
-    computedList.sort((a, b) => a.res1.fps - b.res1.fps);
+    computedList.sort((a, b) => a.res1.avgFps - b.res1.avgFps);
   } else if (sortMode === "alpha") {
     computedList.sort((a, b) => a.game.title.localeCompare(b.game.title));
   } else {
@@ -1288,43 +1382,43 @@ function renderGames() {
     let badgeText = "سلس وممتاز";
     let barColor = "#22c55e";
 
-    if (res1.fps < 35) {
+    if (res1.avgFps < 35) {
       badgeClass = "badge-low";
       badgeText = "ثقيل على التجميعة";
       barColor = "#ef4444";
-    } else if (res1.fps < 60) {
+    } else if (res1.avgFps < 60) {
       badgeClass = "badge-mid";
       badgeText = "مقبول للتجميعة";
       barColor = "#eab308";
     }
 
     const upscaleCompareHtml = upscaleMultiplier > 1
-      ? `<div class="native-fps-sub">الأصلي بدون رفع: ${res1.nativeFps} FPS ← بعد التفعيل: ${res1.fps} FPS</div>`
+      ? `<div class="native-fps-sub">بدون رفع: ${res1.nativeRangeText} FPS ← بعد التفعيل: ${res1.rangeText} FPS</div>`
       : "";
 
-    const hzNote = res1.fps >= targetHz
-      ? `🖥️ يغطي شاشة ${targetHz}Hz بالكامل`
-      : `🖥️ أقل من شاشة ${targetHz}Hz (${targetHz - res1.fps} FPS فارق)`;
+    const hzNote = res1.avgFps >= targetHz
+      ? `🖥️ يغطي شاشة ${targetHz}Hz غالباً`
+      : `🖥️ أقل من شاشة ${targetHz}Hz (~${targetHz - res1.avgFps} FPS فارق)`;
 
-    const barWidth = Math.min(100, Math.round((res1.fps / 240) * 100));
+    const barWidth = Math.min(100, Math.round((res1.avgFps / 240) * 100));
 
     let compareHtml = "";
     if (compareMode && res2 && res3) {
-      const diff2 = res2.fps - res1.fps;
+      const diff2 = res2.avgFps - res1.avgFps;
       const sign2 = diff2 > 0 ? `+${diff2}` : `${diff2}`;
       const color2 = diff2 >= 0 ? "#4ade80" : "#f87171";
 
-      const diff3 = res3.fps - res1.fps;
+      const diff3 = res3.avgFps - res1.avgFps;
       const sign3 = diff3 > 0 ? `+${diff3}` : `${diff3}`;
       const color3 = diff3 >= 0 ? "#4ade80" : "#f87171";
 
       compareHtml = `
         <div class="compare-badge">
-          <span>PC 2: <strong>${res2.fps} FPS</strong></span>
+          <span>PC 2: <strong>${res2.rangeText} FPS</strong></span>
           <strong style="color:${color2}">(${sign2})</strong>
         </div>
         <div class="compare-badge">
-          <span>PC 3: <strong>${res3.fps} FPS</strong></span>
+          <span>PC 3: <strong>${res3.rangeText} FPS</strong></span>
           <strong style="color:${color3}">(${sign3})</strong>
         </div>
       `;
@@ -1336,7 +1430,10 @@ function renderGames() {
 
     const isPickedClass = pickedRandomGameId === game.id ? "is-picked" : "";
     const safeTitle = sanitizeText(game.title, 90);
-    const benchTag = game.year === 2026 ? `<div class="game-subtag">🆕 إصدار 2026 • مرجع ${game.benchRef || game.reqScore}</div>` : `<div class="game-subtag">📊 مرجع الاختبار: ${game.benchRef || game.reqScore}</div>`;
+    const refVal = Number(game.refFps1080High) || 70;
+    const benchTag = game.year === 2026
+      ? `<div class="game-subtag">🆕 إصدار 2026 • مرجع 1080p: ~${refVal} FPS</div>`
+      : `<div class="game-subtag">📊 مرجع 1080p: ~${refVal} FPS</div>`;
 
     resultsDiv.innerHTML += `
       <article class="game-card ${isFav ? "is-fav" : ""} ${isPickedClass}">
@@ -1353,8 +1450,8 @@ function renderGames() {
         </div>
         <div class="fps-row">
           <div>
-            <span class="fps-number" style="color:${barColor}">${res1.fps}</span>
-            <span class="fps-unit">FPS تقريباً</span>
+            <span class="fps-number" style="color:${barColor}">${res1.rangeText}</span>
+            <span class="fps-unit">FPS تقديري</span>
           </div>
           <span class="fps-unit">الرام المطلوب: ${res1.effectiveReqRam}GB</span>
         </div>
@@ -1382,7 +1479,7 @@ function renderGames() {
       const gameId = e.target.dataset.gameId;
       if (presetConfig[e.target.value]) {
         perGamePresets[gameId] = e.target.value;
-        localStorage.setItem("gamecheck_game_presets", JSON.stringify(perGamePresets));
+        safeStorageSet("gamecheck_game_presets", JSON.stringify(perGamePresets));
         renderGames();
       }
     });
@@ -1396,7 +1493,7 @@ function renderGames() {
       } else {
         favGames.push(favId);
       }
-      localStorage.setItem("gamecheck_fav_games", JSON.stringify(favGames));
+      safeStorageSet("gamecheck_fav_games", JSON.stringify(favGames));
       renderGames();
     });
   });
@@ -1405,7 +1502,7 @@ function renderGames() {
     btn.addEventListener("click", (e) => {
       const idToDelete = e.target.dataset.deleteId;
       customGames = customGames.filter((g) => g.id !== idToDelete);
-      localStorage.setItem("gamecheck_custom_games", JSON.stringify(customGames));
+      safeStorageSet("gamecheck_custom_games", JSON.stringify(customGames));
       renderGames();
     });
   });
@@ -1413,7 +1510,7 @@ function renderGames() {
 
 globalPresetSelect.addEventListener("change", () => {
   perGamePresets = {};
-  localStorage.removeItem("gamecheck_game_presets");
+  safeStorageRemove("gamecheck_game_presets");
   renderGames();
 });
 

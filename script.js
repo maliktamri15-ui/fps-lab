@@ -1,42 +1,39 @@
-// قاعدة بيانات معايرة على اختبارات مرجعية عند 1080p High
-// refGpuFps1080: متوسط إطارات مرجعي لكرت RTX 3060 (12GB) على دقة 1080p High في اللعبة
 const gpus = [
-  { name: "GTX 750 Ti (2GB)", score: 15, gpuPower: 0.21, tdp: 60, vram: 2 },
-  { name: "GTX 1050 Ti (4GB)", score: 26, gpuPower: 0.36, tdp: 75, vram: 4 },
-  { name: "RX 570 / RX 580 (8GB)", score: 33, gpuPower: 0.46, tdp: 185, vram: 8 },
-  { name: "GTX 1650 (4GB)", score: 35, gpuPower: 0.49, tdp: 75, vram: 4 },
-  { name: "GTX 1060 (6GB)", score: 42, gpuPower: 0.58, tdp: 120, vram: 6 },
-  { name: "GTX 1660 Super (6GB)", score: 48, gpuPower: 0.67, tdp: 125, vram: 6 },
-  { name: "RTX 3050 (8GB)", score: 52, gpuPower: 0.72, tdp: 130, vram: 8 },
-  { name: "RTX 2060 (6GB)", score: 56, gpuPower: 0.78, tdp: 160, vram: 6 },
-  { name: "Intel Arc B580 (12GB)", score: 68, gpuPower: 0.94, tdp: 190, vram: 12 },
-  { name: "RX 6600 (8GB)", score: 66, gpuPower: 0.92, tdp: 132, vram: 8 },
-  { name: "RTX 3060 (12GB)", score: 72, gpuPower: 1.0, tdp: 170, vram: 12 },
-  { name: "RTX 5050 (8GB)", score: 70, gpuPower: 0.97, tdp: 135, vram: 8 },
-  { name: "RX 7600 XT (16GB)", score: 78, gpuPower: 1.08, tdp: 190, vram: 16 },
-  { name: "RTX 3060 Ti (8GB)", score: 80, gpuPower: 1.11, tdp: 200, vram: 8 },
-  { name: "RTX 4060 (8GB)", score: 84, gpuPower: 1.17, tdp: 115, vram: 8 },
-  { name: "RTX 5060 (8GB)", score: 92, gpuPower: 1.28, tdp: 145, vram: 8 },
-  { name: "RX 9060 XT (16GB)", score: 96, gpuPower: 1.33, tdp: 170, vram: 16 },
-  { name: "RTX 3070 / 3070 Ti (8GB)", score: 94, gpuPower: 1.31, tdp: 220, vram: 8 },
-  { name: "RTX 4060 Ti (8GB / 16GB)", score: 96, gpuPower: 1.33, tdp: 165, vram: 16 },
-  { name: "RTX 5060 Ti (16GB)", score: 105, gpuPower: 1.46, tdp: 180, vram: 16 },
-  { name: "RX 7800 XT (16GB)", score: 108, gpuPower: 1.50, tdp: 263, vram: 16 },
-  { name: "RTX 3080 / 3080 Ti (12GB)", score: 112, gpuPower: 1.56, tdp: 320, vram: 12 },
-  { name: "RTX 4070 / 4070 Super (12GB)", score: 118, gpuPower: 1.64, tdp: 220, vram: 12 },
-  { name: "RTX 5070 (12GB GDDR7)", score: 128, gpuPower: 1.78, tdp: 250, vram: 12 },
-  { name: "RX 9070 (16GB)", score: 128, gpuPower: 1.78, tdp: 220, vram: 16 },
-  { name: "RTX 4070 Ti Super (16GB)", score: 132, gpuPower: 1.83, tdp: 285, vram: 16 },
-  { name: "RX 9070 XT (16GB)", score: 140, gpuPower: 1.94, tdp: 304, vram: 16 },
-  { name: "RTX 5070 Ti (16GB GDDR7)", score: 145, gpuPower: 2.01, tdp: 300, vram: 16 },
-  { name: "RX 7900 XTX (24GB)", score: 146, gpuPower: 2.03, tdp: 355, vram: 24 },
-  { name: "RTX 4080 / 4080 Super (16GB)", score: 148, gpuPower: 2.06, tdp: 320, vram: 16 },
-  { name: "RTX 5080 (16GB GDDR7)", score: 162, gpuPower: 2.25, tdp: 360, vram: 16 },
-  { name: "RTX 4090 (24GB GDDR6X)", score: 175, gpuPower: 2.43, tdp: 450, vram: 24 },
-  { name: "RTX 5090 (32GB GDDR7) — الأقوى في العالم", score: 215, gpuPower: 2.98, tdp: 575, vram: 32 }
+  { name: "GTX 750 Ti (2GB)", score: 15, gpuPower: 0.21, tdp: 60, vram: 2, arch: "Maxwell" },
+  { name: "GTX 1050 Ti (4GB)", score: 26, gpuPower: 0.36, tdp: 75, vram: 4, arch: "Pascal" },
+  { name: "RX 570 / RX 580 (8GB)", score: 33, gpuPower: 0.46, tdp: 185, vram: 8, arch: "Polaris" },
+  { name: "GTX 1650 (4GB)", score: 35, gpuPower: 0.49, tdp: 75, vram: 4, arch: "Turing" },
+  { name: "GTX 1060 (6GB)", score: 42, gpuPower: 0.58, tdp: 120, vram: 6, arch: "Pascal" },
+  { name: "GTX 1660 Super (6GB)", score: 48, gpuPower: 0.67, tdp: 125, vram: 6, arch: "Turing" },
+  { name: "RTX 3050 (8GB)", score: 52, gpuPower: 0.72, tdp: 130, vram: 8, arch: "Ampere" },
+  { name: "RTX 2060 (6GB)", score: 56, gpuPower: 0.78, tdp: 160, vram: 6, arch: "Turing" },
+  { name: "Intel Arc B580 (12GB)", score: 68, gpuPower: 0.94, tdp: 190, vram: 12, arch: "Battlemage" },
+  { name: "RX 6600 (8GB)", score: 66, gpuPower: 0.92, tdp: 132, vram: 8, arch: "RDNA 2" },
+  { name: "RTX 3060 (12GB)", score: 72, gpuPower: 1.0, tdp: 170, vram: 12, arch: "Ampere" },
+  { name: "RTX 5050 (8GB)", score: 70, gpuPower: 0.97, tdp: 135, vram: 8, arch: "Blackwell" },
+  { name: "RX 7600 XT (16GB)", score: 78, gpuPower: 1.08, tdp: 190, vram: 16, arch: "RDNA 3" },
+  { name: "RTX 3060 Ti (8GB)", score: 80, gpuPower: 1.11, tdp: 200, vram: 8, arch: "Ampere" },
+  { name: "RTX 4060 (8GB)", score: 84, gpuPower: 1.17, tdp: 115, vram: 8, arch: "Ada Lovelace" },
+  { name: "RTX 5060 (8GB)", score: 92, gpuPower: 1.28, tdp: 145, vram: 8, arch: "Blackwell" },
+  { name: "RX 9060 XT (16GB)", score: 96, gpuPower: 1.33, tdp: 170, vram: 16, arch: "RDNA 4" },
+  { name: "RTX 3070 / 3070 Ti (8GB)", score: 94, gpuPower: 1.31, tdp: 220, vram: 8, arch: "Ampere" },
+  { name: "RTX 4060 Ti (8GB / 16GB)", score: 96, gpuPower: 1.33, tdp: 165, vram: 16, arch: "Ada Lovelace" },
+  { name: "RTX 5060 Ti (16GB)", score: 105, gpuPower: 1.46, tdp: 180, vram: 16, arch: "Blackwell" },
+  { name: "RX 7800 XT (16GB)", score: 108, gpuPower: 1.50, tdp: 263, vram: 16, arch: "RDNA 3" },
+  { name: "RTX 3080 / 3080 Ti (12GB)", score: 112, gpuPower: 1.56, tdp: 320, vram: 12, arch: "Ampere" },
+  { name: "RTX 4070 / 4070 Super (12GB)", score: 118, gpuPower: 1.64, tdp: 220, vram: 12, arch: "Ada Lovelace" },
+  { name: "RTX 5070 (12GB GDDR7)", score: 128, gpuPower: 1.78, tdp: 250, vram: 12, arch: "Blackwell" },
+  { name: "RX 9070 (16GB)", score: 128, gpuPower: 1.78, tdp: 220, vram: 16, arch: "RDNA 4" },
+  { name: "RTX 4070 Ti Super (16GB)", score: 132, gpuPower: 1.83, tdp: 285, vram: 16, arch: "Ada Lovelace" },
+  { name: "RX 9070 XT (16GB)", score: 140, gpuPower: 1.94, tdp: 304, vram: 16, arch: "RDNA 4" },
+  { name: "RTX 5070 Ti (16GB GDDR7)", score: 145, gpuPower: 2.01, tdp: 300, vram: 16, arch: "Blackwell" },
+  { name: "RX 7900 XTX (24GB)", score: 146, gpuPower: 2.03, tdp: 355, vram: 24, arch: "RDNA 3" },
+  { name: "RTX 4080 / 4080 Super (16GB)", score: 148, gpuPower: 2.06, tdp: 320, vram: 16, arch: "Ada Lovelace" },
+  { name: "RTX 5080 (16GB GDDR7)", score: 162, gpuPower: 2.25, tdp: 360, vram: 16, arch: "Blackwell" },
+  { name: "RTX 4090 (24GB GDDR6X)", score: 175, gpuPower: 2.43, tdp: 450, vram: 24, arch: "Ada Lovelace" },
+  { name: "RTX 5090 (32GB GDDR7) — الأقوى في العالم", score: 215, gpuPower: 2.98, tdp: 575, vram: 32, arch: "Blackwell" }
 ];
 
-// cpuPower معاير بحيث يكون Ryzen 7 5600X = 1.00 عند 1080p
 const cpus = [
   { name: "Core i3-10100F / 12100F", score: 46, cpuPower: 0.66, tdp: 65 },
   { name: "Ryzen 5 2600 / 3600", score: 55, cpuPower: 0.76, tdp: 65 },
@@ -91,47 +88,50 @@ const presetConfig = {
   ultra: { label: "Ultra", loadMultiplier: 1.26 }
 };
 
-// قاعدة بيانات اختبارات مرجعية (refFps1080High: متوسط الفريمات المرجعي على RTX 3060 + 5600X عند 1080p High)
+// قاعدة بيانات مع تاريخ آخر تحديث لكل لعبة ومتطلباتها
 const defaultGames = [
-  { id: "fh6_2026", title: "Forza Horizon 6 (2026)", category: "sim", year: 2026, refFps1080High: 72, reqRam: 16 },
-  { id: "rer_2026", title: "Resident Evil Requiem (2026)", category: "action", year: 2026, refFps1080High: 68, reqRam: 16 },
-  { id: "mw4_2026", title: "Call of Duty: Modern Warfare 4 (2026)", category: "fps", year: 2026, refFps1080High: 88, reqRam: 16 },
-  { id: "pbz_2026", title: "Phantom Blade Zero (2026)", category: "action", year: 2026, refFps1080High: 64, reqRam: 16 },
-  { id: "cd_2026", title: "Crimson Desert (2026)", category: "action", year: 2026, refFps1080High: 54, reqRam: 16 },
-  { id: "ds2_2026", title: "Death Stranding 2 PC (2026)", category: "action", year: 2026, refFps1080High: 70, reqRam: 16 },
-  { id: "nioh3_2026", title: "Nioh 3 (2026)", category: "rpg", year: 2026, refFps1080High: 68, reqRam: 16 },
-  { id: "cr_2026", title: "Control Resonant (2026)", category: "rpg", year: 2026, refFps1080High: 60, reqRam: 16 },
-  { id: "gow_eday_2026", title: "Gears of War: E-Day (2026)", category: "fps", year: 2026, refFps1080High: 66, reqRam: 16 },
-  { id: "bf6_2026", title: "Battlefield 6 (2026)", category: "fps", year: 2026, refFps1080High: 78, reqRam: 16 },
-  { id: "ets2", title: "Euro Truck Simulator 2", category: "sim", year: 2024, refFps1080High: 92, reqRam: 8 },
-  { id: "ats", title: "American Truck Simulator", category: "sim", year: 2024, refFps1080High: 92, reqRam: 8 },
-  { id: "ac", title: "Assetto Corsa (CSP)", category: "sim", year: 2024, refFps1080High: 88, reqRam: 8 },
-  { id: "acc", title: "Assetto Corsa Competizione", category: "sim", year: 2024, refFps1080High: 72, reqRam: 16 },
-  { id: "beamng", title: "BeamNG.drive", category: "sim", year: 2025, refFps1080High: 62, reqRam: 16 },
-  { id: "cms21", title: "Car Mechanic Simulator 2021", category: "sim", year: 2021, refFps1080High: 84, reqRam: 8 },
-  { id: "msc", title: "My Summer Car", category: "sim", year: 2020, refFps1080High: 78, reqRam: 8 },
-  { id: "fs25", title: "Farming Simulator 25", category: "sim", year: 2024, refFps1080High: 70, reqRam: 16 },
-  { id: "consim", title: "Construction Simulator", category: "sim", year: 2022, refFps1080High: 72, reqRam: 16 },
-  { id: "fh5", title: "Forza Horizon 5", category: "sim", year: 2023, refFps1080High: 82, reqRam: 16 },
-  { id: "msfs24", title: "Microsoft Flight Simulator 2024", category: "sim", year: 2024, refFps1080High: 46, reqRam: 16 },
-  { id: "gtav", title: "Grand Theft Auto V / FiveM", category: "action", year: 2024, refFps1080High: 98, reqRam: 8 },
-  { id: "rdr2", title: "Red Dead Redemption 2", category: "action", year: 2023, refFps1080High: 64, reqRam: 16 },
-  { id: "cp2077", title: "Cyberpunk 2077", category: "action", year: 2024, refFps1080High: 58, reqRam: 16 },
-  { id: "gowr", title: "God of War Ragnarök", category: "action", year: 2024, refFps1080High: 72, reqRam: 16 },
-  { id: "alanwake2", title: "Alan Wake 2", category: "action", year: 2023, refFps1080High: 48, reqRam: 16 },
-  { id: "cs2", title: "Counter-Strike 2", category: "fps", year: 2024, refFps1080High: 145, reqRam: 8 },
-  { id: "val", title: "Valorant", category: "fps", year: 2024, refFps1080High: 195, reqRam: 8 },
-  { id: "fortnite", title: "Fortnite (Performance / DX12)", category: "fps", year: 2025, refFps1080High: 125, reqRam: 8 },
-  { id: "warzone", title: "Call of Duty: Warzone / BO6", category: "fps", year: 2024, refFps1080High: 84, reqRam: 16 },
-  { id: "squad", title: "Squad", category: "fps", year: 2024, refFps1080High: 70, reqRam: 16 },
-  { id: "tarkov", title: "Escape from Tarkov", category: "fps", year: 2024, refFps1080High: 64, reqRam: 32 },
-  { id: "minecraft", title: "Minecraft (Java + Shaders)", category: "rpg", year: 2024, refFps1080High: 110, reqRam: 8 },
-  { id: "eldenring", title: "Elden Ring", category: "rpg", year: 2024, refFps1080High: 58, reqRam: 16 },
-  { id: "wukong", title: "Black Myth: Wukong", category: "rpg", year: 2024, refFps1080High: 52, reqRam: 16 },
-  { id: "ark", title: "ARK: Survival Ascended", category: "rpg", year: 2024, refFps1080High: 46, reqRam: 32 }
+  { id: "fh6_2026", title: "Forza Horizon 6 (2026)", category: "sim", year: 2026, refFps1080High: 72, reqRam: 16, lastUpdated: "2026-10-15" },
+  { id: "rer_2026", title: "Resident Evil Requiem (2026)", category: "action", year: 2026, refFps1080High: 68, reqRam: 16, lastUpdated: "2026-10-20" },
+  { id: "mw4_2026", title: "Call of Duty: Modern Warfare 4 (2026)", category: "fps", year: 2026, refFps1080High: 88, reqRam: 16, lastUpdated: "2026-11-02" },
+  { id: "pbz_2026", title: "Phantom Blade Zero (2026)", category: "action", year: 2026, refFps1080High: 64, reqRam: 16, lastUpdated: "2026-09-28" },
+  { id: "cd_2026", title: "Crimson Desert (2026)", category: "action", year: 2026, refFps1080High: 54, reqRam: 16, lastUpdated: "2026-10-10" },
+  { id: "ds2_2026", title: "Death Stranding 2 PC (2026)", category: "action", year: 2026, refFps1080High: 70, reqRam: 16, lastUpdated: "2026-09-18" },
+  { id: "nioh3_2026", title: "Nioh 3 (2026)", category: "rpg", year: 2026, refFps1080High: 68, reqRam: 16, lastUpdated: "2026-08-25" },
+  { id: "cr_2026", title: "Control Resonant (2026)", category: "rpg", year: 2026, refFps1080High: 60, reqRam: 16, lastUpdated: "2026-10-05" },
+  { id: "gow_eday_2026", title: "Gears of War: E-Day (2026)", category: "fps", year: 2026, refFps1080High: 66, reqRam: 16, lastUpdated: "2026-09-30" },
+  { id: "bf6_2026", title: "Battlefield 6 (2026)", category: "fps", year: 2026, refFps1080High: 78, reqRam: 16, lastUpdated: "2026-11-08" },
+  { id: "ets2", title: "Euro Truck Simulator 2", category: "sim", year: 2024, refFps1080High: 92, reqRam: 8, lastUpdated: "2026-08-12" },
+  { id: "ats", title: "American Truck Simulator", category: "sim", year: 2024, refFps1080High: 92, reqRam: 8, lastUpdated: "2026-08-12" },
+  { id: "ac", title: "Assetto Corsa (CSP)", category: "sim", year: 2024, refFps1080High: 88, reqRam: 8, lastUpdated: "2026-09-04" },
+  { id: "acc", title: "Assetto Corsa Competizione", category: "sim", year: 2024, refFps1080High: 72, reqRam: 16, lastUpdated: "2026-07-22" },
+  { id: "beamng", title: "BeamNG.drive", category: "sim", year: 2025, refFps1080High: 62, reqRam: 16, lastUpdated: "2026-10-27" },
+  { id: "cms21", title: "Car Mechanic Simulator 2021", category: "sim", year: 2021, refFps1080High: 84, reqRam: 8, lastUpdated: "2026-07-10" },
+  { id: "msc", title: "My Summer Car", category: "sim", year: 2020, refFps1080High: 78, reqRam: 8, lastUpdated: "2026-09-14" },
+  { id: "fs25", title: "Farming Simulator 25", category: "sim", year: 2024, refFps1080High: 70, reqRam: 16, lastUpdated: "2026-10-02" },
+  { id: "consim", title: "Construction Simulator", category: "sim", year: 2022, refFps1080High: 72, reqRam: 16, lastUpdated: "2026-08-19" },
+  { id: "fh5", title: "Forza Horizon 5", category: "sim", year: 2023, refFps1080High: 82, reqRam: 16, lastUpdated: "2026-08-05" },
+  { id: "msfs24", title: "Microsoft Flight Simulator 2024", category: "sim", year: 2024, refFps1080High: 46, reqRam: 16, lastUpdated: "2026-10-29" },
+  { id: "gtav", title: "Grand Theft Auto V / FiveM", category: "action", year: 2024, refFps1080High: 98, reqRam: 8, lastUpdated: "2026-09-21" },
+  { id: "rdr2", title: "Red Dead Redemption 2", category: "action", year: 2023, refFps1080High: 64, reqRam: 16, lastUpdated: "2026-08-29" },
+  { id: "cp2077", title: "Cyberpunk 2077", category: "action", year: 2024, refFps1080High: 58, reqRam: 16, lastUpdated: "2026-09-11" },
+  { id: "gowr", title: "God of War Ragnarök", category: "action", year: 2024, refFps1080High: 72, reqRam: 16, lastUpdated: "2026-07-30" },
+  { id: "alanwake2", title: "Alan Wake 2", category: "action", year: 2023, refFps1080High: 48, reqRam: 16, lastUpdated: "2026-07-18" },
+  { id: "cs2", title: "Counter-Strike 2", category: "fps", year: 2024, refFps1080High: 145, reqRam: 8, lastUpdated: "2026-10-12" },
+  { id: "val", title: "Valorant", category: "fps", year: 2024, refFps1080High: 195, reqRam: 8, lastUpdated: "2026-10-12" },
+  { id: "fortnite", title: "Fortnite (Performance / DX12)", category: "fps", year: 2025, refFps1080High: 125, reqRam: 8, lastUpdated: "2026-10-24" },
+  { id: "warzone", title: "Call of Duty: Warzone / BO6", category: "fps", year: 2024, refFps1080High: 84, reqRam: 16, lastUpdated: "2026-09-09" },
+  { id: "squad", title: "Squad", category: "fps", year: 2024, refFps1080High: 70, reqRam: 16, lastUpdated: "2026-10-18" },
+  { id: "tarkov", title: "Escape from Tarkov", category: "fps", year: 2024, refFps1080High: 64, reqRam: 32, lastUpdated: "2026-08-15" },
+  { id: "minecraft", title: "Minecraft (Java + Shaders)", category: "rpg", year: 2024, refFps1080High: 110, reqRam: 8, lastUpdated: "2026-09-25" },
+  { id: "eldenring", title: "Elden Ring", category: "rpg", year: 2024, refFps1080High: 58, reqRam: 16, lastUpdated: "2026-08-01" },
+  { id: "wukong", title: "Black Myth: Wukong", category: "rpg", year: 2024, refFps1080High: 52, reqRam: 16, lastUpdated: "2026-08-22" },
+  { id: "ark", title: "ARK: Survival Ascended", category: "rpg", year: 2024, refFps1080High: 46, reqRam: 32, lastUpdated: "2026-09-02" }
 ];
 
-// غلاف آمن للتخزين المحلي
+function getTodayIsoDate() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 const memoryFallbackStorage = new Map();
 function safeStorageGet(key, fallbackValue = "") {
   try {
@@ -169,7 +169,6 @@ function safeJsonParse(rawStr, fallback) {
   }
 }
 
-// أدوات حماية وتعقيم المدخلات
 function sanitizeText(input, maxLen = 120) {
   if (typeof input !== "string") return "";
   return input
@@ -229,6 +228,9 @@ const posterGamesContent = document.getElementById("posterGamesContent");
 
 const runBrowserBenchBtn = document.getElementById("runBrowserBenchBtn");
 const browserBenchResult = document.getElementById("browserBenchResult");
+const realGpuProfileText = document.getElementById("realGpuProfileText");
+const fpsLabAiGrid = document.getElementById("fpsLabAiGrid");
+const fpsLabAiDelta = document.getElementById("fpsLabAiDelta");
 const compatCheckBox = document.getElementById("compatCheckBox");
 
 const shareBuildBtn = document.getElementById("shareBuildBtn");
@@ -411,35 +413,34 @@ function applyUrlParams() {
   }
 }
 
-// اختبار أداء المتصفح الحقيقي (Web Bench): يقيس إطارات المتصفح وسرعة المعالجة بدقة
+// اختبار أداء المتصفح فقط (منفصل تماماً عن أداء كرت الشاشة الحقيقي)
 runBrowserBenchBtn.addEventListener("click", () => {
   runBrowserBenchBtn.disabled = true;
-  browserBenchResult.textContent = "⏳ جارٍ قياس إطارات المتصفح وسرعة الحسابات...";
+  browserBenchResult.textContent = "⏳ جارٍ قياس إطارات المتصفح وزمن الحسابات...";
 
   const mathStart = performance.now();
-  let checkSum = 0;
-  for (let i = 0; i < 4000000; i++) {
-    checkSum += Math.sqrt((i % 97) + 1) * 0.5;
+  let sum = 0;
+  for (let i = 0; i < 3500000; i++) {
+    sum += Math.sqrt((i % 89) + 1);
   }
   const mathMs = Math.max(1, performance.now() - mathStart);
-  const webComputeScore = Math.max(1, Math.round((4000000 / mathMs) / 35));
 
-  let frameCount = 0;
+  let frames = 0;
   const rafStart = performance.now();
 
-  function measureFrame(now) {
-    frameCount++;
-    const elapsedMs = now - rafStart;
-    if (elapsedMs < 500) {
-      requestAnimationFrame(measureFrame);
+  function step(now) {
+    frames++;
+    const elapsed = now - rafStart;
+    if (elapsed < 500) {
+      requestAnimationFrame(step);
     } else {
-      const measuredFps = Math.round((frameCount / elapsedMs) * 1000);
-      browserBenchResult.textContent = `✅ إطارات المتصفح الفعلية: ~${measuredFps} FPS | زمن المعالجة: ${mathMs.toFixed(0)} ms (مؤشر المتصفح: ${webComputeScore} pts، فحص: ${checkSum > 0 ? "سليم" : "سليم"})`;
+      const browserFps = Math.round((frames / elapsed) * 1000);
+      browserBenchResult.textContent = `✅ المتصفح: ~${browserFps} FPS (معدل تحديث التبويب) | زمن الحساب: ${mathMs.toFixed(0)} ms (${sum ? "مكتمل" : ""})`;
       runBrowserBenchBtn.disabled = false;
     }
   }
 
-  requestAnimationFrame(measureFrame);
+  requestAnimationFrame(step);
 });
 
 resetAllBtn.addEventListener("click", () => {
@@ -568,10 +569,10 @@ langToggleBtn.addEventListener("click", () => {
 
   document.getElementById("mainTitle").textContent = currentLang === "ar"
     ? "FPS Lab — فاحص تشغيل الألعاب وتقدير الفريمات"
-    : "FPS Lab — PC Game Benchmark & FPS Range Estimator";
+    : "FPS Lab — PC Game Benchmark & FPS Lab AI";
   document.getElementById("mainSubtitle").textContent = currentLang === "ar"
-    ? "اختر مواصفات جهازك أو جرّب التجميعات الجاهزة، واحصل على نطاق الفريمات التقديري وفحص التوافق والترقية واستهلاك الطاقة"
-    : "Select your PC hardware or try presets for FPS ranges, hardware compatibility, PSU wattage, and upgrade insights";
+    ? "اختر مواصفات جهازك واحصل على تحليل FPS Lab AI ونطاق الفريمات التقديري وفحص التوافق"
+    : "Pick your specs for FPS Lab AI insights, estimated FPS ranges, and hardware compatibility";
   document.getElementById("lblGpu").textContent = currentLang === "ar" ? "كرت الشاشة الأساسي (GPU 1)" : "Primary Graphics Card (GPU 1)";
   document.getElementById("lblCpu").textContent = currentLang === "ar" ? "المعالج الأساسي (CPU 1)" : "Primary Processor (CPU 1)";
   document.getElementById("lblRam").textContent = currentLang === "ar" ? "الذاكرة (RAM 1)" : "Memory (RAM 1)";
@@ -623,7 +624,6 @@ toggleCompareBtn.addEventListener("click", () => {
   renderGames();
 });
 
-// معادلة نطاق الفريمات المبنية على اختبارات مرجعية وتوازن القطع
 function calculateGameRange(game, gpuObj, cpuObj, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, selectedPresetKey) {
   const presetInfo = presetConfig[selectedPresetKey] || presetConfig.high;
   const baseRef = Number(game.refFps1080High) || 70;
@@ -632,11 +632,9 @@ function calculateGameRange(game, gpuObj, cpuObj, ram, resMultiplier, upscaleMul
   const gpuWeight = resMultiplier < 1 ? 0.84 : (isCpuHeavy ? 0.68 : 0.78);
   const cpuWeight = 1 - gpuWeight;
 
-  // نسبة الأداء مقارنة بمرجع RTX 3060 + 5600X على 1080p High
   const scaledGpuPower = gpuObj.gpuPower * resMultiplier;
   const combinedRatio = (scaledGpuPower * gpuWeight) + (cpuObj.cpuPower * cpuWeight);
 
-  // إذا كان المعالج أضعف بكثير من الكرت في ألعاب الشوتر/المحاكاة، يحدّ من أقصى سقف للإطارات
   const cpuCapFactor = isCpuHeavy
     ? Math.min(1.25, Math.max(0.55, cpuObj.cpuPower / Math.max(0.5, gpuObj.gpuPower * 0.85)))
     : Math.min(1.3, Math.max(0.65, cpuObj.cpuPower / Math.max(0.5, gpuObj.gpuPower * 0.72)));
@@ -654,23 +652,267 @@ function calculateGameRange(game, gpuObj, cpuObj, ram, resMultiplier, upscaleMul
   }
 
   const clampedAvg = Math.max(12, Math.min(340, Math.round(avgFps)));
-  const spread = Math.max(4, Math.round(clampedAvg * (ramPenalty < 1 ? 0.16 : 0.11)));
+  const marginPct = (ramPenalty < 1 || heavyModsEnabled || rayTracingEnabled) ? 18 : 13;
+  const spread = Math.max(4, Math.round(clampedAvg * (marginPct / 100)));
   const minFps = Math.max(10, clampedAvg - spread);
   const maxFps = Math.min(360, clampedAvg + spread);
 
   let nativeAvg = avgFps / Math.max(1, upscaleMultiplier);
   const nativeClamped = Math.max(10, Math.min(340, Math.round(nativeAvg)));
-  const nativeSpread = Math.max(4, Math.round(nativeClamped * 0.11));
+  const nativeSpread = Math.max(4, Math.round(nativeClamped * 0.13));
 
   return {
     avgFps: clampedAvg,
     minFps,
     maxFps,
+    marginPct,
     rangeText: `${minFps}-${maxFps}`,
     nativeRangeText: `${Math.max(10, nativeClamped - nativeSpread)}-${Math.min(360, nativeClamped + nativeSpread)}`,
     effectiveReqRam,
     presetLabel: presetInfo.label
   };
+}
+
+// تحديث بطاقة كرت الشاشة الحقيقي وميزة FPS Lab AI
+function updateFpsLabAiAndGpuProfile(gpuIdx, cpuIdx, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, allCalculated) {
+  const gpu = gpus[gpuIdx];
+  const cpu = cpus[cpuIdx];
+
+  realGpuProfileText.innerHTML = `
+    <strong>${gpu.name}</strong> • معمارية: <strong>${gpu.arch}</strong> • ذاكرة: <strong>${gpu.vram} GB</strong> • استهلاك: <strong>${gpu.tdp}W</strong> • مؤشر رسوميات: <strong>${gpu.score} pt</strong>
+  `;
+
+  // 1. أفضل إعدادات مقترحة حسب الأداء العام للجهاز
+  const avgAll = allCalculated.length
+    ? Math.round(allCalculated.reduce((s, item) => s + item.res1.avgFps, 0) / allCalculated.length)
+    : 60;
+
+  let bestSettingsText = "";
+  if (avgAll >= 100) {
+    bestSettingsText = "High إلى Ultra مع إيقاف Upscaling أو Quality عند 1440p/4K، وتفعيل Reflex / Anti-Lag.";
+  } else if (avgAll >= 60) {
+    bestSettingsText = "Medium–High مع تفعيل DLSS/FSR Quality عند الحاجة، وخفض الظلال أو الضبابية لكسب 10–15% سلاسة.";
+  } else {
+    bestSettingsText = "Low–Medium مع DLSS/FSR Balanced أو Performance وتقليل جودة الظلال والانعكاسات أولاً.";
+  }
+
+  // 2. القطعة التي تستحق الترقية أولاً + مقارنة قبل وبعد الترقية
+  let upgradeTargetTitle = "";
+  let upgradeTargetReason = "";
+  let upgradedGpu = gpu;
+  let upgradedCpu = cpu;
+  let upgradedRam = ram;
+  let upgradeLabel = "";
+
+  const effectiveGpuRel = gpu.gpuPower * resMultiplier;
+  const balanceRatio = effectiveGpuRel / Math.max(0.25, cpu.cpuPower);
+
+  if (ram < 16) {
+    upgradeTargetTitle = "الذاكرة العشوائية (RAM) إلى 16 GB";
+    upgradeTargetReason = "تجنّب هبوط الإطارات المفاجئ والتقطيع في الألعاب الحديثة.";
+    upgradedRam = 16;
+    upgradeLabel = "16 GB RAM";
+  } else if (balanceRatio > 1.25 && cpuIdx < cpus.length - 1) {
+    const nextCpuIdx = Math.min(cpus.length - 1, cpuIdx + 2);
+    upgradedCpu = cpus[nextCpuIdx];
+    upgradeTargetTitle = `المعالج إلى ${upgradedCpu.name}`;
+    upgradeTargetReason = "المعالج الحالي يحدّ نسبياً من كرت الشاشة في الشوتر والمحاكاة.";
+    upgradeLabel = upgradedCpu.name;
+  } else if (gpuIdx < gpus.length - 1) {
+    const nextGpuIdx = Math.min(gpus.length - 1, gpuIdx + 3);
+    upgradedGpu = gpus[nextGpuIdx];
+    upgradeTargetTitle = `كرت الشاشة إلى ${upgradedGpu.name}`;
+    upgradeTargetReason = "أعلى أثر مباشر على نطاق الفريمات وجودة الرسوميات.";
+    upgradeLabel = upgradedGpu.name;
+  } else {
+    upgradeTargetTitle = "التجميعة في أعلى فئة متاحة";
+    upgradeTargetReason = "لا توجد ترقية ضرورية حالياً؛ ركّز على ضبط إعدادات العرض والشاشة.";
+    upgradeLabel = "الحد الأقصى";
+  }
+
+  // 3. الألعاب الأنسب للجهاز حالياً
+  const suitableGames = [...allCalculated]
+    .filter((item) => item.res1.avgFps >= 55)
+    .sort((a, b) => b.res1.avgFps - a.res1.avgFps)
+    .slice(0, 4);
+
+  const suitableHtml = suitableGames.length
+    ? suitableGames.map((item) => `• ${item.game.title.split("(")[0].trim()} (${item.res1.rangeText} FPS)`).join("<br>")
+    : "• يُنصح بتجربة الألعاب الخفيفة أو خفض الدقة/الإعدادات.";
+
+  // مقارنة متوسط نطاق الفريمات قبل وبعد الترقية المقترحة على عينة ألعاب
+  const sampleGames = defaultGames.filter((g) => ["fh6_2026", "rer_2026", "mw4_2026", "rdr2", "gtav"].includes(g.id));
+  const beforeAvg = Math.round(sampleGames.reduce((sum, g) => {
+    const r = calculateGameRange(g, gpu, cpu, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, globalPresetSelect.value);
+    return sum + r.avgFps;
+  }, 0) / sampleGames.length);
+
+  const afterAvg = Math.round(sampleGames.reduce((sum, g) => {
+    const r = calculateGameRange(g, upgradedGpu, upgradedCpu, upgradedRam, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, globalPresetSelect.value);
+    return sum + r.avgFps;
+  }, 0) / sampleGames.length);
+
+  const deltaDiff = afterAvg - beforeAvg;
+  const deltaSign = deltaDiff >= 0 ? `+${deltaDiff}` : `${deltaDiff}`;
+
+  fpsLabAiGrid.innerHTML = `
+    <div class="ai-card">
+      <div class="ai-card-title">🎛️ أفضل إعدادات مقترحة</div>
+      <div>${bestSettingsText}</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-card-title">⬆️ القطعة الأولى للترقية</div>
+      <div><strong>${upgradeTargetTitle}</strong></div>
+      <div style="color:var(--text-muted); margin-top:3px;">${upgradeTargetReason}</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-card-title">🎯 ألعاب مناسبة لجهازك الآن</div>
+      <div>${suitableHtml}</div>
+    </div>
+  `;
+
+  fpsLabAiDelta.innerHTML = `
+    📊 مقارنة الأداء قبل وبعد الترقية المقترحة (${upgradeLabel}): متوسط العينة <strong>~${beforeAvg} FPS</strong> ← <strong>~${afterAvg} FPS</strong> (التغير التقديري: <strong>${deltaSign} FPS</strong>)
+  `;
+}
+
+function updateCompatibilityAndInsights(gpuIdx, cpuIdx, ram, resMultiplier, allCalculated) {
+  const gpu = gpus[gpuIdx];
+  const cpu = cpus[cpuIdx];
+
+  const effectiveGpuRel = gpu.gpuPower * resMultiplier;
+  const balanceRatio = effectiveGpuRel / Math.max(0.25, cpu.cpuPower);
+  const diffPct = Math.round(Math.abs(effectiveGpuRel - cpu.cpuPower) * 100);
+
+  let cpuGpuStatus = "";
+  if (balanceRatio >= 0.78 && balanceRatio <= 1.25) {
+    cpuGpuStatus = "✅ متوافق ومتوازن جداً";
+  } else if (balanceRatio > 1.25) {
+    cpuGpuStatus = `⚠️ المعالج أضعف من الكرت (فارق ~${diffPct}%)`;
+  } else {
+    cpuGpuStatus = `ℹ️ كرت الشاشة أضعف من المعالج (فارق ~${diffPct}%)`;
+  }
+
+  const minRecommendedRam = (streamingModeEnabled || heavyModsEnabled) ? 24 : 16;
+  const ramStatus = ram >= 32
+    ? "✅ ممتاز (32GB+ كافٍ للألعاب والمودات)"
+    : ram >= minRecommendedRam
+      ? "✅ متوافق مع الاستخدام الحالي"
+      : `⚠️ يُنصح بترقية الرام إلى ${minRecommendedRam}GB+`;
+
+  let neededVram = 4;
+  if (resMultiplier === 0.72) neededVram = 8;
+  else if (resMultiplier === 0.45) neededVram = 12;
+  if (rayTracingEnabled) neededVram += 2;
+  if (globalPresetSelect.value === "ultra") neededVram += 2;
+
+  const vramStatus = gpu.vram >= neededVram
+    ? `✅ كافٍ (${gpu.vram}GB / مطلوب ~${neededVram}GB)`
+    : `⚠️ غير كافٍ (${gpu.vram}GB / مطلوب ~${neededVram}GB)`;
+
+  compatCheckBox.innerHTML = `
+    <strong>🛡️ فحص توافق القطع (CPU + GPU + RAM + VRAM):</strong>
+    <div class="compat-items">
+      <div class="compat-chip"><strong>توازن المعالج والكرت:</strong><br>${cpuGpuStatus}</div>
+      <div class="compat-chip"><strong>الذاكرة العشوائية (RAM):</strong><br>${ramStatus}</div>
+      <div class="compat-chip"><strong>ذاكرة الفيديو (VRAM):</strong><br>${vramStatus}</div>
+    </div>
+  `;
+
+  const avgSample = allCalculated.length
+    ? Math.round(allCalculated.reduce((acc, item) => acc + item.res1.avgFps, 0) / allCalculated.length)
+    : 60;
+  const resName = resSelect.options[resSelect.selectedIndex].text;
+  const upName = upscaleSelect.options[upscaleSelect.selectedIndex].text;
+
+  let verdictText = "";
+  if (avgSample >= 110) {
+    verdictText = `🎯 <strong>الخلاصة (${resName} | ${upName}):</strong> أداء تقديري مرتفع مناسب للشاشات السريعة واللعب التنافسي والمحاكاة.`;
+  } else if (avgSample >= 60) {
+    verdictText = `🎮 <strong>الخلاصة (${resName} | ${upName}):</strong> نطاق فريمات مناسب للعب السلس (60+ FPS متوسط تقريباً) مع مراعاة هامش الخطأ.`;
+  } else {
+    verdictText = `🛠️ <strong>الخلاصة (${resName} | ${upName}):</strong> الإعدادات أو الدقة الحالية ثقيلة؛ يُنصح بخفض الجودة أو تفعيل DLSS/FSR.`;
+  }
+  expVerdictBanner.innerHTML = verdictText;
+
+  if (gpu.vram < neededVram) {
+    vramWarningBox.classList.add("active");
+    vramWarningBox.innerHTML = `🚨 <strong>تنبيه VRAM:</strong> كرت الشاشة يملك <strong>${gpu.vram}GB VRAM</strong> بينما الإعدادات الحالية تحتاج إلى <strong>~${neededVram}GB+</strong> لتجنب التقطيع أو هبوط القوام.`;
+  } else {
+    vramWarningBox.classList.remove("active");
+    vramWarningBox.innerHTML = "";
+  }
+
+  const pct = Math.min(48, Math.round(Math.abs(balanceRatio - 1) * 65));
+  if (pct <= 14) {
+    bottleneckBar.className = "insight-box bn-good";
+    bottleneckBar.innerHTML = `✅ <strong>توافق القطع ممتاز:</strong> توازن جيد بين المعالج والكرت (الفارق التقديري: ~${pct}%).`;
+  } else if (balanceRatio > 1) {
+    bottleneckBar.className = pct > 26 ? "insight-box bn-bad" : "insight-box bn-warn";
+    bottleneckBar.innerHTML = `⚠️ <strong>عنق زجاجة معالج (~${pct}%):</strong> قد يحد المعالج من الفريمات في الشوتر والمحاكاة.`;
+  } else {
+    bottleneckBar.className = pct > 26 ? "insight-box bn-bad" : "insight-box bn-warn";
+    bottleneckBar.innerHTML = `ℹ️ <strong>عنق زجاجة كرت شاشة (~${pct}%):</strong> كرت الشاشة (${gpu.name}) هو المحدّد الأساسي.`;
+  }
+
+  const systemOverhead = 90 + (ram > 16 ? 20 : 10) + (streamingModeEnabled ? 25 : 0);
+  const estimatedWatts = gpu.tdp + cpu.tdp + systemOverhead;
+  const recommendedPsu = Math.ceil((estimatedWatts * 1.35) / 50) * 50;
+
+  psuEstimatorBox.innerHTML = `
+    ⚡ <strong>استهلاك الطاقة التقديري:</strong> ~${estimatedWatts}W تحت الضغط<br>
+    🔌 <strong>الباور سبلاي المقترح (PSU):</strong> ${recommendedPsu}W أو أعلى
+  `;
+
+  let adviceText = "";
+  let pillsHtml = "";
+
+  if (ram < 16) {
+    adviceText = `💡 <strong>مستشار الترقية:</strong> ترقية الذاكرة إلى <strong>16GB أو 32GB</strong> ستقلل التقطيع بشكل واضح.`;
+    pillsHtml = `<button class="upgrade-pill" data-upgrade-ram="16" type="button">ترقية إلى 16GB RAM</button>
+                 <button class="upgrade-pill" data-upgrade-ram="32" type="button">ترقية إلى 32GB RAM</button>`;
+  } else if (balanceRatio <= 1 && gpuIdx < gpus.length - 1) {
+    const nextGpus = [gpuIdx + 2, gpuIdx + 4, gpuIdx + 6].filter((idx) => idx < gpus.length);
+    adviceText = `💡 <strong>مستشار الترقية:</strong> خيارات ترقية مقترحة لكرت الشاشة:`;
+    pillsHtml = nextGpus.map((idx) => `<button class="upgrade-pill" data-upgrade-gpu="${idx}" type="button">${gpus[idx].name}</button>`).join("");
+  } else if (cpuIdx < cpus.length - 1) {
+    const nextCpus = [cpuIdx + 1, cpuIdx + 2, cpuIdx + 3].filter((idx) => idx < cpus.length);
+    adviceText = `💡 <strong>مستشار الترقية:</strong> خيارات ترقية مقترحة للمعالج:`;
+    pillsHtml = nextCpus.map((idx) => `<button class="upgrade-pill" data-upgrade-cpu="${idx}" type="button">${cpus[idx].name}</button>`).join("");
+  } else {
+    adviceText = `🏆 <strong>تجميعتك في القمة:</strong> تملك أقوى القطع المتوفرة حالياً!`;
+  }
+
+  upgradeAdvisorBox.innerHTML = `${adviceText}<div class="upgrade-pills">${pillsHtml}</div>`;
+
+  upgradeAdvisorBox.querySelectorAll("[data-upgrade-ram]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      ramSelect.value = btn.dataset.upgradeRam;
+      renderGames();
+    });
+  });
+
+  upgradeAdvisorBox.querySelectorAll("[data-upgrade-gpu]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      gpuSelect.value = btn.dataset.upgradeGpu;
+      renderGames();
+    });
+  });
+
+  upgradeAdvisorBox.querySelectorAll("[data-upgrade-cpu]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      cpuSelect.value = btn.dataset.upgradeCpu;
+      renderGames();
+    });
+  });
+
+  const topGames = [...allCalculated].sort((a, b) => b.res1.avgFps - a.res1.avgFps).slice(0, 5);
+  bestMatchBox.innerHTML = `
+    🌟 <strong>الأكثر سلاسة على تجميعتك حالياً:</strong>
+    <div class="best-match-pills">
+      ${topGames.map((item) => `<span class="match-pill">${item.game.title.split("(")[0].trim()} — ${item.res1.rangeText} FPS</span>`).join("")}
+    </div>
+  `;
 }
 
 copyReportBtn.addEventListener("click", async () => {
@@ -688,7 +930,7 @@ copyReportBtn.addEventListener("click", async () => {
     const g = defaultGames.find((item) => item.id === id);
     if (!g) return "";
     const calc = calculateGameRange(g, gpu, cpu, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, globalPresetSelect.value);
-    return `- ${g.title}: ~${calc.rangeText} FPS`;
+    return `- ${g.title}: ~${calc.rangeText} FPS (±${calc.marginPct}%)`;
   }).filter(Boolean);
 
   const report = [
@@ -696,7 +938,7 @@ copyReportBtn.addEventListener("click", async () => {
     `- GPU: ${gpu.name}`,
     `- CPU: ${cpu.name}`,
     `- RAM: ${ram} GB | شاشة: ${resSelect.options[resSelect.selectedIndex].text} (${hzSelect.value}Hz)`,
-    "نطاق الفريمات التقديري لأبرز الألعاب:",
+    "نطاق الفريمات التقديري (ليس قياساً مباشراً):",
     ...lines
   ].join("\n");
 
@@ -843,8 +1085,9 @@ importBackupBtn.addEventListener("click", () => {
         id: "custom_" + idx + "_" + Date.now().toString().slice(-4),
         title: sanitizeText(obj.title, 70) || `لعبة مخصصة ${idx + 1}`,
         category: validCats.includes(obj.category) ? obj.category : "sim",
-        refFps1080High: Number.isFinite(wNum) ? Math.max(25, Math.min(180, wNum)) : 70,
+        refFps1080High: Number.isFinite(wNum) ? Math.max(30, Math.min(180, wNum)) : 72,
         reqRam: [4, 8, 16, 32].includes(ramNum) ? ramNum : 16,
+        lastUpdated: sanitizeText(obj.lastUpdated, 10) || getTodayIsoDate(),
         isCustom: true
       };
     });
@@ -1104,7 +1347,7 @@ addGameBtn.addEventListener("click", () => {
 
   const validCats = ["sim", "action", "fps", "rpg"];
   const cat = validCats.includes(newGameCat.value) ? newGameCat.value : "sim";
-  const weight = Math.max(30, Math.min(140, Number(newGameWeight.value) || 70));
+  const weight = Math.max(30, Math.min(180, Number(newGameWeight.value) || 72));
   const reqRam = [4, 8, 16, 32].includes(Number(newGameRam.value)) ? Number(newGameRam.value) : 16;
 
   const newGame = {
@@ -1114,6 +1357,7 @@ addGameBtn.addEventListener("click", () => {
     year: 2026,
     refFps1080High: weight,
     reqRam,
+    lastUpdated: getTodayIsoDate(),
     isCustom: true
   };
 
@@ -1138,146 +1382,6 @@ function matchesGameQuery(game, rawQuery) {
 
   const tokens = q.split(/\s+/).filter(Boolean);
   return tokens.length > 0 && tokens.every((t) => titleNorm.includes(t));
-}
-
-// فحص توافق القطع + مؤشرات الأداء والترقية
-function updateCompatibilityAndInsights(gpuIdx, cpuIdx, ram, resMultiplier, allCalculated) {
-  const gpu = gpus[gpuIdx];
-  const cpu = cpus[cpuIdx];
-
-  const effectiveGpuRel = gpu.gpuPower * resMultiplier;
-  const balanceRatio = effectiveGpuRel / Math.max(0.25, cpu.cpuPower);
-  const diffPct = Math.round(Math.abs(effectiveGpuRel - cpu.cpuPower) * 100);
-
-  let cpuGpuStatus = "";
-  if (balanceRatio >= 0.78 && balanceRatio <= 1.25) {
-    cpuGpuStatus = "✅ متوافق ومتوازن جداً";
-  } else if (balanceRatio > 1.25) {
-    cpuGpuStatus = `⚠️ المعالج أضعف من الكرت (فارق ~${diffPct}%)`;
-  } else {
-    cpuGpuStatus = `ℹ️ كرت الشاشة أضعف من المعالج (فارق ~${diffPct}%)`;
-  }
-
-  const minRecommendedRam = (streamingModeEnabled || heavyModsEnabled) ? 24 : 16;
-  const ramStatus = ram >= 32
-    ? "✅ ممتاز (32GB+ كافٍ للألعاب والمودات)"
-    : ram >= minRecommendedRam
-      ? "✅ متوافق مع الاستخدام الحالي"
-      : `⚠️ يُنصح بترقية الرام إلى ${minRecommendedRam}GB+`;
-
-  let neededVram = 4;
-  if (resMultiplier === 0.72) neededVram = 8;
-  else if (resMultiplier === 0.45) neededVram = 12;
-  if (rayTracingEnabled) neededVram += 2;
-  if (globalPresetSelect.value === "ultra") neededVram += 2;
-
-  const vramStatus = gpu.vram >= neededVram
-    ? `✅ كافٍ (${gpu.vram}GB / مطلوب ~${neededVram}GB)`
-    : `⚠️ غير كافٍ (${gpu.vram}GB / مطلوب ~${neededVram}GB)`;
-
-  compatCheckBox.innerHTML = `
-    <strong>🛡️ فحص توافق القطع (CPU + GPU + RAM + VRAM):</strong>
-    <div class="compat-items">
-      <div class="compat-chip"><strong>توازن المعالج والكرت:</strong><br>${cpuGpuStatus}</div>
-      <div class="compat-chip"><strong>الذاكرة العشوائية (RAM):</strong><br>${ramStatus}</div>
-      <div class="compat-chip"><strong>ذاكرة الفيديو (VRAM):</strong><br>${vramStatus}</div>
-    </div>
-  `;
-
-  const avgSample = allCalculated.length
-    ? Math.round(allCalculated.reduce((acc, item) => acc + item.res1.avgFps, 0) / allCalculated.length)
-    : 60;
-  const resName = resSelect.options[resSelect.selectedIndex].text;
-  const upName = upscaleSelect.options[upscaleSelect.selectedIndex].text;
-
-  let verdictText = "";
-  if (avgSample >= 110) {
-    verdictText = `🎯 <strong>الخلاصة (${resName} | ${upName}):</strong> أداء عالٍ جداً مناسب للشاشات السريعة واللعب التنافسي والمحاكاة.`;
-  } else if (avgSample >= 60) {
-    verdictText = `🎮 <strong>الخلاصة (${resName} | ${upName}):</strong> تجربة سلسة غالباً (60+ FPS متوسط) مع إمكانية ضبط بعض الإعدادات لرفع الثبات.`;
-  } else {
-    verdictText = `🛠️ <strong>الخلاصة (${resName} | ${upName}):</strong> الإعدادات أو الدقة الحالية ثقيلة؛ يُنصح بخفض الجودة أو تفعيل DLSS/FSR.`;
-  }
-  expVerdictBanner.innerHTML = verdictText;
-
-  if (gpu.vram < neededVram) {
-    vramWarningBox.classList.add("active");
-    vramWarningBox.innerHTML = `🚨 <strong>تنبيه VRAM:</strong> كرت الشاشة يملك <strong>${gpu.vram}GB VRAM</strong> بينما الإعدادات الحالية تحتاج إلى <strong>~${neededVram}GB+</strong> لتجنب التقطيع أو هبوط القوام.`;
-  } else {
-    vramWarningBox.classList.remove("active");
-    vramWarningBox.innerHTML = "";
-  }
-
-  const pct = Math.min(48, Math.round(Math.abs(balanceRatio - 1) * 65));
-  if (pct <= 14) {
-    bottleneckBar.className = "insight-box bn-good";
-    bottleneckBar.innerHTML = `✅ <strong>توافق القطع ممتاز:</strong> توازن جيد بين المعالج والكرت (الفارق: ~${pct}%).`;
-  } else if (balanceRatio > 1) {
-    bottleneckBar.className = pct > 26 ? "insight-box bn-bad" : "insight-box bn-warn";
-    bottleneckBar.innerHTML = `⚠️ <strong>عنق زجاجة معالج (~${pct}%):</strong> قد يحد المعالج من الفريمات في الشوتر والمحاكاة.`;
-  } else {
-    bottleneckBar.className = pct > 26 ? "insight-box bn-bad" : "insight-box bn-warn";
-    bottleneckBar.innerHTML = `ℹ️ <strong>عنق زجاجة كرت شاشة (~${pct}%):</strong> كرت الشاشة (${gpu.name}) هو المحدّد الأساسي.`;
-  }
-
-  const systemOverhead = 90 + (ram > 16 ? 20 : 10) + (streamingModeEnabled ? 25 : 0);
-  const estimatedWatts = gpu.tdp + cpu.tdp + systemOverhead;
-  const recommendedPsu = Math.ceil((estimatedWatts * 1.35) / 50) * 50;
-
-  psuEstimatorBox.innerHTML = `
-    ⚡ <strong>استهلاك الطاقة التقديري:</strong> ~${estimatedWatts}W تحت الضغط<br>
-    🔌 <strong>الباور سبلاي المقترح (PSU):</strong> ${recommendedPsu}W أو أعلى
-  `;
-
-  let adviceText = "";
-  let pillsHtml = "";
-
-  if (ram < 16) {
-    adviceText = `💡 <strong>مستشار الترقية:</strong> ترقية الذاكرة إلى <strong>16GB أو 32GB</strong> ستقلل التقطيع بشكل واضح.`;
-    pillsHtml = `<button class="upgrade-pill" data-upgrade-ram="16" type="button">ترقية إلى 16GB RAM</button>
-                 <button class="upgrade-pill" data-upgrade-ram="32" type="button">ترقية إلى 32GB RAM</button>`;
-  } else if (balanceRatio <= 1 && gpuIdx < gpus.length - 1) {
-    const nextGpus = [gpuIdx + 2, gpuIdx + 4, gpuIdx + 6].filter((idx) => idx < gpus.length);
-    adviceText = `💡 <strong>مستشار الترقية:</strong> خيارات ترقية مقترحة لكرت الشاشة:`;
-    pillsHtml = nextGpus.map((idx) => `<button class="upgrade-pill" data-upgrade-gpu="${idx}" type="button">${gpus[idx].name}</button>`).join("");
-  } else if (cpuIdx < cpus.length - 1) {
-    const nextCpus = [cpuIdx + 1, cpuIdx + 2, cpuIdx + 3].filter((idx) => idx < cpus.length);
-    adviceText = `💡 <strong>مستشار الترقية:</strong> خيارات ترقية مقترحة للمعالج:`;
-    pillsHtml = nextCpus.map((idx) => `<button class="upgrade-pill" data-upgrade-cpu="${idx}" type="button">${cpus[idx].name}</button>`).join("");
-  } else {
-    adviceText = `🏆 <strong>تجميعتك في القمة:</strong> تملك أقوى القطع المتوفرة حالياً!`;
-  }
-
-  upgradeAdvisorBox.innerHTML = `${adviceText}<div class="upgrade-pills">${pillsHtml}</div>`;
-
-  upgradeAdvisorBox.querySelectorAll("[data-upgrade-ram]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      ramSelect.value = btn.dataset.upgradeRam;
-      renderGames();
-    });
-  });
-
-  upgradeAdvisorBox.querySelectorAll("[data-upgrade-gpu]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      gpuSelect.value = btn.dataset.upgradeGpu;
-      renderGames();
-    });
-  });
-
-  upgradeAdvisorBox.querySelectorAll("[data-upgrade-cpu]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      cpuSelect.value = btn.dataset.upgradeCpu;
-      renderGames();
-    });
-  });
-
-  const topGames = [...allCalculated].sort((a, b) => b.res1.avgFps - a.res1.avgFps).slice(0, 5);
-  bestMatchBox.innerHTML = `
-    🌟 <strong>الأكثر سلاسة على تجميعتك حالياً:</strong>
-    <div class="best-match-pills">
-      ${topGames.map((item) => `<span class="match-pill">${item.game.title.split("(")[0].trim()} — ${item.res1.rangeText} FPS</span>`).join("")}
-    </div>
-  `;
 }
 
 function renderGames() {
@@ -1314,6 +1418,7 @@ function renderGames() {
     return { game, res1 };
   });
 
+  updateFpsLabAiAndGpuProfile(gpuIdx, cpuIdx, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, allCalculatedForInsights);
   updateCompatibilityAndInsights(gpuIdx, cpuIdx, ram, resMultiplier, allCalculatedForInsights);
 
   let tier = "متوسط";
@@ -1325,7 +1430,7 @@ function renderGames() {
   specsSummary.innerHTML = `
     <span>تقييم التجميعة: <strong>${tier}</strong></span>
     <span>عدد الألعاب: <strong>${allGames.length} لعبة</strong></span>
-    <span>نقاط الأداء الفعلية: <strong>${effectiveScore} نقطة</strong></span>
+    <span>نقاط الأداء التقديرية: <strong>${effectiveScore} نقطة</strong></span>
   `;
 
   let computedList = allGames
@@ -1379,16 +1484,16 @@ function renderGames() {
 
   computedList.forEach(({ game, isFav, selectedPresetKey, res1, res2, res3 }) => {
     let badgeClass = "badge-high";
-    let badgeText = "سلس وممتاز";
+    let badgeText = "سلس تقديرياً";
     let barColor = "#22c55e";
 
     if (res1.avgFps < 35) {
       badgeClass = "badge-low";
-      badgeText = "ثقيل على التجميعة";
+      badgeText = "ثقيل تقديرياً";
       barColor = "#ef4444";
     } else if (res1.avgFps < 60) {
       badgeClass = "badge-mid";
-      badgeText = "مقبول للتجميعة";
+      badgeText = "مقبول تقديرياً";
       barColor = "#eab308";
     }
 
@@ -1431,36 +1536,47 @@ function renderGames() {
     const isPickedClass = pickedRandomGameId === game.id ? "is-picked" : "";
     const safeTitle = sanitizeText(game.title, 90);
     const refVal = Number(game.refFps1080High) || 70;
+    const updatedDate = sanitizeText(game.lastUpdated || "2026-10-01", 10);
     const benchTag = game.year === 2026
       ? `<div class="game-subtag">🆕 إصدار 2026 • مرجع 1080p: ~${refVal} FPS</div>`
       : `<div class="game-subtag">📊 مرجع 1080p: ~${refVal} FPS</div>`;
 
     resultsDiv.innerHTML += `
       <article class="game-card ${isFav ? "is-fav" : ""} ${isPickedClass}">
-        <div class="card-top">
-          <div>
-            <div class="game-title">${safeTitle}</div>
-            ${benchTag}
-          </div>
-          <div class="card-actions-top">
-            <span class="badge ${badgeClass}">${badgeText}</span>
-            <button class="fav-btn ${isFav ? "active" : ""}" data-fav-id="${sanitizeText(game.id, 40)}" title="تفضيل" type="button">★</button>
-            ${deleteBtnHtml}
+        <div>
+          <div class="card-top">
+            <div>
+              <div class="game-title">${safeTitle}</div>
+              ${benchTag}
+              <div class="game-updated-tag">🕒 آخر تحديث للبيانات: ${updatedDate}</div>
+            </div>
+            <div class="card-actions-top">
+              <span class="badge ${badgeClass}">${badgeText}</span>
+              <button class="fav-btn ${isFav ? "active" : ""}" data-fav-id="${sanitizeText(game.id, 40)}" title="تفضيل" type="button">★</button>
+              ${deleteBtnHtml}
+            </div>
           </div>
         </div>
-        <div class="fps-row">
-          <div>
-            <span class="fps-number" style="color:${barColor}">${res1.rangeText}</span>
-            <span class="fps-unit">FPS تقديري</span>
+
+        <div>
+          <div class="fps-row">
+            <div>
+              <span class="fps-number" style="color:${barColor}">${res1.rangeText}</span>
+              <span class="fps-unit">FPS تقديري</span>
+            </div>
+            <span class="fps-unit">الرام المطلوب: ${res1.effectiveReqRam}GB</span>
           </div>
-          <span class="fps-unit">الرام المطلوب: ${res1.effectiveReqRam}GB</span>
+          <div class="margin-note">هامش خطأ محتمل: ±${res1.marginPct}% (تقديري)</div>
+          ${upscaleCompareHtml}
+          <div class="hz-status">${hzNote}</div>
         </div>
-        ${upscaleCompareHtml}
-        <div class="hz-status">${hzNote}</div>
+
         ${compareHtml}
+
         <div class="progress-track">
           <div class="progress-fill" style="width:${barWidth}%; background:${barColor};"></div>
         </div>
+
         <div class="game-meta">
           <span>جودة الأداء (${res1.presetLabel}):</span>
           <select class="card-preset-select" data-game-id="${sanitizeText(game.id, 40)}">

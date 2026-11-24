@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="FPS Lab 2.0 — فاحص تشغيل الألعاب، 1% Low، مقارنة كروت الشاشة والمعالجات، رسوم الدقة، والمصادر.">
-  <title>FPS Lab 2.0 | فاحص تشغيل الألعاب و FPS Lab AI</title>
+  <meta name="description" content="FPS Lab 2.1 — فاحص تشغيل الألعاب التقديري مع توثيق المصادر، 1% Low، مقارنة الأداء بالرسوم البيانية، وحفظ واسترجاع البيانات.">
+  <title>FPS Lab 2.1 | فاحص تشغيل الألعاب والمقارنة البيانية</title>
   <style>
     :root {
       --bg-body: radial-gradient(circle at top, #1e293b 0%, #090d16 70%);
-      --bg-card: rgba(30, 41, 59, 0.88);
+      --bg-card: rgba(30, 41, 59, 0.9);
       --bg-game-card: #131c2e;
       --bg-input: #0f172a;
       --border-color: #334155;
@@ -22,7 +22,7 @@
 
     body.theme-neon {
       --bg-body: radial-gradient(circle at top, #1f1135 0%, #070510 75%);
-      --bg-card: rgba(28, 16, 48, 0.9);
+      --bg-card: rgba(28, 16, 48, 0.92);
       --bg-game-card: #140c24;
       --bg-input: #0b0614;
       --border-color: #4c1d95;
@@ -109,11 +109,13 @@
       margin-top: 10px;
       display: inline-block;
       background: rgba(234, 179, 8, 0.14);
-      border: 1px solid rgba(250, 204, 21, 0.35);
+      border: 1px solid rgba(250, 204, 21, 0.4);
       color: #fde047;
       font-size: 12px;
-      padding: 6px 12px;
+      font-weight: 600;
+      padding: 7px 14px;
       border-radius: 10px;
+      line-height: 1.5;
     }
 
     .card-box {
@@ -152,8 +154,15 @@
 
     .specs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
       gap: 12px;
+    }
+
+    .hw-source-line {
+      margin-top: 5px;
+      font-size: 11px;
+      color: #38bdf8;
+      line-height: 1.4;
     }
 
     .compare-grid-3 {
@@ -241,7 +250,6 @@
       gap: 8px;
     }
 
-    /* لوحة FPS Lab AI */
     .ai-panel {
       margin-top: 14px;
       padding: 14px;
@@ -298,7 +306,6 @@
       font-weight: 700;
     }
 
-    /* قسم مقارنة كرتي شاشة أو معالجين */
     .duel-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -324,18 +331,34 @@
       line-height: 1.65;
     }
 
-    /* قسم الرسوم البيانية للدقة */
     .chart-controls {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .chart-controls select {
       width: auto;
-      min-width: 220px;
+      min-width: 210px;
+    }
+
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-inline-end: 5px;
     }
 
     .chart-canvas-wrap {
@@ -347,11 +370,10 @@
 
     #resChartCanvas {
       width: 100%;
-      height: 240px;
+      height: 255px;
       display: block;
     }
 
-    /* قسم المصادر الموثوقة */
     .sources-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -789,7 +811,6 @@
       margin-bottom: 24px;
     }
 
-    /* تحسينات شاملة لنسخة الهاتف */
     @media (max-width: 600px) {
       body {
         padding: 12px 10px 28px;
@@ -817,7 +838,7 @@
         max-width: none;
       }
       #resChartCanvas {
-        height: 195px;
+        height: 205px;
       }
     }
 
@@ -906,10 +927,12 @@
       margin-top: 3px;
     }
 
-    .game-updated-tag {
+    .game-updated-tag,
+    .game-source-tag {
       font-size: 11px;
       color: var(--text-muted);
       margin-top: 2px;
+      line-height: 1.35;
     }
 
     .badge {
@@ -1228,7 +1251,7 @@
 <body>
   <div class="container">
     <div class="top-bar">
-      <div class="brand-badge">⚡ FPS Lab 2.0</div>
+      <div class="brand-badge">⚡ FPS Lab 2.1</div>
       <div class="top-controls">
         <button class="btn btn-outline btn-sm" id="themeToggleBtn" type="button">🎨 المظهر: داكن</button>
         <button class="btn btn-outline btn-sm" id="langToggleBtn" type="button">🌐 English</button>
@@ -1237,10 +1260,10 @@
     </div>
 
     <header class="header">
-      <h1 id="mainTitle">FPS Lab 2.0 — فاحص تشغيل الألعاب و 1% Low</h1>
-      <p id="mainSubtitle">نطاق الفريمات التقديري، 1% Low، مقارنة كرتي شاشة أو معالجين، رسوم الدقة، والمصادر</p>
+      <h1 id="mainTitle">FPS Lab 2.1 — فاحص تشغيل الألعاب التقديري</h1>
+      <p id="mainSubtitle">تقدير FPS و 1% Low، توثيق مصدر كل قطعة ولعبة، مقارنة بيانية واضحة، وحفظ واسترجاع كامل</p>
       <div class="disclaimer-note">
-        ⚠️ تنبيه الدقة: جميع قيم الفريمات (FPS) و 1% Low تقديرية مبنية على معايرات مرجعية وليست قياساً مباشراً من اللعبة، ويوجد هامش خطأ محتمل حسب المشهد والنظام والمودات.
+        ⚠️ تنبيه مهم: جميع نتائج FPS و 1% Low تقديرية وليست قياسات حقيقية مباشرة من اللعبة، وتخضع لهامش خطأ محتمل حسب الإعدادات والمشاهد والمودات.
       </div>
     </header>
 
@@ -1258,12 +1281,14 @@
           <label for="gpuSelect" id="lblGpu">كرت الشاشة الأساسي (GPU 1)</label>
           <input type="text" class="hw-mini-search" id="gpuFilterInput" maxlength="40" placeholder="ابحث عن كرت (مثلاً 3060, 4070)...">
           <select id="gpuSelect"></select>
+          <div class="hw-source-line" id="gpuSourceText"></div>
         </div>
 
         <div class="field">
           <label for="cpuSelect" id="lblCpu">المعالج الأساسي (CPU 1)</label>
           <input type="text" class="hw-mini-search" id="cpuFilterInput" maxlength="40" placeholder="ابحث عن معالج (مثلاً 5600X, i5)...">
           <select id="cpuSelect"></select>
+          <div class="hw-source-line" id="cpuSourceText"></div>
         </div>
 
         <div class="field">
@@ -1331,7 +1356,6 @@
       </div>
       <div class="status-msg" id="shareStatus"></div>
 
-      <!-- فصل اختبار أداء المتصفح عن أداء كرت الشاشة الحقيقي -->
       <div class="bench-split-grid">
         <div class="bench-box">
           <div>
@@ -1351,7 +1375,6 @@
         </div>
       </div>
 
-      <!-- ميزة FPS Lab AI -->
       <div class="ai-panel" id="fpsLabAiPanel">
         <div class="ai-header">
           <span class="ai-badge">🤖 FPS Lab AI — المساعد الذكي لتحليل التجميعة والترقية</span>
@@ -1446,7 +1469,6 @@
       <div class="summary-bar" id="specsSummary"></div>
     </section>
 
-    <!-- 2. قسم مقارنة كرتي شاشة أو معالجين -->
     <section class="card-box" id="hwDuelSection">
       <h3 class="card-heading">⚔️ مقارنة مباشرة: كرتي شاشة أو معالجين</h3>
       <div class="duel-grid">
@@ -1478,15 +1500,25 @@
       </div>
     </section>
 
-    <!-- 3. رسوم بيانية لتطور الأداء حسب دقة الشاشة -->
+    <!-- مقارنة أداء واضحة برسوم بيانية -->
     <section class="card-box" id="resChartSection">
-      <h3 class="card-heading">📈 تطور الأداء التقديري حسب دقة الشاشة (1080p → 1440p → 2160p)</h3>
+      <h3 class="card-heading">📊 مقارنة أداء واضحة برسوم بيانية (متوسط FPS تقديري و 1% Low)</h3>
       <div class="chart-controls">
-        <label for="chartGameSelect" class="section-tag">اختر اللعبة:</label>
+        <label for="chartGameSelect" class="section-tag">اللعبة:</label>
         <select id="chartGameSelect"></select>
+        <label for="chartModeSelect" class="section-tag">وضع المقارنة:</label>
+        <select id="chartModeSelect">
+          <option value="resolutions" selected>حسب دقة الشاشة (1080p / 1440p / 2160p)</option>
+          <option value="builds">مقارنة PC 1 مقابل PC 2</option>
+        </select>
+      </div>
+      <div class="chart-legend">
+        <span><i class="legend-dot" style="background:#38bdf8;"></i>متوسط FPS تقديري (PC 1)</span>
+        <span><i class="legend-dot" style="background:#f59e0b;"></i>1% Low تقديري</span>
+        <span><i class="legend-dot" style="background:#a855f7;"></i>متوسط FPS تقديري (PC 2)</span>
       </div>
       <div class="chart-canvas-wrap">
-        <canvas id="resChartCanvas" width="880" height="240"></canvas>
+        <canvas id="resChartCanvas" width="880" height="255"></canvas>
       </div>
     </section>
 
@@ -1576,21 +1608,20 @@
 
     <section class="games-grid" id="results"></section>
 
-    <!-- 4. مصادر موثوقة لبيانات الألعاب والقطع -->
     <section class="card-box" id="sourcesSection">
-      <h3 class="card-heading">📚 مصادر موثوقة لبيانات الألعاب والقطع</h3>
+      <h3 class="card-heading">📚 توثيق منهجية ومصادر بيانات القطع والألعاب</h3>
       <div class="sources-grid">
         <div class="source-item">
-          <strong>مواصفات كروت الشاشة والمعالجات</strong>
-          النشرات التقنية الرسمية للشركات المصنعة (NVIDIA, AMD, Intel) للذاكرة (VRAM)، المعمارية، واستهلاك الطاقة الحراري (TDP).
+          <strong>مصدر مواصفات كروت الشاشة والمعالجات</strong>
+          النشرات التقنية الرسمية للشركات المصنعة (NVIDIA, AMD, Intel) للذاكرة (VRAM)، المعمارية، واستهلاك الطاقة (TDP)، ومؤشرات مقارنة مرجعية تقديرية.
         </div>
         <div class="source-item">
-          <strong>معايرات الأداء والـ 1% Low</strong>
-          مؤشرات مرجعية تقديرية مستخلصة من اختبارات الأداء العامة على دقات 1080p و1440p و2160p مع احتساب هامش خطأ واضح.
+          <strong>مصدر تقديرات FPS و 1% Low</strong>
+          نموذج تقديري يعتمد على معايرات مرجعية لمتوسط الفريمات عند 1080p High وتأثير الدقة والإعدادات وعنق الزجاجة والرام — وليس قياساً حقيقياً مباشراً.
         </div>
         <div class="source-item">
-          <strong>متطلبات الذاكرة وتحديثات الألعاب</strong>
-          قوائم المتطلبات الموصى بها للألعاب والأنماط الإضافية (المودات، تتبع الأشعة، والبث المباشر) مع تواريخ تحديث البيانات.
+          <strong>مصدر متطلبات الألعاب وتاريخ التحديث</strong>
+          متطلبات التشغيل الموصى بها للألعاب والإصدارات الحديثة مع تاريخ آخر تحديث للبيانات المرجعية داخل FPS Lab.
         </div>
       </div>
     </section>
@@ -1661,7 +1692,7 @@
       <div class="neox-brand-block">
         <div class="neox-logo-mark">NeoX</div>
         <div>
-          <div class="neox-title">NeoX — FPS Lab 2.0</div>
+          <div class="neox-title">NeoX — FPS Lab 2.1</div>
           <div class="neox-sub" id="developerCreditText">تطوير وإشراف: NeoX Dev</div>
         </div>
       </div>
@@ -1675,7 +1706,7 @@
   <div class="modal-overlay" id="posterModal">
     <div class="poster-card">
       <div class="poster-header">
-        <strong style="font-size:18px; color:#38bdf8;">⚡ FPS Lab 2.0 — بطاقة أداء التجميعة</strong>
+        <strong style="font-size:18px; color:#38bdf8;">⚡ FPS Lab 2.1 — بطاقة أداء تقديرية</strong>
         <button class="btn btn-outline btn-sm" id="closePosterBtn" type="button">✕ إغلاق</button>
       </div>
       <div class="poster-specs" id="posterSpecsContent"></div>

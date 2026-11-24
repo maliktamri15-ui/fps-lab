@@ -88,7 +88,6 @@ const presetConfig = {
   ultra: { label: "Ultra", loadMultiplier: 1.26 }
 };
 
-// قاعدة بيانات مع تاريخ آخر تحديث لكل لعبة ومتطلباتها
 const defaultGames = [
   { id: "fh6_2026", title: "Forza Horizon 6 (2026)", category: "sim", year: 2026, refFps1080High: 72, reqRam: 16, lastUpdated: "2026-10-15" },
   { id: "rer_2026", title: "Resident Evil Requiem (2026)", category: "action", year: 2026, refFps1080High: 68, reqRam: 16, lastUpdated: "2026-10-20" },
@@ -210,6 +209,16 @@ const resSelect = document.getElementById("resSelect");
 const hzSelect = document.getElementById("hzSelect");
 const globalPresetSelect = document.getElementById("globalPresetSelect");
 const upscaleSelect = document.getElementById("upscaleSelect");
+
+const duelGpuA = document.getElementById("duelGpuA");
+const duelGpuB = document.getElementById("duelGpuB");
+const duelGpuResult = document.getElementById("duelGpuResult");
+const duelCpuA = document.getElementById("duelCpuA");
+const duelCpuB = document.getElementById("duelCpuB");
+const duelCpuResult = document.getElementById("duelCpuResult");
+
+const chartGameSelect = document.getElementById("chartGameSelect");
+const resChartCanvas = document.getElementById("resChartCanvas");
 
 const themeToggleBtn = document.getElementById("themeToggleBtn");
 const langToggleBtn = document.getElementById("langToggleBtn");
@@ -388,6 +397,33 @@ function populateHardwareSelects(selectedGpuIndex = 10, selectedCpuIndex = 4) {
       cpuSelect3.innerHTML += `<option value="${i}" ${sel3}>${cpu.name}</option>`;
     });
   }
+
+  // تعبئة قوائم مقارنة كرتي شاشة أو معالجين
+  if (!duelGpuA.options.length) {
+    gpus.forEach((gpu, i) => {
+      duelGpuA.innerHTML += `<option value="${i}" ${i === 10 ? "selected" : ""}>${gpu.name}</option>`;
+      duelGpuB.innerHTML += `<option value="${i}" ${i === 14 ? "selected" : ""}>${gpu.name}</option>`;
+    });
+  }
+
+  if (!duelCpuA.options.length) {
+    cpus.forEach((cpu, i) => {
+      duelCpuA.innerHTML += `<option value="${i}" ${i === 4 ? "selected" : ""}>${cpu.name}</option>`;
+      duelCpuB.innerHTML += `<option value="${i}" ${i === 9 ? "selected" : ""}>${cpu.name}</option>`;
+    });
+  }
+}
+
+function populateChartGameSelect() {
+  const prevVal = chartGameSelect.value;
+  const allGames = [...customGames, ...defaultGames];
+  chartGameSelect.innerHTML = `<option value="__avg__">📊 متوسط أداء التجميعة عبر الألعاب</option>`;
+  allGames.forEach((g) => {
+    chartGameSelect.innerHTML += `<option value="${sanitizeText(g.id, 40)}">${sanitizeText(g.title, 75)}</option>`;
+  });
+  if (prevVal && [...chartGameSelect.options].some((o) => o.value === prevVal)) {
+    chartGameSelect.value = prevVal;
+  }
 }
 
 gpuFilterInput.addEventListener("input", () => populateHardwareSelects());
@@ -413,7 +449,6 @@ function applyUrlParams() {
   }
 }
 
-// اختبار أداء المتصفح فقط (منفصل تماماً عن أداء كرت الشاشة الحقيقي)
 runBrowserBenchBtn.addEventListener("click", () => {
   runBrowserBenchBtn.disabled = true;
   browserBenchResult.textContent = "⏳ جارٍ قياس إطارات المتصفح وزمن الحسابات...";
@@ -556,6 +591,7 @@ themeToggleBtn.addEventListener("click", () => {
   themeToggleBtn.textContent = currentLang === "ar"
     ? themes[currentThemeIndex].labelAr
     : themes[currentThemeIndex].labelEn;
+  renderGames();
 });
 
 langToggleBtn.addEventListener("click", () => {
@@ -568,11 +604,11 @@ langToggleBtn.addEventListener("click", () => {
     : themes[currentThemeIndex].labelEn;
 
   document.getElementById("mainTitle").textContent = currentLang === "ar"
-    ? "FPS Lab — فاحص تشغيل الألعاب وتقدير الفريمات"
-    : "FPS Lab — PC Game Benchmark & FPS Lab AI";
+    ? "FPS Lab 2.0 — فاحص تشغيل الألعاب و 1% Low"
+    : "FPS Lab 2.0 — Game Benchmark, 1% Low & Hardware Lab";
   document.getElementById("mainSubtitle").textContent = currentLang === "ar"
-    ? "اختر مواصفات جهازك واحصل على تحليل FPS Lab AI ونطاق الفريمات التقديري وفحص التوافق"
-    : "Pick your specs for FPS Lab AI insights, estimated FPS ranges, and hardware compatibility";
+    ? "نطاق الفريمات التقديري، 1% Low، مقارنة كرتي شاشة أو معالجين، رسوم الدقة، والمصادر"
+    : "Estimated FPS ranges, 1% Low, GPU/CPU duel comparison, resolution chart, and sources";
   document.getElementById("lblGpu").textContent = currentLang === "ar" ? "كرت الشاشة الأساسي (GPU 1)" : "Primary Graphics Card (GPU 1)";
   document.getElementById("lblCpu").textContent = currentLang === "ar" ? "المعالج الأساسي (CPU 1)" : "Primary Processor (CPU 1)";
   document.getElementById("lblRam").textContent = currentLang === "ar" ? "الذاكرة (RAM 1)" : "Memory (RAM 1)";
@@ -657,7 +693,11 @@ function calculateGameRange(game, gpuObj, cpuObj, ram, resMultiplier, upscaleMul
   const minFps = Math.max(10, clampedAvg - spread);
   const maxFps = Math.min(360, clampedAvg + spread);
 
-  let nativeAvg = avgFps / Math.max(1, upscaleMultiplier);
+  // تقدير 1% Low بناءً على توازن المعالج والرام وضغط الإعدادات
+  const ratioPenalty = (ramPenalty < 1 || cpuCapFactor < 0.78 || heavyModsEnabled) ? 0.66 : 0.74;
+  const onePercentLow = Math.max(8, Math.round(clampedAvg * ratioPenalty));
+
+  const nativeAvg = avgFps / Math.max(1, upscaleMultiplier);
   const nativeClamped = Math.max(10, Math.min(340, Math.round(nativeAvg)));
   const nativeSpread = Math.max(4, Math.round(nativeClamped * 0.13));
 
@@ -665,6 +705,7 @@ function calculateGameRange(game, gpuObj, cpuObj, ram, resMultiplier, upscaleMul
     avgFps: clampedAvg,
     minFps,
     maxFps,
+    onePercentLow,
     marginPct,
     rangeText: `${minFps}-${maxFps}`,
     nativeRangeText: `${Math.max(10, nativeClamped - nativeSpread)}-${Math.min(360, nativeClamped + nativeSpread)}`,
@@ -673,7 +714,116 @@ function calculateGameRange(game, gpuObj, cpuObj, ram, resMultiplier, upscaleMul
   };
 }
 
-// تحديث بطاقة كرت الشاشة الحقيقي وميزة FPS Lab AI
+// تحديث مقارنة كرتي شاشة أو معالجين
+function updateHardwareDuel() {
+  const gpuA = gpus[Number(duelGpuA.value) || 0];
+  const gpuB = gpus[Number(duelGpuB.value) || 0];
+  const gpuDiffPct = Math.round(((gpuB.score - gpuA.score) / Math.max(1, gpuA.score)) * 100);
+  const gpuWinner = gpuDiffPct > 0
+    ? `${gpuB.name} يتفوق بـ +${gpuDiffPct}%`
+    : gpuDiffPct < 0
+      ? `${gpuA.name} يتفوق بـ +${Math.abs(gpuDiffPct)}%`
+      : "أداء متقارب جداً";
+
+  duelGpuResult.innerHTML = `
+    <div><strong>النتيجة:</strong> ${gpuWinner}</div>
+    <div>VRAM: <strong>${gpuA.vram}GB</strong> مقابل <strong>${gpuB.vram}GB</strong> • TDP: <strong>${gpuA.tdp}W</strong> مقابل <strong>${gpuB.tdp}W</strong></div>
+  `;
+
+  const cpuA = cpus[Number(duelCpuA.value) || 0];
+  const cpuB = cpus[Number(duelCpuB.value) || 0];
+  const cpuDiffPct = Math.round(((cpuB.score - cpuA.score) / Math.max(1, cpuA.score)) * 100);
+  const cpuWinner = cpuDiffPct > 0
+    ? `${cpuB.name} يتفوق بـ +${cpuDiffPct}%`
+    : cpuDiffPct < 0
+      ? `${cpuA.name} يتفوق بـ +${Math.abs(cpuDiffPct)}%`
+      : "أداء متقارب جداً";
+
+  duelCpuResult.innerHTML = `
+    <div><strong>النتيجة:</strong> ${cpuWinner}</div>
+    <div>TDP: <strong>${cpuA.tdp}W</strong> مقابل <strong>${cpuB.tdp}W</strong> • مؤشر الأداء: <strong>${cpuA.score}</strong> مقابل <strong>${cpuB.score}</strong></div>
+  `;
+}
+
+// رسم بياني لتطور الأداء حسب دقة الشاشة (1080p, 1440p, 2160p)
+function drawResolutionChart(gpuObj, cpuObj, ram, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, presetKey) {
+  if (!resChartCanvas) return;
+  const ctx = resChartCanvas.getContext("2d");
+  const w = resChartCanvas.width;
+  const h = resChartCanvas.height;
+  ctx.clearRect(0, 0, w, h);
+
+  const resolutions = [
+    { label: "1080p (FHD)", mult: 1.0, color: "#38bdf8" },
+    { label: "1440p (2K)", mult: 0.72, color: "#a855f7" },
+    { label: "2160p (4K)", mult: 0.45, color: "#4ade80" }
+  ];
+
+  const allGames = [...customGames, ...defaultGames];
+  const chosenId = chartGameSelect.value;
+
+  const series = resolutions.map((r) => {
+    let avg = 60;
+    let low1 = 44;
+    if (chosenId === "__avg__") {
+      const sample = allGames.slice(0, 12);
+      const calcList = sample.map((g) => calculateGameRange(g, gpuObj, cpuObj, ram, r.mult, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, presetKey));
+      avg = Math.round(calcList.reduce((s, x) => s + x.avgFps, 0) / calcList.length);
+      low1 = Math.round(calcList.reduce((s, x) => s + x.onePercentLow, 0) / calcList.length);
+    } else {
+      const found = allGames.find((g) => g.id === chosenId) || defaultGames[0];
+      const c = calculateGameRange(found, gpuObj, cpuObj, ram, r.mult, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, presetKey);
+      avg = c.avgFps;
+      low1 = c.onePercentLow;
+    }
+    return { ...r, avg, low1 };
+  });
+
+  const maxVal = Math.max(120, ...series.map((s) => s.avg));
+  const chartBottom = h - 42;
+  const chartTop = 28;
+  const chartHeight = chartBottom - chartTop;
+
+  const isLight = document.body.classList.contains("theme-light");
+  ctx.strokeStyle = isLight ? "rgba(15,23,42,0.14)" : "rgba(148,163,184,0.18)";
+  ctx.lineWidth = 1;
+  ctx.font = "12px Arial, sans-serif";
+  ctx.fillStyle = isLight ? "#475569" : "#94a3b8";
+
+  for (let i = 0; i <= 4; i++) {
+    const y = chartTop + (chartHeight / 4) * i;
+    const val = Math.round(maxVal * (1 - i / 4));
+    ctx.beginPath();
+    ctx.moveTo(50, y);
+    ctx.lineTo(w - 24, y);
+    ctx.stroke();
+    ctx.fillText(`${val}`, 12, y + 4);
+  }
+
+  const slotWidth = (w - 80) / series.length;
+  series.forEach((item, idx) => {
+    const barW = Math.min(90, slotWidth * 0.45);
+    const x = 65 + idx * slotWidth + (slotWidth - barW) / 2;
+    const barH = Math.max(8, (item.avg / maxVal) * chartHeight);
+    const y = chartBottom - barH;
+
+    ctx.fillStyle = item.color;
+    ctx.fillRect(x, y, barW, barH);
+
+    ctx.fillStyle = isLight ? "#0f172a" : "#f8fafc";
+    ctx.font = "bold 13px Arial, sans-serif";
+    ctx.fillText(`~${item.avg} FPS`, x - 4, y - 16);
+
+    ctx.fillStyle = isLight ? "#2563eb" : "#38bdf8";
+    ctx.font = "11px Arial, sans-serif";
+    ctx.fillText(`1% Low: ${item.low1}`, x - 6, y - 4);
+
+    ctx.fillStyle = isLight ? "#334155" : "#cbd5e1";
+    ctx.font = "bold 12px Arial, sans-serif";
+    ctx.fillText(item.label, x - 12, h - 14);
+  });
+}
+
 function updateFpsLabAiAndGpuProfile(gpuIdx, cpuIdx, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, allCalculated) {
   const gpu = gpus[gpuIdx];
   const cpu = cpus[cpuIdx];
@@ -682,7 +832,6 @@ function updateFpsLabAiAndGpuProfile(gpuIdx, cpuIdx, ram, resMultiplier, upscale
     <strong>${gpu.name}</strong> • معمارية: <strong>${gpu.arch}</strong> • ذاكرة: <strong>${gpu.vram} GB</strong> • استهلاك: <strong>${gpu.tdp}W</strong> • مؤشر رسوميات: <strong>${gpu.score} pt</strong>
   `;
 
-  // 1. أفضل إعدادات مقترحة حسب الأداء العام للجهاز
   const avgAll = allCalculated.length
     ? Math.round(allCalculated.reduce((s, item) => s + item.res1.avgFps, 0) / allCalculated.length)
     : 60;
@@ -696,7 +845,6 @@ function updateFpsLabAiAndGpuProfile(gpuIdx, cpuIdx, ram, resMultiplier, upscale
     bestSettingsText = "Low–Medium مع DLSS/FSR Balanced أو Performance وتقليل جودة الظلال والانعكاسات أولاً.";
   }
 
-  // 2. القطعة التي تستحق الترقية أولاً + مقارنة قبل وبعد الترقية
   let upgradeTargetTitle = "";
   let upgradeTargetReason = "";
   let upgradedGpu = gpu;
@@ -730,7 +878,6 @@ function updateFpsLabAiAndGpuProfile(gpuIdx, cpuIdx, ram, resMultiplier, upscale
     upgradeLabel = "الحد الأقصى";
   }
 
-  // 3. الألعاب الأنسب للجهاز حالياً
   const suitableGames = [...allCalculated]
     .filter((item) => item.res1.avgFps >= 55)
     .sort((a, b) => b.res1.avgFps - a.res1.avgFps)
@@ -740,7 +887,6 @@ function updateFpsLabAiAndGpuProfile(gpuIdx, cpuIdx, ram, resMultiplier, upscale
     ? suitableGames.map((item) => `• ${item.game.title.split("(")[0].trim()} (${item.res1.rangeText} FPS)`).join("<br>")
     : "• يُنصح بتجربة الألعاب الخفيفة أو خفض الدقة/الإعدادات.";
 
-  // مقارنة متوسط نطاق الفريمات قبل وبعد الترقية المقترحة على عينة ألعاب
   const sampleGames = defaultGames.filter((g) => ["fh6_2026", "rer_2026", "mw4_2026", "rdr2", "gtav"].includes(g.id));
   const beforeAvg = Math.round(sampleGames.reduce((sum, g) => {
     const r = calculateGameRange(g, gpu, cpu, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, globalPresetSelect.value);
@@ -930,15 +1076,15 @@ copyReportBtn.addEventListener("click", async () => {
     const g = defaultGames.find((item) => item.id === id);
     if (!g) return "";
     const calc = calculateGameRange(g, gpu, cpu, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, globalPresetSelect.value);
-    return `- ${g.title}: ~${calc.rangeText} FPS (±${calc.marginPct}%)`;
+    return `- ${g.title}: ~${calc.rangeText} FPS (1% Low: ~${calc.onePercentLow} FPS, ±${calc.marginPct}%)`;
   }).filter(Boolean);
 
   const report = [
-    `⚡ تقرير تجميعة FPS Lab (${devName}):`,
+    `⚡ تقرير تجميعة FPS Lab 2.0 (${devName}):`,
     `- GPU: ${gpu.name}`,
     `- CPU: ${cpu.name}`,
     `- RAM: ${ram} GB | شاشة: ${resSelect.options[resSelect.selectedIndex].text} (${hzSelect.value}Hz)`,
-    "نطاق الفريمات التقديري (ليس قياساً مباشراً):",
+    "نطاق الفريمات و 1% Low التقديري (ليس قياساً مباشراً):",
     ...lines
   ].join("\n");
 
@@ -1103,6 +1249,7 @@ importBackupBtn.addEventListener("click", () => {
     safeStorageSet("gamecheck_fav_games", JSON.stringify(favGames));
   }
 
+  populateChartGameSelect();
   renderSavedBuilds();
   renderGames();
   shareStatus.textContent = "تم استرجاع البيانات والتحقق منها بأمان!";
@@ -1131,7 +1278,7 @@ openPosterBtn.addEventListener("click", () => {
   const selectedGames = defaultGames.filter((g) => highlightIds.includes(g.id)).map((g) => {
     const shortName = g.title.split("(")[0].trim();
     const res = calculateGameRange(g, gpu, cpu, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, globalPresetSelect.value);
-    return { shortName, rangeText: res.rangeText, avgFps: res.avgFps };
+    return { shortName, rangeText: res.rangeText, onePercentLow: res.onePercentLow, avgFps: res.avgFps };
   });
 
   posterSnapshotData = {
@@ -1145,7 +1292,7 @@ openPosterBtn.addEventListener("click", () => {
   posterGamesContent.innerHTML = selectedGames.map((item) => `
     <div class="poster-game-item">
       <span>${item.shortName}</span>
-      <strong style="color:#4ade80;">${item.rangeText} FPS</strong>
+      <strong style="color:#4ade80;">${item.rangeText} (${item.onePercentLow} Low)</strong>
     </div>
   `).join("");
 
@@ -1174,7 +1321,7 @@ downloadPngBtn.addEventListener("click", () => {
   ctx.textAlign = "right";
   ctx.fillStyle = "#38bdf8";
   ctx.font = "bold 30px Arial, sans-serif";
-  ctx.fillText("⚡ FPS Lab — بطاقة أداء التجميعة", 850, 68);
+  ctx.fillText("⚡ FPS Lab 2.0 — بطاقة أداء التجميعة", 850, 68);
 
   ctx.fillStyle = "#f8fafc";
   ctx.font = "bold 20px Arial, sans-serif";
@@ -1207,7 +1354,7 @@ downloadPngBtn.addEventListener("click", () => {
   ctx.fillText(posterSnapshotData.devLabel, 850, 522);
 
   const link = document.createElement("a");
-  link.download = "FPS-Lab-NeoX-Build.png";
+  link.download = "FPS-Lab-2-NeoX-Build.png";
   link.href = canvas.toDataURL("image/png");
   link.click();
 });
@@ -1365,6 +1512,7 @@ addGameBtn.addEventListener("click", () => {
   customGames = customGames.slice(0, 50);
   safeStorageSet("gamecheck_custom_games", JSON.stringify(customGames));
   newGameTitle.value = "";
+  populateChartGameSelect();
   renderGames();
 });
 
@@ -1420,6 +1568,8 @@ function renderGames() {
 
   updateFpsLabAiAndGpuProfile(gpuIdx, cpuIdx, ram, resMultiplier, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, allCalculatedForInsights);
   updateCompatibilityAndInsights(gpuIdx, cpuIdx, ram, resMultiplier, allCalculatedForInsights);
+  updateHardwareDuel();
+  drawResolutionChart(gpu, cpu, ram, upscaleMultiplier, rtMultiplier, modsMultiplier, streamMultiplier, defaultPresetKey);
 
   let tier = "متوسط";
   if (rawScore >= 145) tier = "وحش خارق (Ultra Flagship)";
@@ -1566,6 +1716,7 @@ function renderGames() {
             </div>
             <span class="fps-unit">الرام المطلوب: ${res1.effectiveReqRam}GB</span>
           </div>
+          <div class="low1-line">📉 1% Low تقديري: ~${res1.onePercentLow} FPS</div>
           <div class="margin-note">هامش خطأ محتمل: ±${res1.marginPct}% (تقديري)</div>
           ${upscaleCompareHtml}
           <div class="hz-status">${hzNote}</div>
@@ -1619,6 +1770,7 @@ function renderGames() {
       const idToDelete = e.target.dataset.deleteId;
       customGames = customGames.filter((g) => g.id !== idToDelete);
       safeStorageSet("gamecheck_custom_games", JSON.stringify(customGames));
+      populateChartGameSelect();
       renderGames();
     });
   });
@@ -1630,7 +1782,11 @@ globalPresetSelect.addEventListener("change", () => {
   renderGames();
 });
 
-[gpuSelect, cpuSelect, ramSelect, resSelect, hzSelect, upscaleSelect, gpuSelect2, cpuSelect2, ramSelect2, gpuSelect3, cpuSelect3, ramSelect3, sortSelect].forEach((el) => {
+[
+  gpuSelect, cpuSelect, ramSelect, resSelect, hzSelect, upscaleSelect,
+  gpuSelect2, cpuSelect2, ramSelect2, gpuSelect3, cpuSelect3, ramSelect3,
+  duelGpuA, duelGpuB, duelCpuA, duelCpuB, chartGameSelect, sortSelect
+].forEach((el) => {
   el.addEventListener("change", renderGames);
 });
 
@@ -1655,6 +1811,7 @@ playabilityButtons.forEach((btn) => {
 });
 
 populateHardwareSelects();
+populateChartGameSelect();
 applyUrlParams();
 renderSavedBuilds();
 renderDiscordProfile();

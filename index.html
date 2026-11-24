@@ -20,7 +20,7 @@
     }
 
     .container {
-      max-width: 1060px;
+      max-width: 1120px;
       margin: 0 auto;
     }
 
@@ -56,12 +56,74 @@
       font-size: 15px;
       margin-bottom: 12px;
       color: #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .specs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
       gap: 14px;
+    }
+
+    .compare-box {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed #475569;
+    }
+
+    .compare-box.active {
+      display: block;
+    }
+
+    .compare-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #c084fc;
+      margin-bottom: 10px;
+    }
+
+    .tools-row {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .bottleneck-bar {
+      margin-top: 14px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .bn-good {
+      background: rgba(34, 197, 94, 0.14);
+      border: 1px solid rgba(74, 222, 128, 0.35);
+      color: #86efac;
+    }
+
+    .bn-warn {
+      background: rgba(234, 179, 8, 0.14);
+      border: 1px solid rgba(250, 204, 21, 0.35);
+      color: #fde047;
+    }
+
+    .bn-bad {
+      background: rgba(239, 68, 68, 0.14);
+      border: 1px solid rgba(248, 113, 113, 0.35);
+      color: #fca5a5;
     }
 
     .add-game-grid {
@@ -118,10 +180,10 @@
       border: none;
       background: #2563eb;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.15s;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -139,6 +201,14 @@
 
     .btn-green:hover {
       background: #15803d;
+    }
+
+    .btn-purple {
+      background: #7c3aed;
+    }
+
+    .btn-purple:hover {
+      background: #6d28d9;
     }
 
     .btn-discord {
@@ -160,7 +230,7 @@
     }
 
     .summary-bar {
-      margin-top: 16px;
+      margin-top: 14px;
       padding-top: 14px;
       border-top: 1px solid #334155;
       display: flex;
@@ -185,7 +255,12 @@
     }
 
     .controls-bar input {
-      flex: 1 1 250px;
+      flex: 1 1 220px;
+    }
+
+    .controls-bar select {
+      width: auto;
+      min-width: 170px;
     }
 
     .filter-buttons {
@@ -219,7 +294,7 @@
 
     .games-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
       gap: 16px;
       margin-bottom: 28px;
     }
@@ -230,6 +305,7 @@
       border-radius: 14px;
       padding: 18px;
       transition: transform 0.2s, border-color 0.2s;
+      position: relative;
     }
 
     .game-card:hover {
@@ -243,6 +319,30 @@
       align-items: flex-start;
       gap: 8px;
       margin-bottom: 12px;
+    }
+
+    .card-actions-top {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .delete-game-btn {
+      background: rgba(239, 68, 68, 0.16);
+      border: 1px solid rgba(248, 113, 113, 0.4);
+      color: #f87171;
+      border-radius: 7px;
+      width: 24px;
+      height: 24px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .delete-game-btn:hover {
+      background: #ef4444;
+      color: #ffffff;
     }
 
     .game-title {
@@ -292,6 +392,19 @@
     .fps-unit {
       font-size: 13px;
       color: #94a3b8;
+    }
+
+    .compare-badge {
+      margin-bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(124, 58, 237, 0.14);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      font-size: 12px;
+      color: #ddd6fe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .progress-track {
@@ -364,11 +477,12 @@
       }
     }
 
-    .support-status {
-      margin-top: 10px;
+    .support-status,
+    .share-status {
+      margin-top: 8px;
       font-size: 13px;
       color: #4ade80;
-      min-height: 20px;
+      min-height: 18px;
     }
 
     .social-links-row {
@@ -407,23 +521,23 @@
   <div class="container">
     <header class="header">
       <h1>فاحص تشغيل الألعاب وتقدير الفريمات</h1>
-      <p>اختر مواصفات جهازك، دقة الشاشة، ومستوى الأداء لمعرفة الفريمات في أشهر ألعاب العالم</p>
+      <p>اختر مواصفات جهازك، قارن التجميعات، وافحص الفريمات وتوافق القطع في أشهر ألعاب العالم</p>
     </header>
 
     <section class="specs-card">
       <div class="specs-grid">
         <div class="field">
-          <label for="gpuSelect">كرت الشاشة (GPU)</label>
+          <label for="gpuSelect">كرت الشاشة الأساسي (GPU 1)</label>
           <select id="gpuSelect"></select>
         </div>
 
         <div class="field">
-          <label for="cpuSelect">المعالج (CPU)</label>
+          <label for="cpuSelect">المعالج الأساسي (CPU 1)</label>
           <select id="cpuSelect"></select>
         </div>
 
         <div class="field">
-          <label for="ramSelect">الذاكرة (RAM)</label>
+          <label for="ramSelect">الذاكرة (RAM 1)</label>
           <select id="ramSelect">
             <option value="2">2 GB</option>
             <option value="4">4 GB</option>
@@ -460,7 +574,50 @@
             <option value="ultra">Ultra (فائق)</option>
           </select>
         </div>
+
+        <div class="field">
+          <label for="upscaleSelect">تقنية رفع الفريمات (DLSS / FSR)</label>
+          <select id="upscaleSelect">
+            <option value="1" selected>إيقاف (Native)</option>
+            <option value="1.25">DLSS / FSR Quality (+25%)</option>
+            <option value="1.42">DLSS / FSR Performance (+42%)</option>
+            <option value="1.75">Frame Generation (+75%)</option>
+          </select>
+        </div>
       </div>
+
+      <div class="tools-row">
+        <button class="btn btn-purple" id="toggleCompareBtn" type="button">⚖️ تفعيل مقارنة تجميعة ثانية</button>
+        <button class="btn btn-outline" id="shareBuildBtn" type="button">🔗 نسخ رابط هذه التجميعة للمشاركة</button>
+      </div>
+      <div class="share-status" id="shareStatus"></div>
+
+      <div class="compare-box" id="compareBox">
+        <div class="compare-title">⚖️ مواصفات التجميعة الثانية للمقارنة (PC 2):</div>
+        <div class="specs-grid">
+          <div class="field">
+            <label for="gpuSelect2">كرت الشاشة الثاني (GPU 2)</label>
+            <select id="gpuSelect2"></select>
+          </div>
+          <div class="field">
+            <label for="cpuSelect2">المعالج الثاني (CPU 2)</label>
+            <select id="cpuSelect2"></select>
+          </div>
+          <div class="field">
+            <label for="ramSelect2">الذاكرة الثانية (RAM 2)</label>
+            <select id="ramSelect2">
+              <option value="4">4 GB</option>
+              <option value="8">8 GB</option>
+              <option value="16" selected>16 GB</option>
+              <option value="32">32 GB</option>
+              <option value="64">64 GB</option>
+              <option value="128">128 GB</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottleneck-bar bn-good" id="bottleneckBar"></div>
 
       <div class="summary-bar" id="specsSummary"></div>
     </section>
@@ -504,7 +661,13 @@
     </section>
 
     <section class="controls-bar">
-      <input type="text" id="searchInput" placeholder="ابحث في الألعاب (أكثر من 50 لعبة عالمية)...">
+      <input type="text" id="searchInput" placeholder="ابحث في الألعاب...">
+      <select id="sortSelect" aria-label="ترتيب الألعاب">
+        <option value="default" selected>الترتيب: الافتراضي</option>
+        <option value="fps-desc">الأعلى فريمات (FPS)</option>
+        <option value="fps-asc">الأقل فريمات (FPS)</option>
+        <option value="alpha">الاسم (A - Z)</option>
+      </select>
       <div class="filter-buttons" id="filterButtons">
         <button class="filter-btn active" data-cat="all">الكل</button>
         <button class="filter-btn" data-cat="sim">محاكاة وقيادة</button>
@@ -520,23 +683,24 @@
       <h3 class="card-heading">🛟 تواصل مع الدعم عبر حساب Discord</h3>
 
       <div class="discord-box">
-        <div class="discord-badge" id="discordDisplay">💬 حساب Discord: غير محدد</div>
+        <div class="discord-badge" id="discordDisplay">💬 حساب Discord للدعم: 1501411543059923159</div>
         <div class="discord-actions">
-          <a class="btn btn-discord" id="contactSupportDiscordBtn" href="https://discord.com" target="_blank" rel="noopener noreferrer">
+          <a class="btn btn-discord" id="contactSupportDiscordBtn" href="https://discord.com/users/1501411543059923159" target="_blank" rel="noopener noreferrer">
             💬 تواصل مع الدعم (Discord)
           </a>
-          <button class="btn btn-outline" id="copyDiscordBtn" type="button">نسخ الحساب</button>
+          <button class="btn btn-outline" id="attachSpecsBtn" type="button">📋 إرفاق مواصفاتي بالرسالة</button>
+          <button class="btn btn-outline" id="copyDiscordBtn" type="button">نسخ ID</button>
         </div>
       </div>
 
       <div class="support-grid">
         <div class="field">
-          <label for="myDiscordHandle">اسم حسابك على Discord</label>
-          <input type="text" id="myDiscordHandle" placeholder="مثال: ax_gamer">
+          <label for="myDiscordHandle">Discord ID للدعم</label>
+          <input type="text" id="myDiscordHandle" value="1501411543059923159">
         </div>
         <div class="field">
-          <label for="myDiscordInvite">رابط حسابك أو سيرفر الدعم على Discord</label>
-          <input type="url" id="myDiscordInvite" placeholder="https://discord.com/users/... أو https://discord.gg/...">
+          <label for="myDiscordInvite">رابط حساب أو سيرفر الدعم على Discord</label>
+          <input type="url" id="myDiscordInvite" value="https://discord.com/users/1501411543059923159">
         </div>
       </div>
 
@@ -546,7 +710,7 @@
       </div>
 
       <div class="discord-actions">
-        <button class="btn btn-green" id="saveDiscordBtn" type="button">حفظ حساب Discord</button>
+        <button class="btn btn-green" id="saveDiscordBtn" type="button">حفظ إعدادات الدعم</button>
       </div>
 
       <div class="support-status" id="supportStatus"></div>
@@ -567,7 +731,7 @@
         </div>
         <div class="field">
           <label for="dcUrl">Discord</label>
-          <input type="url" id="dcUrl" placeholder="https://discord.gg/...">
+          <input type="url" id="dcUrl" placeholder="https://discord.com/users/1501411543059923159">
         </div>
         <div class="field">
           <label for="tgUrl">Telegram / Facebook</label>
@@ -581,3 +745,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+

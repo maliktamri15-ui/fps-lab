@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="FPS Lab — فاحص تشغيل الألعاب وتقدير نطاق الفريمات، فحص توافق المعالج وكرت الشاشة والرام، واختبار أداء المتصفح.">
-  <title>FPS Lab | فاحص تشغيل الألعاب وتقدير الفريمات</title>
+  <meta name="description" content="FPS Lab — فاحص تشغيل الألعاب وتقدير الفريمات مع FPS Lab AI، فحص التوافق، وتاريخ تحديث الألعاب.">
+  <title>FPS Lab | فاحص تشغيل الألعاب و FPS Lab AI</title>
   <style>
     :root {
       --bg-body: radial-gradient(circle at top, #1e293b 0%, #090d16 70%);
@@ -59,7 +59,7 @@
       background: var(--bg-body);
       color: var(--text-main);
       min-height: 100vh;
-      padding: 20px 14px 36px;
+      padding: 18px 12px 36px;
       transition: background 0.25s, color 0.25s;
       overflow-x: hidden;
     }
@@ -75,7 +75,7 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .brand-badge {
@@ -92,11 +92,11 @@
 
     .header {
       text-align: center;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .header h1 {
-      font-size: clamp(21px, 4vw, 30px);
+      font-size: clamp(20px, 4vw, 30px);
       margin-bottom: 8px;
     }
 
@@ -105,12 +105,23 @@
       font-size: clamp(13px, 2.2vw, 15px);
     }
 
+    .disclaimer-note {
+      margin-top: 10px;
+      display: inline-block;
+      background: rgba(234, 179, 8, 0.14);
+      border: 1px solid rgba(250, 204, 21, 0.35);
+      color: #fde047;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 10px;
+    }
+
     .card-box {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 18px;
+      padding: 16px;
+      margin-bottom: 16px;
       backdrop-filter: blur(8px);
     }
 
@@ -141,7 +152,7 @@
 
     .specs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 12px;
     }
 
@@ -199,18 +210,92 @@
       align-items: center;
     }
 
-    .bench-box {
+    .bench-split-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
       margin-top: 12px;
+    }
+
+    .bench-box {
       padding: 12px 14px;
       border-radius: 12px;
-      background: rgba(14, 165, 233, 0.1);
+      background: rgba(14, 165, 233, 0.09);
       border: 1px solid rgba(56, 189, 248, 0.35);
       font-size: 13px;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .gpu-bench-box {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(168, 85, 247, 0.09);
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    /* لوحة FPS Lab AI */
+    .ai-panel {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(147, 51, 234, 0.12));
+      border: 1px solid rgba(96, 165, 250, 0.4);
+    }
+
+    .ai-header {
+      display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .ai-badge {
+      font-size: 13px;
+      font-weight: 800;
+      color: #60a5fa;
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 10px;
+    }
+
+    .ai-card {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 11px;
+      padding: 11px 12px;
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+
+    .ai-card-title {
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .ai-upgrade-delta {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 9px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(74, 222, 128, 0.35);
+      color: #4ade80;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .compat-box {
@@ -225,7 +310,7 @@
 
     .compat-items {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 8px;
       margin-top: 8px;
     }
@@ -249,7 +334,7 @@
     }
 
     .saved-builds-bar input {
-      max-width: 220px;
+      max-width: 240px;
     }
 
     .saved-builds-list {
@@ -400,7 +485,7 @@
     }
 
     .upgrade-pill {
-      padding: 4px 10px;
+      padding: 5px 10px;
       border-radius: 8px;
       background: var(--bg-input);
       border: 1px solid #38bdf8;
@@ -478,7 +563,7 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      min-height: 36px;
+      min-height: 38px;
     }
 
     .btn:hover {
@@ -489,7 +574,7 @@
       padding: 6px 11px;
       font-size: 12px;
       border-radius: 8px;
-      min-height: 32px;
+      min-height: 34px;
     }
 
     .btn-green { background: #16a34a; }
@@ -533,8 +618,8 @@
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 18px;
+      padding: 15px;
+      margin-bottom: 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -601,7 +686,7 @@
     }
 
     .filter-btn {
-      padding: 7px 12px;
+      padding: 7px 11px;
       border-radius: 10px;
       border: 1px solid var(--border-color);
       background: var(--bg-input);
@@ -625,13 +710,17 @@
     .games-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 15px;
-      margin-bottom: 26px;
+      gap: 14px;
+      margin-bottom: 24px;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 520px) {
       .games-grid {
         grid-template-columns: 1fr;
+      }
+      .top-controls .btn,
+      .tools-row .btn {
+        flex: 1 1 auto;
       }
     }
 
@@ -639,12 +728,16 @@
       background: var(--bg-game-card);
       border: 1px solid var(--border-card);
       border-radius: 14px;
-      padding: 16px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
       transition: transform 0.2s, border-color 0.2s;
     }
 
     .game-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       border-color: var(--accent);
     }
 
@@ -659,13 +752,13 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 8px;
-      margin-bottom: 12px;
     }
 
     .card-actions-top {
       display: flex;
       align-items: center;
       gap: 5px;
+      flex-shrink: 0;
     }
 
     .fav-btn {
@@ -673,8 +766,8 @@
       border: 1px solid var(--border-color);
       color: #94a3b8;
       border-radius: 7px;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       font-size: 14px;
       cursor: pointer;
       line-height: 1;
@@ -691,8 +784,8 @@
       border: 1px solid rgba(248, 113, 113, 0.4);
       color: #f87171;
       border-radius: 7px;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
@@ -714,6 +807,12 @@
       font-size: 11px;
       color: #38bdf8;
       margin-top: 3px;
+    }
+
+    .game-updated-tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
     }
 
     .badge {
@@ -746,13 +845,12 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 6px;
       gap: 6px;
       flex-wrap: wrap;
     }
 
     .fps-number {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
     }
 
@@ -761,22 +859,25 @@
       color: var(--text-muted);
     }
 
+    .margin-note {
+      font-size: 11px;
+      color: #fbbf24;
+      font-weight: 600;
+    }
+
     .native-fps-sub {
       font-size: 11px;
       color: #c084fc;
-      margin-bottom: 6px;
       font-weight: 600;
     }
 
     .hz-status {
       font-size: 11px;
       color: #38bdf8;
-      margin-bottom: 8px;
       font-weight: 600;
     }
 
     .compare-badge {
-      margin-bottom: 6px;
       padding: 5px 10px;
       border-radius: 8px;
       background: rgba(124, 58, 237, 0.14);
@@ -793,7 +894,6 @@
       background: var(--bg-input);
       border-radius: 999px;
       overflow: hidden;
-      margin-bottom: 12px;
     }
 
     .progress-fill {
@@ -809,6 +909,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .card-preset-select {
@@ -1033,7 +1134,10 @@
 
     <header class="header">
       <h1 id="mainTitle">FPS Lab — فاحص تشغيل الألعاب وتقدير الفريمات</h1>
-      <p id="mainSubtitle">اختر مواصفات جهازك أو جرّب التجميعات الجاهزة، واحصل على نطاق الفريمات التقديري وفحص التوافق والترقية واستهلاك الطاقة</p>
+      <p id="mainSubtitle">اختر مواصفات جهازك واحصل على تحليل FPS Lab AI ونطاق الفريمات التقديري وفحص التوافق</p>
+      <div class="disclaimer-note">
+        ⚠️ تنبيه الدقة: جميع قيم الفريمات (FPS) تقديرية مبنية على معايرات مرجعية وليست قياساً مباشراً من اللعبة، ويوجد هامش خطأ محتمل حسب المشهد والنظام والمودات.
+      </div>
     </header>
 
     <section class="card-box">
@@ -1123,12 +1227,34 @@
       </div>
       <div class="status-msg" id="shareStatus"></div>
 
-      <div class="bench-box">
-        <div>
-          <strong>🧪 اختبار أداء المتصفح (Web Bench):</strong>
-          <span id="browserBenchResult">لم يتم تشغيله بعد — يقيس إطارات المتصفح الفعلية (FPS) وسرعة المعالجة في المتصفح (ms).</span>
+      <!-- فصل اختبار أداء المتصفح عن أداء كرت الشاشة الحقيقي -->
+      <div class="bench-split-grid">
+        <div class="bench-box">
+          <div>
+            <strong>🧪 اختبار أداء المتصفح فقط (Browser Bench):</strong>
+            <div id="browserBenchResult" style="margin-top:4px; color:var(--text-muted);">
+              يقيس إطارات المتصفح (FPS) وسرعة الحسابات داخل التبويب فقط — لا يمثل أداء كرت الشاشة في الألعاب.
+            </div>
+          </div>
+          <button class="btn btn-sm" id="runBrowserBenchBtn" type="button">▶ تشغيل اختبار المتصفح</button>
         </div>
-        <button class="btn btn-sm" id="runBrowserBenchBtn" type="button">▶ تشغيل اختبار المتصفح</button>
+
+        <div class="gpu-bench-box" id="realGpuProfileBox">
+          <div>
+            <strong>🎮 ملف كرت الشاشة الحقيقي (Real GPU Spec):</strong>
+            <div id="realGpuProfileText" style="margin-top:4px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ميزة FPS Lab AI -->
+      <div class="ai-panel" id="fpsLabAiPanel">
+        <div class="ai-header">
+          <span class="ai-badge">🤖 FPS Lab AI — المساعد الذكي لتحليل التجميعة والترقية</span>
+          <span style="font-size:11.5px; color:var(--text-muted);">تحديث تلقائي حسب المواصفات والإعدادات</span>
+        </div>
+        <div class="ai-grid" id="fpsLabAiGrid"></div>
+        <div class="ai-upgrade-delta" id="fpsLabAiDelta"></div>
       </div>
 
       <div class="exp-verdict-banner" id="expVerdictBanner"></div>
@@ -1244,12 +1370,12 @@
           </select>
         </div>
         <div class="field">
-          <label for="newGameWeight">ثقل اللعبة</label>
+          <label for="newGameWeight">مرجع الفريمات (1080p High)</label>
           <select id="newGameWeight">
-            <option value="30">خفيفة</option>
-            <option value="55" selected>متوسطة</option>
-            <option value="80">ثقيلة</option>
-            <option value="98">ثقيلة جداً</option>
+            <option value="110">خفيفة (~110 FPS)</option>
+            <option value="72" selected>متوسطة (~72 FPS)</option>
+            <option value="54">ثقيلة (~54 FPS)</option>
+            <option value="42">ثقيلة جداً (~42 FPS)</option>
           </select>
         </div>
         <div class="field">
